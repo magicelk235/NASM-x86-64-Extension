@@ -86,14 +86,14 @@ export function activate(context: vscode.ExtensionContext) {
             const word = document.getText(range);
             const wordLower = word.toLowerCase();
             
-            // 1. Check symbols/KB first
+            // 1. Symbols/KB check
             const allSymbols = getAllSymbolsFromOpenFiles();
             const dynamicSym = allSymbols.find(s => s.name.toLowerCase() === wordLower);
             if (dynamicSym && dynamicSym.description) return new vscode.Hover(new vscode.MarkdownString(dynamicSym.description));
             if (kb[wordLower]) return new vscode.Hover(new vscode.MarkdownString(kb[wordLower]));
             if (kb['%' + wordLower]) return new vscode.Hover(new vscode.MarkdownString(kb['%' + wordLower]));
 
-            // 2. Check if it's a number
+            // 2. Number check
             const hexRegex = /^(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)$/i;
             const binRegex = /^(?:0b[01]+|[01]+[by])$/i;
             const decRegex = /^\d+[dt]?$/i;
@@ -128,7 +128,6 @@ export function activate(context: vscode.ExtensionContext) {
                 const bits = uint64[0];
                 
                 const hoverText = new vscode.MarkdownString();
-                hoverText.appendMarkdown(`**Float64 (IEEE 754)**  \n`);
                 hoverText.appendMarkdown(`Hex: \`0x${bits.toString(16).toUpperCase().padStart(16, '0')}\`  \n`);
                 const b = bits.toString(2).padStart(64, '0');
                 const formattedBin = b.match(/.{1,8}/g)?.join(' ') || b;
@@ -142,11 +141,10 @@ export function activate(context: vscode.ExtensionContext) {
                 if (type !== 'hex') hoverText.appendMarkdown(`Hex: \`0x${val.toString(16).toUpperCase()}\`  \n`);
                 if (type !== 'bin') {
                     let b = val.toString(2);
-                    if (b.length > 8) {
-                        const padded = b.padStart(Math.ceil(b.length / 8) * 8, '0');
-                        b = padded.match(/.{1,8}/g)?.join(' ') || b;
-                    }
-                    hoverText.appendMarkdown(`Bin: \`${b}\``);
+                    const paddedLen = Math.max(8, Math.ceil(b.length / 8) * 8);
+                    b = b.padStart(paddedLen, '0');
+                    const formattedBin = b.match(/.{1,8}/g)?.join(' ') || b;
+                    hoverText.appendMarkdown(`Bin: \`${formattedBin}\``);
                 }
                 return new vscode.Hover(hoverText);
             }
@@ -166,11 +164,8 @@ export function activate(context: vscode.ExtensionContext) {
                 const line = lines[i];
                 const commentIdx = line.indexOf(';');
                 let codePart = commentIdx === -1 ? line : line.substring(0, commentIdx);
-                
-                // Mask strings
                 codePart = codePart.replace(/(["'`])(?:\\.|[^\1])*?\1/g, (match) => ' '.repeat(match.length));
 
-                // Regexes MUST be fresh for each line to avoid lastIndex issues
                 const numberRegex = /(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?|0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|\b[0-9][0-9a-fA-F]*h|0b[01]+|\b[01]+[by]|\b\d+[dt]?\b/g;
                 const idRegex = /(?:%%|%\?|%\*|%\$|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*/g;
 
@@ -196,17 +191,17 @@ export function activate(context: vscode.ExtensionContext) {
                         builder.push(range, 'parameter');
                         instructionSlotTaken = true;
                     } else if (word.startsWith('%') && !word.startsWith('%%') && !word.startsWith('%$') && !word.startsWith('%?') && !word.startsWith('%*')) {
-                        builder.push(range, 'keyword'); // Directives are Purple
+                        builder.push(range, 'keyword');
                         instructionSlotTaken = true;
                     } else if (isLabelDef) {
-                        builder.push(range, 'function'); // Labels are Yellow
+                        builder.push(range, 'function');
                     } else if (!instructionSlotTaken) {
-                        builder.push(range, 'keyword'); // Instructions/Macros are Purple
+                        builder.push(range, 'keyword');
                         instructionSlotTaken = true;
                     } else if (kb[wordLower] || macroNames.has(wordLower)) {
-                        builder.push(range, 'keyword'); // Known instructions/macros as operands are Purple
+                        builder.push(range, 'keyword');
                     } else {
-                        builder.push(range, 'variable'); // Other symbols are Yellow
+                        builder.push(range, 'variable');
                     }
                 }
             }
