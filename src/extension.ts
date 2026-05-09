@@ -47,7 +47,6 @@ export function activate(context: vscode.ExtensionContext) {
             const itemsMap = new Map<string, vscode.CompletionItem>();
             const wordRange = document.getWordRangeAtPosition(position, /[%a-zA-Z0-9_$#@~.?]+/);
             
-            // 1. Knowledge Base
             for (const key in kb) {
                 const item = new vscode.CompletionItem(key, 
                     key.startsWith('%') ? vscode.CompletionItemKind.Keyword : 
@@ -58,7 +57,6 @@ export function activate(context: vscode.ExtensionContext) {
                 itemsMap.set(key.toLowerCase(), item);
             }
 
-            // 2. Global Symbols
             const allSymbols = getAllSymbolsFromOpenFiles();
             allSymbols.forEach(sym => {
                 const item = new vscode.CompletionItem(sym.name, sym.kind);
@@ -67,7 +65,6 @@ export function activate(context: vscode.ExtensionContext) {
                 itemsMap.set(sym.name.toLowerCase(), item);
             });
 
-            // 3. Dynamic Discovery
             const dynamicSymbols = discoverUndefinedSymbolsInDocument(document, new Set(itemsMap.keys()), kb);
             dynamicSymbols.forEach(sym => {
                 const item = new vscode.CompletionItem(sym.name, sym.kind);
@@ -83,14 +80,77 @@ export function activate(context: vscode.ExtensionContext) {
 
     const hoverProvider = vscode.languages.registerHoverProvider('nasm', {
         provideHover(document: vscode.TextDocument, position: vscode.Position) {
-            const range = document.getWordRangeAtPosition(position);
+            const range = document.getWordRangeAtPosition(position, /(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h|0b[01]+|[01]+[by]|\d+\.\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?|[a-zA-Z_?%.][a-zA-Z0-9_$#@~.?]*)/i);
             if (!range) return;
-            const word = document.getText(range).toLowerCase();
+
+            const word = document.getText(range);
+            const wordLower = word.toLowerCase();
+            
+            // 1. Check symbols/KB first
             const allSymbols = getAllSymbolsFromOpenFiles();
-            const dynamicSym = allSymbols.find(s => s.name.toLowerCase() === word);
+            const dynamicSym = allSymbols.find(s => s.name.toLowerCase() === wordLower);
             if (dynamicSym && dynamicSym.description) return new vscode.Hover(new vscode.MarkdownString(dynamicSym.description));
-            if (kb[word]) return new vscode.Hover(new vscode.MarkdownString(kb[word]));
-            if (kb['%' + word]) return new vscode.Hover(new vscode.MarkdownString(kb['%' + word]));
+            if (kb[wordLower]) return new vscode.Hover(new vscode.MarkdownString(kb[wordLower]));
+            if (kb['%' + wordLower]) return new vscode.Hover(new vscode.MarkdownString(kb['%' + wordLower]));
+
+            // 2. Check if it's a number
+            const hexRegex = /^(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)$/i;
+            const binRegex = /^(?:0b[01]+|[01]+[by])$/i;
+            const decRegex = /^\d+[dt]?$/i;
+            const floatRegex = /^(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?$/i;
+
+            let val: bigint | null = null;
+            let type: 'hex' | 'bin' | 'dec' | 'float' | null = null;
+
+            if (hexRegex.test(word)) {
+                type = 'hex';
+                let s = wordLower;
+                if (s.startsWith('0x')) s = s.substring(2);
+                else if (s.startsWith('$')) s = s.substring(1);
+                else if (s.endsWith('h')) s = s.substring(0, s.length - 1);
+                try { val = BigInt('0x' + s); } catch (e) { return; }
+            } else if (binRegex.test(word)) {
+                type = 'bin';
+                let s = wordLower;
+                if (s.startsWith('0b')) s = s.substring(2);
+                else s = s.substring(0, s.length - 1);
+                try { val = BigInt('0b' + s); } catch (e) { return; }
+            } else if (decRegex.test(word)) {
+                type = 'dec';
+                let s = wordLower;
+                if (s.endsWith('d') || s.endsWith('t')) s = s.substring(0, s.length - 1);
+                try { val = BigInt(s); } catch (e) { return; }
+            } else if (floatRegex.test(word)) {
+                const f = parseFloat(word);
+                const arr = new Float64Array(1);
+                arr[0] = f;
+                const uint64 = new BigUint64Array(arr.buffer);
+                const bits = uint64[0];
+                
+                const hoverText = new vscode.MarkdownString();
+                hoverText.appendMarkdown(`**Float64 (IEEE 754)**  \n`);
+                hoverText.appendMarkdown(`Hex: \`0x${bits.toString(16).toUpperCase().padStart(16, '0')}\`  \n`);
+                const b = bits.toString(2).padStart(64, '0');
+                const formattedBin = b.match(/.{1,8}/g)?.join(' ') || b;
+                hoverText.appendMarkdown(`Bin: \`${formattedBin}\``);
+                return new vscode.Hover(hoverText);
+            }
+
+            if (val !== null && type !== null) {
+                const hoverText = new vscode.MarkdownString();
+                if (type !== 'dec') hoverText.appendMarkdown(`Dec: \`${val.toString(10)}\`  \n`);
+                if (type !== 'hex') hoverText.appendMarkdown(`Hex: \`0x${val.toString(16).toUpperCase()}\`  \n`);
+                if (type !== 'bin') {
+                    let b = val.toString(2);
+                    if (b.length > 8) {
+                        const padded = b.padStart(Math.ceil(b.length / 8) * 8, '0');
+                        b = padded.match(/.{1,8}/g)?.join(' ') || b;
+                    }
+                    hoverText.appendMarkdown(`Bin: \`${b}\``);
+                }
+                return new vscode.Hover(hoverText);
+            }
+
             return;
         }
     });
