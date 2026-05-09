@@ -1,0 +1,119 @@
+{
+  "name": "nasm-x64",
+  "displayName": "NASM x86-64 Support",
+  "description": "Comprehensive NASM x86-64 assembly support for VSCode.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:nasm"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "nasm",
+        "aliases": [
+          "NASM",
+          "nasm"
+        ],
+        "extensions": [
+          ".asm",
+          ".nasm",
+          ".s"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nasm",
+        "scopeName": "source.asm.nasm",
+        "path": "./syntaxes/nasm.tmLanguage.json"
+      }
+    ],
+    "configurationDefaults": {
+      "editor.tokenColorCustomizations": {
+        "textMateRules": [
+          {
+            "scope": "variable.language.register.asm.nasm",
+            "settings": {
+              "foreground": "#569CD6"
+            }
+          },
+          {
+            "scope": "keyword.operator.instruction.asm.nasm",
+            "settings": {
+              "foreground": "#C586C0"
+            }
+          },
+          {
+            "scope": "entity.name.function.asm.nasm",
+            "settings": {
+              "foreground": "#FFCC00"
+            }
+          },
+          {
+            "scope": "entity.name.function.local.asm.nasm",
+            "settings": {
+              "foreground": "#FFCC00"
+            }
+          },
+          {
+            "scope": "variable.other.symbol.asm.nasm",
+            "settings": {
+              "foreground": "#FFCC00"
+            }
+          },
+          {
+            "scope": "keyword.preprocessor.asm.nasm",
+            "settings": {
+              "foreground": "#C586C0"
+            }
+          },
+          {
+            "scope": "keyword.control.asm.nasm",
+            "settings": {
+              "foreground": "#C586C0"
+            }
+          }
+        ]
+      },
+      "editor.semanticTokenColorCustomizations": {
+        "rules": {
+          "keyword": "#C586C0",
+          "function": "#FFCC00",
+          "parameter": "#569CD6",
+          "variable": "#FFCC00"
+        }
+      }
+    },
+    "semanticTokenTypes": [
+      { "id": "keyword", "description": "NASM Instructions and Directives" },
+      { "id": "function", "description": "NASM Labels" },
+      { "id": "parameter", "description": "NASM Registers" },
+      { "id": "variable", "description": "NASM Symbols" }
+    ],
+    "semanticTokenModifiers": []
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.126",
+    "@types/vscode": "^1.118.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "typescript": "^4.9.5"
+  }
+}

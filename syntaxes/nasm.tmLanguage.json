@@ -1,0 +1,116 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "NASM x86-64",
+  "scopeName": "source.asm.nasm",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#labels" },
+    { "include": "#directives" },
+    { "include": "#registers" },
+    { "include": "#instructions" },
+    { "include": "#numbers" },
+    { "include": "#symbols" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.semicolon.asm.nasm",
+          "match": ";.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.asm.nasm",
+          "begin": "\"",
+          "end": "\""
+        },
+        {
+          "name": "string.quoted.single.asm.nasm",
+          "begin": "'",
+          "end": "'"
+        },
+        {
+          "name": "string.quoted.backtick.asm.nasm",
+          "begin": "`",
+          "end": "`"
+        }
+      ]
+    },
+    "labels": {
+      "patterns": [
+        {
+          "name": "entity.name.function.asm.nasm",
+          "match": "^\\s*([a-zA-Z_?.%$#@~][a-zA-Z0-9_$#@~.?]*):"
+        },
+        {
+          "name": "entity.name.function.local.asm.nasm",
+          "match": "(\\.|%%|%\\$)[a-zA-Z_?][a-zA-Z0-9_$#@~.?]*"
+        }
+      ]
+    },
+    "directives": {
+      "patterns": [
+        {
+          "name": "keyword.control.asm.nasm",
+          "match": "(?i)\\b(SECTION|SEGMENT|ABSOLUTE|EXTERN|GLOBAL|COMMON|CPU|BITS|USE16|USE32|USE64|DEFAULT|STRICT|EQU|TIMES|ALIGN|STRUC|ENDSTRUC|ISTRUC|AT|IEND|INCBIN)\\b"
+        },
+        {
+          "name": "keyword.other.asm.nasm",
+          "match": "(?i)\\b(DB|DW|DD|DQ|DT|DO|DY|DZ|RESB|RESW|RESD|RESQ|REST|RESO|RESY|RESZ)\\b"
+        },
+        {
+          "name": "keyword.preprocessor.asm.nasm",
+          "match": "%[a-zA-Z0-9_?]+"
+        }
+      ]
+    },
+    "registers": {
+      "patterns": [
+        {
+          "name": "variable.language.register.asm.nasm",
+          "match": "(?i)\\b(R([89]|1[0-5])[DBW]?|[ER]?[A-D]X|[ER]?[SD]I|[ER]?[BS]P|[A-D][LH]|[C-GS]S|[XYZ]MM([0-9]|[12][0-9]|3[01])|CR[0-9]|DR[0-9])\\b"
+        }
+      ]
+    },
+    "instructions": {
+      "patterns": [
+        {
+          "name": "keyword.operator.instruction.asm.nasm",
+          "match": "(?i)\\b([A-Z]{2,12})\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.asm.nasm",
+          "match": "(?i)\\b(0x[0-9a-fA-F]+|\\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)\\b"
+        },
+        {
+          "name": "constant.numeric.binary.asm.nasm",
+          "match": "(?i)\\b(0b[01]+|[01]+[by])\\b"
+        },
+        {
+          "name": "constant.numeric.float.asm.nasm",
+          "match": "(\\d+\\.\\d*|\\.\\d+)([eE][+-]?\\d+)?"
+        },
+        {
+          "name": "constant.numeric.decimal.asm.nasm",
+          "match": "\\b[0-9]+[dt]?\\b"
+        }
+      ]
+    },
+    "symbols": {
+      "patterns": [
+        {
+          "name": "variable.other.symbol.asm.nasm",
+          "match": "\\b([a-zA-Z_?]|\\.|%%|%\\$)[a-zA-Z0-9_$#@~.?]*\\b"
+        }
+      ]
+    }
+  }
+}
