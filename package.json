@@ -3,7 +3,17 @@
   "displayName": "NASM x86-64 Support",
   "description": "Comprehensive NASM x86-64 assembly support for VSCode.",
   "version": "1.0.0",
-  "publisher": "magicelk235",
+  "publisher": "Magicelk235",
+  "license": "MIT",
+  "keywords": [
+    "nasm",
+    "assembly",
+    "x86-64",
+    "asm",
+    "x64",
+    "assembler"
+  ],
+  "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/magicelk235/Nasm-Extension.git"
@@ -40,70 +50,7 @@
         "scopeName": "source.asm.nasm",
         "path": "./syntaxes/nasm.tmLanguage.json"
       }
-    ],
-    "configurationDefaults": {
-      "editor.tokenColorCustomizations": {
-        "textMateRules": [
-          {
-            "scope": "variable.language.register.asm.nasm",
-            "settings": {
-              "foreground": "#569CD6"
-            }
-          },
-          {
-            "scope": "keyword.operator.instruction.asm.nasm",
-            "settings": {
-              "foreground": "#C586C0"
-            }
-          },
-          {
-            "scope": "entity.name.function.asm.nasm",
-            "settings": {
-              "foreground": "#FFCC00"
-            }
-          },
-          {
-            "scope": "entity.name.function.local.asm.nasm",
-            "settings": {
-              "foreground": "#FFCC00"
-            }
-          },
-          {
-            "scope": "variable.other.symbol.asm.nasm",
-            "settings": {
-              "foreground": "#FFCC00"
-            }
-          },
-          {
-            "scope": "keyword.preprocessor.asm.nasm",
-            "settings": {
-              "foreground": "#C586C0"
-            }
-          },
-          {
-            "scope": "keyword.control.asm.nasm",
-            "settings": {
-              "foreground": "#C586C0"
-            }
-          }
-        ]
-      },
-      "editor.semanticTokenColorCustomizations": {
-        "rules": {
-          "keyword": "#C586C0",
-          "function": "#FFCC00",
-          "parameter": "#569CD6",
-          "variable": "#FFCC00"
-        }
-      }
-    },
-    "semanticTokenTypes": [
-      { "id": "keyword", "description": "NASM Instructions and Directives" },
-      { "id": "function", "description": "NASM Labels" },
-      { "id": "parameter", "description": "NASM Registers" },
-      { "id": "variable", "description": "NASM Symbols" }
-    ],
-    "semanticTokenModifiers": []
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

@@ -1,14 +1,16 @@
 .vscode/**
 .vscode-test/**
-out/test/**
 src/**
 .gitignore
-.gitattributes
-tsconfig.json
-package-lock.json
+.yarnrc
+vsc-extension-quickstart.md
+**/tsconfig.json
+**/.eslintrc.json
+**/*.map
+**/*.ts
+node_modules/**
+.lean-ctx/**
+test_*.js
 prompt.md
-List of x86 instructions - Wikipedia.html
 nasmdoc.txt
-parse_data.py
-parse_kb.py
-**/.*
+*.html

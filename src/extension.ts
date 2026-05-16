@@ -10,11 +10,94 @@ interface SymbolInfo {
     name: string;
     description: string;
     kind: vscode.CompletionItemKind;
-    uri?: vscode.Uri;
+    range: vscode.Range;
+    uri: vscode.Uri;
 }
 
-const tokenTypes = ['keyword', 'function', 'parameter', 'variable'];
-const tokenModifiers = ['declaration', 'definition', 'readonly'];
+class SymbolManager {
+    private cache = new Map<string, { version: number, symbols: SymbolInfo[] }>();
+
+    public updateCache(document: vscode.TextDocument) {
+        if (document.languageId === 'nasm') {
+            this.cache.set(document.uri.toString(), {
+                version: document.version,
+                symbols: this.parseDocumentSymbols(document)
+            });
+        }
+    }
+
+    public getSymbols(uri?: vscode.Uri): SymbolInfo[] {
+        if (uri) {
+            const cached = this.cache.get(uri.toString());
+            return cached ? cached.symbols : [];
+        }
+        const all: SymbolInfo[] = [];
+        for (const entry of this.cache.values()) {
+            all.push(...entry.symbols);
+        }
+        return all;
+    }
+
+    private parseDocumentSymbols(document: vscode.TextDocument): SymbolInfo[] {
+        const symbols: SymbolInfo[] = [];
+        const lines = document.getText().split(/\r?\n/);
+        const idRegex = /(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?])[a-zA-Z0-9_$#@~.?]*/;
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const labelMatch = line.match(new RegExp(`^\\s*(${idRegex.source}):`));
+            if (labelMatch) {
+                const name = labelMatch[1];
+                const startIdx = line.indexOf(name);
+                symbols.push({
+                    name,
+                    description: extractComment(lines, i),
+                    kind: (name.startsWith('.') || name.startsWith('%')) ? vscode.CompletionItemKind.Field : vscode.CompletionItemKind.Function,
+                    uri: document.uri,
+                    range: new vscode.Range(i, startIdx, i, startIdx + name.length)
+                });
+                continue;
+            }
+            const macroMatch = line.match(new RegExp(`^\\s*%(?:macro|rmacro|imacro|irmacro)\\s+(${idRegex.source})`, 'i'));
+            if (macroMatch) {
+                const name = macroMatch[1];
+                const startIdx = line.indexOf(name);
+                symbols.push({
+                    name,
+                    description: extractComment(lines, i),
+                    kind: vscode.CompletionItemKind.Snippet,
+                    uri: document.uri,
+                    range: new vscode.Range(i, startIdx, i, startIdx + name.length)
+                });
+                continue;
+            }
+            const defineMatch = line.match(new RegExp(`^\\s*%(?:i?x?define|i?def(?:str|tok)|i?assign|strlen|substr)\\s+(${idRegex.source})(\\([^)]*\\))?`, 'i'));
+            if (defineMatch) {
+                const name = defineMatch[1];
+                const args = defineMatch[2] || '';
+                const startIdx = line.indexOf(name);
+                let description = extractComment(lines, i);
+                if (args) {
+                    description = description ? `${description}  \n${name}${args}` : `${name}${args}`;
+                }
+                symbols.push({
+                    name,
+                    description,
+                    kind: vscode.CompletionItemKind.Constant,
+                    uri: document.uri,
+                    range: new vscode.Range(i, startIdx, i, startIdx + name.length)
+                });
+            }
+        }
+        return symbols;
+    }
+
+    public clear(uri: vscode.Uri) {
+        this.cache.delete(uri.toString());
+    }
+}
+
+const tokenTypes = ['keyword', 'operator', 'parameter', 'function', 'variable', 'string', 'comment'];
+const tokenModifiers: string[] = [];
 const legend = new vscode.SemanticTokensLegend(tokenTypes, tokenModifiers);
 
 const registers = new Set([
@@ -42,12 +125,24 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }
 
+    const symbolManager = new SymbolManager();
+    vscode.workspace.textDocuments.forEach(doc => symbolManager.updateCache(doc));
+
+    context.subscriptions.push(
+        vscode.workspace.onDidOpenTextDocument(doc => symbolManager.updateCache(doc)),
+        vscode.workspace.onDidChangeTextDocument(e => symbolManager.updateCache(e.document)),
+        vscode.workspace.onDidCloseTextDocument(doc => symbolManager.clear(doc.uri))
+    );
+
     const completionProvider = vscode.languages.registerCompletionItemProvider('nasm', {
         provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
             const itemsMap = new Map<string, vscode.CompletionItem>();
             const wordRange = document.getWordRangeAtPosition(position, /[%a-zA-Z0-9_$#@~.?]+/);
-            
+            const word = wordRange ? document.getText(wordRange) : '';
+
             for (const key in kb) {
+                if (key.startsWith('%') && !word.startsWith('%')) continue;
+                
                 const item = new vscode.CompletionItem(key, 
                     key.startsWith('%') ? vscode.CompletionItemKind.Keyword : 
                     registers.has(key.toLowerCase()) ? vscode.CompletionItemKind.Variable : 
@@ -57,7 +152,7 @@ export function activate(context: vscode.ExtensionContext) {
                 itemsMap.set(key.toLowerCase(), item);
             }
 
-            const allSymbols = getAllSymbolsFromOpenFiles();
+            const allSymbols = symbolManager.getSymbols();
             allSymbols.forEach(sym => {
                 const item = new vscode.CompletionItem(sym.name, sym.kind);
                 if (sym.description) item.documentation = new vscode.MarkdownString(sym.description);
@@ -80,24 +175,26 @@ export function activate(context: vscode.ExtensionContext) {
 
     const hoverProvider = vscode.languages.registerHoverProvider('nasm', {
         provideHover(document: vscode.TextDocument, position: vscode.Position) {
-            const range = document.getWordRangeAtPosition(position, /(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h|0b[01]+|[01]+[by]|\d+\.\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?|\d+[dt]?|[a-zA-Z_?%.][a-zA-Z0-9_$#@~.?]*)/i);
+            const range = document.getWordRangeAtPosition(position, /(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h|0b[01]+|[01]+[by]|\d+\.\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?|\d+[dt]?|(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*)/i);
             if (!range) return;
 
             const word = document.getText(range);
             const wordLower = word.toLowerCase();
             
-            // 1. Symbols/KB check
-            const allSymbols = getAllSymbolsFromOpenFiles();
+            const allSymbols = symbolManager.getSymbols();
             const dynamicSym = allSymbols.find(s => s.name.toLowerCase() === wordLower);
             if (dynamicSym && dynamicSym.description) return new vscode.Hover(new vscode.MarkdownString(dynamicSym.description));
-            if (kb[wordLower]) return new vscode.Hover(new vscode.MarkdownString(kb[wordLower]));
-            if (kb['%' + wordLower]) return new vscode.Hover(new vscode.MarkdownString(kb['%' + wordLower]));
 
-            // 2. Number check
             const hexRegex = /^(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)$/i;
             const binRegex = /^(?:0b[01]+|[01]+[by])$/i;
             const decRegex = /^\d+[dt]?$/i;
             const floatRegex = /^(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?$/i;
+
+            const isNumeric = hexRegex.test(word) || binRegex.test(word) || decRegex.test(word) || floatRegex.test(word);
+
+            if (kb[wordLower] && !isNumeric) {
+                return new vscode.Hover(new vscode.MarkdownString(kb[wordLower]));
+            }
 
             let val: bigint | null = null;
             let type: 'hex' | 'bin' | 'dec' | 'float' | null = null;
@@ -153,86 +250,151 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    const definitionProvider = vscode.languages.registerDefinitionProvider('nasm', {
+        provideDefinition(document: vscode.TextDocument, position: vscode.Position) {
+            const range = document.getWordRangeAtPosition(position, /(?:%%|%\?|%\*|%\$|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*/);
+            if (!range) return;
+            const word = document.getText(range).toLowerCase();
+            const sym = symbolManager.getSymbols().find(s => s.name.toLowerCase() === word);
+            if (sym) return new vscode.Location(sym.uri, sym.range);
+            return;
+        }
+    });
+
+    const documentSymbolProvider = vscode.languages.registerDocumentSymbolProvider('nasm', {
+        provideDocumentSymbols(document: vscode.TextDocument) {
+            return symbolManager.getSymbols(document.uri).map(sym => {
+                return new vscode.DocumentSymbol(
+                    sym.name,
+                    '',
+                    sym.kind === vscode.CompletionItemKind.Snippet ? vscode.SymbolKind.Function :
+                    sym.kind === vscode.CompletionItemKind.Constant ? vscode.SymbolKind.Constant :
+                    sym.kind === vscode.CompletionItemKind.Function ? vscode.SymbolKind.Function :
+                    vscode.SymbolKind.Variable,
+                    sym.range,
+                    sym.range
+                );
+            });
+        }
+    });
+
     const semanticTokensProvider = vscode.languages.registerDocumentSemanticTokensProvider('nasm', {
         provideDocumentSemanticTokens(document: vscode.TextDocument) {
             const builder = new vscode.SemanticTokensBuilder(legend);
             const lines = document.getText().split(/\r?\n/);
-            const allSymbols = getAllSymbolsFromOpenFiles();
+            const allSymbols = symbolManager.getSymbols();
             const macroNames = new Set(allSymbols.filter(s => s.kind === vscode.CompletionItemKind.Snippet || s.kind === vscode.CompletionItemKind.Constant).map(s => s.name.toLowerCase()));
             
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
-                const commentIdx = line.indexOf(';');
-                let codePart = commentIdx === -1 ? line : line.substring(0, commentIdx);
-                codePart = codePart.replace(/(["'`])(?:\\.|[^\1])*?\1/g, (match) => ' '.repeat(match.length));
+                if (!line.trim()) continue;
+
+                const lineTokens: { start: number, length: number, type: string }[] = [];
+                
+                const stringRegex = /(["'`])(?:\\.|(?!\1).)*\1/g;
+                const maskedForComment = line.replace(stringRegex, (match) => ' '.repeat(match.length));
+                const commentIdx = maskedForComment.indexOf(';');
+
+                if (commentIdx !== -1) {
+                    lineTokens.push({ start: commentIdx, length: line.length - commentIdx, type: 'comment' });
+                }
+
+                const codeLimit = commentIdx === -1 ? line.length : commentIdx;
+                const codePartOriginal = line.substring(0, codeLimit);
+                
+                let strMatch;
+                const stringRegexForExec = /(["'`])(?:\\.|(?!\1).)*\1/g;
+                while ((strMatch = stringRegexForExec.exec(codePartOriginal)) !== null) {
+                    lineTokens.push({ start: strMatch.index, length: strMatch[0].length, type: 'string' });
+                }
+
+                const codePartMasked = codePartOriginal.replace(stringRegex, (match) => ' '.repeat(match.length));
 
                 const numberRegex = /(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?|0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|\b[0-9][0-9a-fA-F]*h|0b[01]+|\b[01]+[by]|\b\d+[dt]?\b/g;
-                const idRegex = /(?:%%|%\?|%\*|%\$|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*/g;
+                const idRegex = /(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*/g;
+                const punctRegex = /[\[\]\(\),]/g;
 
                 const numberPositions = new Set<number>();
                 let numMatch;
-                while ((numMatch = numberRegex.exec(codePart)) !== null) {
+                while ((numMatch = numberRegex.exec(codePartMasked)) !== null) {
                     for (let n = 0; n < numMatch[0].length; n++) numberPositions.add(numMatch.index + n);
+                }
+
+                let punctMatch;
+                while ((punctMatch = punctRegex.exec(codePartMasked)) !== null) {
+                    lineTokens.push({ start: punctMatch.index, length: 1, type: 'operator' });
                 }
 
                 let idMatch;
                 let instructionSlotTaken = false;
-                while ((idMatch = idRegex.exec(codePart)) !== null) {
+                let defineNamePending = false;
+                while ((idMatch = idRegex.exec(codePartMasked)) !== null) {
                     if (numberPositions.has(idMatch.index)) continue;
 
                     const word = idMatch[0];
                     const wordLower = word.toLowerCase();
-                    const startPos = new vscode.Position(i, idMatch.index);
-                    const range = new vscode.Range(startPos, new vscode.Position(i, idMatch.index + word.length));
-                    const remaining = codePart.substring(idMatch.index + word.length).trimStart();
+                    const isPrefix = /^(lock|rep|repe|repz|repne|repnz|bnd|xacquire|xrelease)$/i.test(word);
+                    const isDefineDirective = /^%(?:i?x?define|i?def(?:str|tok)|i?assign|macro|[ri]?macro|strlen|substr)$/i.test(word);
+                    const remaining = codePartMasked.substring(idMatch.index + word.length).trimStart();
                     const isLabelDef = remaining.startsWith(':');
 
+                    if (isLabelDef) {
+                        lineTokens.push({ start: idMatch.index, length: word.length, type: 'function' });
+                        continue;
+                    }
+
+                    if (word === '%') {
+                        lineTokens.push({ start: idMatch.index, length: 1, type: 'operator' });
+                        continue;
+                    }
+
+                    if (defineNamePending) {
+                        lineTokens.push({ start: idMatch.index, length: word.length, type: 'function' });
+                        defineNamePending = false;
+                        continue;
+                    }
+
                     if (registers.has(wordLower)) {
-                        builder.push(range, 'parameter');
-                        instructionSlotTaken = true;
-                    } else if (word.startsWith('%') && !word.startsWith('%%') && !word.startsWith('%$') && !word.startsWith('%?') && !word.startsWith('%*')) {
-                        builder.push(range, 'keyword');
-                        instructionSlotTaken = true;
-                    } else if (isLabelDef) {
-                        builder.push(range, 'function');
+                        lineTokens.push({ start: idMatch.index, length: word.length, type: 'parameter' });
+                        if (!instructionSlotTaken) instructionSlotTaken = true;
+                    } else if (macroNames.has(wordLower)) {
+                        lineTokens.push({ start: idMatch.index, length: word.length, type: 'keyword' });
+                        if (!instructionSlotTaken) instructionSlotTaken = true;
                     } else if (!instructionSlotTaken) {
-                        builder.push(range, 'keyword');
-                        instructionSlotTaken = true;
-                    } else if (kb[wordLower] || macroNames.has(wordLower)) {
-                        builder.push(range, 'keyword');
+                        lineTokens.push({ start: idMatch.index, length: word.length, type: 'keyword' });
+                        if (!isPrefix) instructionSlotTaken = true;
+                        if (isDefineDirective) defineNamePending = true;
                     } else {
-                        builder.push(range, 'variable');
+                        lineTokens.push({ start: idMatch.index, length: word.length, type: 'variable' });
                     }
                 }
+
+                lineTokens.sort((a, b) => a.start - b.start);
+                lineTokens.forEach(t => {
+                    builder.push(new vscode.Range(i, t.start, i, t.start + t.length), t.type);
+                });
             }
             return builder.build();
         }
     }, legend);
 
-    context.subscriptions.push(completionProvider, hoverProvider, semanticTokensProvider);
+    context.subscriptions.push(completionProvider, hoverProvider, definitionProvider, documentSymbolProvider, semanticTokensProvider);
 }
 
-function getAllSymbolsFromOpenFiles(): SymbolInfo[] {
-    const allSymbols: SymbolInfo[] = [];
-    vscode.workspace.textDocuments.forEach(doc => {
-        if (doc.languageId === 'nasm') allSymbols.push(...parseDocumentSymbols(doc));
-    });
-    return allSymbols;
-}
-
-function discoverUndefinedSymbolsInDocument(document: vscode.TextDocument, seenNames: Set<string>, kb: KnowledgeBase): SymbolInfo[] {
-    const symbols: SymbolInfo[] = [];
+function discoverUndefinedSymbolsInDocument(document: vscode.TextDocument, seenNames: Set<string>, kb: KnowledgeBase): { name: string, kind: vscode.CompletionItemKind }[] {
+    const symbols: { name: string, kind: vscode.CompletionItemKind }[] = [];
     const localSeen = new Set<string>();
     const text = document.getText();
     const lines = text.split(/\r?\n/);
+    const stringRegex = /(["'`])(?:\\.|(?!\1).)*\1/g;
 
     for (const line of lines) {
-        const commentIdx = line.indexOf(';');
+        const commentIdx = line.replace(stringRegex, (match) => ' '.repeat(match.length)).indexOf(';');
         let codePart = commentIdx === -1 ? line : line.substring(0, commentIdx);
-        codePart = codePart.replace(/(["'`])(?:\\.|[^\1])*?\1/g, (match) => ' '.repeat(match.length));
+        codePart = codePart.replace(stringRegex, (match) => ' '.repeat(match.length));
         
         const numberRegex = /(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?|0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|\b[0-9][0-9a-fA-F]*h|0b[01]+|\b[01]+[by]|\b\d+[dt]?\b/g;
-        const idRegex = /(?:%%|%\?|%\*|%\$|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*/g;
+        const idRegex = /(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*/g;
 
         const numberPositions = new Set<number>();
         let numMatch;
@@ -247,44 +409,33 @@ function discoverUndefinedSymbolsInDocument(document: vscode.TextDocument, seenN
             const wordLower = word.toLowerCase();
             const remaining = codePart.substring(match.index + word.length).trimStart();
             const isLabelDef = remaining.startsWith(':');
-            if (seenNames.has(wordLower) || localSeen.has(wordLower) || kb[wordLower] || registers.has(wordLower) || /^\d/.test(word)) {
-                if (!isLabelDef) instructionSlotTaken = true;
+            const isPrefix = /^(lock|rep|repe|repz|repne|repnz|bnd|xacquire|xrelease)$/i.test(word);
+
+            if (isLabelDef) {
                 continue;
             }
+
+            if (word === '%') {
+                if (!instructionSlotTaken && !isPrefix) instructionSlotTaken = true;
+                continue;
+            }
+
+            if (seenNames.has(wordLower) || localSeen.has(wordLower) || kb[wordLower] || registers.has(wordLower) || /^\d/.test(word) || /^(SECTION|SEGMENT|ABSOLUTE|EXTERN|GLOBAL|COMMON|CPU|BITS|USE16|USE32|USE64|DEFAULT|STRICT|EQU|TIMES|ALIGN|STRUC|ENDSTRUC|ISTRUC|AT|IEND|INCBIN|DB|DW|DD|DQ|DT|DO|DY|DZ|RESB|RESW|RESD|RESQ|REST|RESO|RESY|RESZ|BYTE|WORD|DWORD|QWORD|TWORD|OWORD|YWORD|ZWORD|PTR|SHORT|NEAR|FAR|REL|ABS)$/i.test(word)) {
+                if (!instructionSlotTaken && !isPrefix) {
+                    instructionSlotTaken = true;
+                }
+                continue;
+            }
+
             symbols.push({
                 name: word,
-                description: '',
-                kind: (!isLabelDef && !instructionSlotTaken) ? vscode.CompletionItemKind.Snippet : vscode.CompletionItemKind.Variable
+                kind: !instructionSlotTaken ? vscode.CompletionItemKind.Snippet : vscode.CompletionItemKind.Variable
             });
             localSeen.add(wordLower);
-            if (!isLabelDef) instructionSlotTaken = true;
-        }
-    }
-    return symbols;
-}
 
-function parseDocumentSymbols(document: vscode.TextDocument): SymbolInfo[] {
-    const symbols: SymbolInfo[] = [];
-    const lines = document.getText().split(/\r?\n/);
-    const idRegex = /(?:%%|%\?|%\*|%\$|\.[a-zA-Z_?]|[a-zA-Z_?])[a-zA-Z0-9_$#@~.?]*/;
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        const labelMatch = line.match(new RegExp(`^\\s*(${idRegex.source}):`));
-        if (labelMatch) {
-            const name = labelMatch[1];
-            symbols.push({ name, description: extractComment(lines, i), kind: (name.startsWith('.') || name.startsWith('%')) ? vscode.CompletionItemKind.Field : vscode.CompletionItemKind.Function, uri: document.uri });
-            continue;
-        }
-        const macroMatch = line.match(new RegExp(`^\\s*%(?:macro|rmacro|imacro|irmacro)\\s+(${idRegex.source})`, 'i'));
-        if (macroMatch) {
-            const name = macroMatch[1];
-            symbols.push({ name, description: extractComment(lines, i), kind: vscode.CompletionItemKind.Snippet, uri: document.uri });
-            continue;
-        }
-        const defineMatch = line.match(new RegExp(`^\\s*%(?:i?x?define|i?def(?:str|tok)|i?assign|strlen|substr)\\s+(${idRegex.source})`, 'i'));
-        if (defineMatch) {
-            const name = defineMatch[1];
-            symbols.push({ name, description: extractComment(lines, i), kind: vscode.CompletionItemKind.Constant, uri: document.uri });
+            if (!instructionSlotTaken && !isPrefix) {
+                instructionSlotTaken = true;
+            }
         }
     }
     return symbols;
@@ -300,7 +451,11 @@ function extractComment(lines: string[], index: number): string {
         else break;
     }
     const sameLine: string[] = [];
-    const parts = lines[index].split(';');
-    if (parts.length > 1) sameLine.push(parts.slice(1).join(';').trim());
+    const line = lines[index];
+    const stringRegex = /(["'`])(?:\\.|(?!\1).)*\1/g;
+    const commentIdx = line.replace(stringRegex, (match) => ' '.repeat(match.length)).indexOf(';');
+    if (commentIdx !== -1) {
+        sameLine.push(line.substring(commentIdx + 1).trim());
+    }
     return [...preceding, ...sameLine].join('  \n').trim();
 }
