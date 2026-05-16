@@ -30,7 +30,7 @@ Supports all NASM number formats: `0x`, `$`, `h` suffix, `0b`, `b` suffix, plain
 
 ## Install
 
-**From Marketplace:** Search "NASM x64" in VS Code extensions.
+**[Get it from the Marketplace](https://marketplace.visualstudio.com/items?itemName=Magicelk235.nasm-x64)** or search "NASM x64" in VS Code extensions.
 
 **Manual:** Copy to `~/.vscode/extensions/` and restart.
 
