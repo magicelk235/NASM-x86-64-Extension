@@ -2,7 +2,7 @@
   "name": "nasm-x64",
   "displayName": "NASM x86-64 Support",
   "description": "Comprehensive NASM x86-64 assembly support for VSCode.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "Magicelk235",
   "license": "MIT",
   "keywords": [
