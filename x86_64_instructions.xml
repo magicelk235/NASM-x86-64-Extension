@@ -1,0 +1,1750 @@
+<?xml version='1.0' encoding='utf-8'?>
+<InstructionSet name="x86-64">
+  <Instruction name="aaa" summary="ASCII Adjust After Addition"/>
+  <Instruction name="aad" summary="ASCII Adjust AX Before Division"/>
+  <Instruction name="aadd" summary="Atomically ADD"/>
+  <Instruction name="aam" summary="ASCII Adjust AX After Multiply"/>
+  <Instruction name="aand" summary="Atomically AND"/>
+  <Instruction name="aas" summary="ASCII Adjust AL After Subtraction"/>
+  <Instruction name="adc" summary="Add with Carry"/>
+  <Instruction name="adcx" summary="Unsigned Integer Addition of Two Operands with Carry Flag"/>
+  <Instruction name="add" summary="Add"/>
+  <Instruction name="addpd" summary="Add Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="addps" summary="Add Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="addsd" summary="Add Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="addss" summary="Add Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="addsubpd" summary="Packed Double Precision Floating-Point Add/Subtract"/>
+  <Instruction name="addsubps" summary="Packed Single Precision Floating-Point Add/Subtract"/>
+  <Instruction name="adox" summary="Unsigned Integer Addition of Two Operands with Overflow Flag"/>
+  <Instruction name="aesdec" summary="Perform One Round of an AES Decryption Flow"/>
+  <Instruction name="aesdec128kl" summary="Perform Ten Rounds of AES Decryption Flow With Key Locker Using 128-BitKey"/>
+  <Instruction name="aesdec256kl" summary="Perform 14 Rounds of AES Decryption Flow With Key Locker Using 256-Bit Key"/>
+  <Instruction name="aesdeclast" summary="Perform Last Round of an AES Decryption Flow"/>
+  <Instruction name="aesdecwide128kl" summary="Perform Ten Rounds of AES Decryption Flow With Key Locker on 8 BlocksUsing 128-Bit Key"/>
+  <Instruction name="aesdecwide256kl" summary="Perform 14 Rounds of AES Decryption Flow With Key Locker on 8 BlocksUsing 256-Bit Key"/>
+  <Instruction name="aesenc" summary="Perform One Round of an AES Encryption Flow"/>
+  <Instruction name="aesenc128kl" summary="Perform Ten Rounds of AES Encryption Flow With Key Locker Using 128-Bit Key"/>
+  <Instruction name="aesenc256kl" summary="Perform 14 Rounds of AES Encryption Flow With Key Locker Using 256-Bit Key"/>
+  <Instruction name="aesenclast" summary="Perform Last Round of an AES Encryption Flow"/>
+  <Instruction name="aesencwide128kl" summary="Perform Ten Rounds of AES Encryption Flow With Key Locker on 8 BlocksUsing 128-Bit Key"/>
+  <Instruction name="aesencwide256kl" summary="Perform 14 Rounds of AES Encryption Flow With Key Locker on 8 BlocksUsing 256-Bit Key"/>
+  <Instruction name="aesimc" summary="Perform the AES InvMixColumn Transformation"/>
+  <Instruction name="aeskeygenassist" summary="AES Round Key Generation Assist"/>
+  <Instruction name="and" summary="Logical AND"/>
+  <Instruction name="andn" summary="Logical AND NOT"/>
+  <Instruction name="andnpd" summary="Bitwise Logical AND NOT of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="andnps" summary="Bitwise Logical AND NOT of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="andpd" summary="Bitwise Logical AND of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="andps" summary="Bitwise Logical AND of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="aor" summary="Atomically OR"/>
+  <Instruction name="arpl" summary="Adjust RPL Field of Segment Selector"/>
+  <Instruction name="axor" summary="Atomically XOR"/>
+  <Instruction name="bextr" summary="Bit Field Extract"/>
+  <Instruction name="blcfill" summary="Fill From Lowest Clear Bit"/>
+  <Instruction name="blci" summary="Isolate Lowest Clear Bit"/>
+  <Instruction name="blcic" summary="Isolate Lowest Set Bit and Complement"/>
+  <Instruction name="blcmsk" summary="Mask From Lowest Clear Bit"/>
+  <Instruction name="blcs" summary="Set Lowest Clear Bit"/>
+  <Instruction name="blendpd" summary="Blend Packed Double Precision Floating-Point Values"/>
+  <Instruction name="blendps" summary="Blend Packed Single Precision Floating-Point Values"/>
+  <Instruction name="blendvpd" summary="Variable Blend Packed Double Precision Floating-Point Values"/>
+  <Instruction name="blendvps" summary="Variable Blend Packed Single Precision Floating-Point Values"/>
+  <Instruction name="blsfill" summary="Fill From Lowest Set Bit"/>
+  <Instruction name="blsi" summary="Extract Lowest Set Isolated Bit"/>
+  <Instruction name="blsic" summary="Isolate Lowest Set Bit and Complement"/>
+  <Instruction name="blsmsk" summary="Get Mask Up to Lowest Set Bit"/>
+  <Instruction name="blsr" summary="Reset Lowest Set Bit"/>
+  <Instruction name="bndcl" summary="Check Lower Bound"/>
+  <Instruction name="bndcn" summary="Check Upper Bound"/>
+  <Instruction name="bndcu" summary="Check Upper Bound"/>
+  <Instruction name="bndldx" summary="Load Extended Bounds Using Address Translation"/>
+  <Instruction name="bndmk" summary="Make Bounds"/>
+  <Instruction name="bndmov" summary="Move Bounds"/>
+  <Instruction name="bndstx" summary="Store Extended Bounds Using Address Translation"/>
+  <Instruction name="bound" summary="Check Array Index Against Bounds"/>
+  <Instruction name="bsf" summary="Bit Scan Forward"/>
+  <Instruction name="bsr" summary="Bit Scan Reverse"/>
+  <Instruction name="bswap" summary="Byte Swap"/>
+  <Instruction name="bt" summary="Bit Test"/>
+  <Instruction name="btc" summary="Bit Test and Complement"/>
+  <Instruction name="btr" summary="Bit Test and Reset"/>
+  <Instruction name="bts" summary="Bit Test and Set"/>
+  <Instruction name="bzhi" summary="Zero High Bits Starting with Specified Bit Position"/>
+  <Instruction name="call" summary="Call Procedure"/>
+  <Instruction name="cbw" summary="Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword toQuadword"/>
+  <Instruction name="cdq" summary="Convert Word to Doubleword/Convert Doubleword to Quadword"/>
+  <Instruction name="cdqe" summary="Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword toQuadword"/>
+  <Instruction name="clac" summary="Clear AC Flag in EFLAGS Register"/>
+  <Instruction name="clc" summary="Clear Carry Flag"/>
+  <Instruction name="cld" summary="Clear Direction Flag"/>
+  <Instruction name="cldemote" summary="Cache Line Demote"/>
+  <Instruction name="clflush" summary="Flush Cache Line"/>
+  <Instruction name="clflushopt" summary="Flush Cache Line Optimized"/>
+  <Instruction name="cli" summary="Clear Interrupt Flag"/>
+  <Instruction name="clrssbsy" summary="Clear Busy Flag in a Supervisor Shadow Stack Token"/>
+  <Instruction name="clts" summary="Clear Task-Switched Flag in CR0"/>
+  <Instruction name="clui" summary="Clear User Interrupt Flag"/>
+  <Instruction name="clwb" summary="Cache Line Write Back"/>
+  <Instruction name="clzero" summary="out 64-bit Cache Line"/>
+  <Instruction name="cmc" summary="Complement Carry Flag"/>
+  <Instruction name="cmova" summary="Move if above (CF == 0 and ZF == 0)"/>
+  <Instruction name="cmovae" summary="Move if above or equal (CF == 0)"/>
+  <Instruction name="cmovb" summary="Move if below (CF == 1)"/>
+  <Instruction name="cmovbe" summary="Move if below or equal (CF == 1 or ZF == 1)"/>
+  <Instruction name="cmovc" summary="Move if carry (CF == 1)"/>
+  <Instruction name="cmovcc" summary="Conditional Move"/>
+  <Instruction name="cmove" summary="Move if equal (ZF == 1)"/>
+  <Instruction name="cmovg" summary="Move if greater (ZF == 0 and SF == OF)"/>
+  <Instruction name="cmovge" summary="Move if greater or equal (SF == OF)"/>
+  <Instruction name="cmovl" summary="Move if less (SF != OF)"/>
+  <Instruction name="cmovle" summary="Move if less or equal (ZF == 1 or SF != OF)"/>
+  <Instruction name="cmovna" summary="Move if not above (CF == 1 or ZF == 1)"/>
+  <Instruction name="cmovnae" summary="Move if not above or equal (CF == 1)"/>
+  <Instruction name="cmovnb" summary="Move if not below (CF == 0)"/>
+  <Instruction name="cmovnbe" summary="Move if not below or equal (CF == 0 and ZF == 0)"/>
+  <Instruction name="cmovnc" summary="Move if not carry (CF == 0)"/>
+  <Instruction name="cmovne" summary="Move if not equal (ZF == 0)"/>
+  <Instruction name="cmovng" summary="Move if not greater (ZF == 1 or SF != OF)"/>
+  <Instruction name="cmovnge" summary="Move if not greater or equal (SF != OF)"/>
+  <Instruction name="cmovnl" summary="Move if not less (SF == OF)"/>
+  <Instruction name="cmovnle" summary="Move if not less or equal (ZF == 0 and SF == OF)"/>
+  <Instruction name="cmovno" summary="Move if not overflow (OF == 0)"/>
+  <Instruction name="cmovnp" summary="Move if not parity (PF == 0)"/>
+  <Instruction name="cmovns" summary="Move if not sign (SF == 0)"/>
+  <Instruction name="cmovnz" summary="Move if not zero (ZF == 0)"/>
+  <Instruction name="cmovo" summary="Move if overflow (OF == 1)"/>
+  <Instruction name="cmovp" summary="Move if parity (PF == 1)"/>
+  <Instruction name="cmovpe" summary="Move if parity even (PF == 1)"/>
+  <Instruction name="cmovpo" summary="Move if parity odd (PF == 0)"/>
+  <Instruction name="cmovs" summary="Move if sign (SF == 1)"/>
+  <Instruction name="cmovz" summary="Move if zero (ZF == 1)"/>
+  <Instruction name="cmp" summary="Compare Two Operands"/>
+  <Instruction name="cmpbexadd" summary="Compare for Below or Equals and Add"/>
+  <Instruction name="cmpbxadd" summary="Compare for Below and Add"/>
+  <Instruction name="cmplexadd" summary="Compare for Less or Equals and Add"/>
+  <Instruction name="cmplxadd" summary="Compare for Less and Add"/>
+  <Instruction name="cmpnbexadd" summary="Compare for Not Below or Equals and Add"/>
+  <Instruction name="cmpnbxadd" summary="Compare for Not Below and Add"/>
+  <Instruction name="cmpnlexadd" summary="Compare for Not Less or Equals and Add"/>
+  <Instruction name="cmpnlxadd" summary="Compare for Not Less and Add"/>
+  <Instruction name="cmpnoxadd" summary="Compare for Not Overflow and Add"/>
+  <Instruction name="cmpnpxadd" summary="Compare for Not Parity and Add"/>
+  <Instruction name="cmpnsxadd" summary="Compare for Not Sign and Add"/>
+  <Instruction name="cmpnzxadd" summary="Compare for Not Zero and Add"/>
+  <Instruction name="cmpoxadd" summary="Compare for Overflow and Add"/>
+  <Instruction name="cmppd" summary="Compare Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="cmpps" summary="Compare Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="cmppxadd" summary="Compare for Parity and Add"/>
+  <Instruction name="cmps" summary="Compare String Operands"/>
+  <Instruction name="cmpsb" summary="Compare String Operands"/>
+  <Instruction name="cmpsd" summary="Compare Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="cmpsq" summary="Compare String Operands"/>
+  <Instruction name="cmpss" summary="Compare Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="cmpsw" summary="Compare String Operands"/>
+  <Instruction name="cmpsxadd" summary="Compare for Sign and Add"/>
+  <Instruction name="cmpxchg" summary="Compare and Exchange"/>
+  <Instruction name="cmpxchg16b" summary="Compare and Exchange 16 Bytes"/>
+  <Instruction name="cmpxchg8b" summary="Compare and Exchange 8 Bytes"/>
+  <Instruction name="cmpzxadd" summary="Compare for Zero and Add"/>
+  <Instruction name="comisd" summary="Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="comiss" summary="Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="cpuid" summary="CPU Identification"/>
+  <Instruction name="cqo" summary="Convert Word to Doubleword/Convert Doubleword to Quadword"/>
+  <Instruction name="crc32" summary="Accumulate CRC32 Value"/>
+  <Instruction name="cvtdq2pd" summary="Convert Packed Doubleword Integers to Packed Double Precision Floating-PointValues"/>
+  <Instruction name="cvtdq2ps" summary="Convert Packed Doubleword Integers to Packed Single Precision Floating-PointValues"/>
+  <Instruction name="cvtpd2dq" summary="Convert Packed Double Precision Floating-Point Values to Packed DoublewordIntegers"/>
+  <Instruction name="cvtpd2pi" summary="Convert Packed Double Precision Floating-Point Values to Packed Dword Integers"/>
+  <Instruction name="cvtpd2ps" summary="Convert Packed Double Precision Floating-Point Values to Packed Single PrecisionFloating-Point Values"/>
+  <Instruction name="cvtpi2pd" summary="Convert Packed Dword Integers to Packed Double Precision Floating-Point Values"/>
+  <Instruction name="cvtpi2ps" summary="Convert Packed Dword Integers to Packed Single Precision Floating-Point Values"/>
+  <Instruction name="cvtps2dq" summary="Convert Packed Single Precision Floating-Point Values to Packed SignedDoubleword Integer Values"/>
+  <Instruction name="cvtps2pd" summary="Convert Packed Single Precision Floating-Point Values to Packed Double PrecisionFloating-Point Values"/>
+  <Instruction name="cvtps2pi" summary="Convert Packed Single Precision Floating-Point Values to Packed Dword Integers"/>
+  <Instruction name="cvtsd2si" summary="Convert Scalar Double Precision Floating-Point Value to Doubleword Integer"/>
+  <Instruction name="cvtsd2ss" summary="Convert Scalar Double Precision Floating-Point Value to Scalar Single PrecisionFloating-Point Value"/>
+  <Instruction name="cvtsi2sd" summary="Convert Doubleword Integer to Scalar Double Precision Floating-Point Value"/>
+  <Instruction name="cvtsi2ss" summary="Convert Doubleword Integer to Scalar Single Precision Floating-Point Value"/>
+  <Instruction name="cvtss2sd" summary="Convert Scalar Single Precision Floating-Point Value to Scalar Double PrecisionFloating-Point Value"/>
+  <Instruction name="cvtss2si" summary="Convert Scalar Single Precision Floating-Point Value to Doubleword Integer"/>
+  <Instruction name="cvttpd2dq" summary="Convert with Truncation Packed Double Precision Floating-Point Values toPacked Doubleword Integers"/>
+  <Instruction name="cvttpd2pi" summary="Convert With Truncation Packed Double Precision Floating-Point Values to PackedDword Integers"/>
+  <Instruction name="cvttps2dq" summary="Convert With Truncation Packed Single Precision Floating-Point Values to PackedSigned Doubleword Integer Values"/>
+  <Instruction name="cvttps2pi" summary="Convert With Truncation Packed Single Precision Floating-Point Values to PackedDword Integers"/>
+  <Instruction name="cvttsd2si" summary="Convert With Truncation Scalar Double Precision Floating-Point Value to SignedInteger"/>
+  <Instruction name="cvttss2si" summary="Convert With Truncation Scalar Single Precision Floating-Point Value to Integer"/>
+  <Instruction name="cwd" summary="Convert Word to Doubleword/Convert Doubleword to Quadword"/>
+  <Instruction name="cwde" summary="Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword toQuadword"/>
+  <Instruction name="daa" summary="Decimal Adjust AL After Addition"/>
+  <Instruction name="das" summary="Decimal Adjust AL After Subtraction"/>
+  <Instruction name="dec" summary="Decrement by 1"/>
+  <Instruction name="div" summary="Unsigned Divide"/>
+  <Instruction name="divpd" summary="Divide Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="divps" summary="Divide Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="divsd" summary="Divide Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="divss" summary="Divide Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="dppd" summary="Dot Product of Packed Double Precision Floating-Point Values"/>
+  <Instruction name="dpps" summary="Dot Product of Packed Single Precision Floating-Point Values"/>
+  <Instruction name="emms" summary="Empty MMX Technology State"/>
+  <Instruction name="encls" summary="Execute an Enclave System Function of Specified Leaf Number"/>
+  <Instruction name="enclu" summary="Execute an Enclave User Function of Specified Leaf Number"/>
+  <Instruction name="enclv" summary="Execute an Enclave VMM Function of Specified Leaf Number"/>
+  <Instruction name="encodekey128" summary="Encode 128-Bit Key With Key Locker"/>
+  <Instruction name="encodekey256" summary="Encode 256-Bit Key With Key Locker"/>
+  <Instruction name="endbr32" summary="Terminate an Indirect Branch in 32-bit and Compatibility Mode"/>
+  <Instruction name="endbr64" summary="Terminate an Indirect Branch in 64-bit Mode"/>
+  <Instruction name="enqcmd" summary="Enqueue Command"/>
+  <Instruction name="enqcmds" summary="Enqueue Command Supervisor"/>
+  <Instruction name="enter" summary="Make Stack Frame for Procedure Parameters"/>
+  <Instruction name="extractps" summary="Extract Packed Single Precision Floating-Point Value"/>
+  <Instruction name="extrq" summary="Extract Field"/>
+  <Instruction name="f2xm1" summary="Compute 2x–1"/>
+  <Instruction name="fabs" summary="Absolute Value"/>
+  <Instruction name="fadd" summary="Add"/>
+  <Instruction name="faddp" summary="Add"/>
+  <Instruction name="fbld" summary="Load Binary Coded Decimal"/>
+  <Instruction name="fbstp" summary="Store BCD Integer and Pop"/>
+  <Instruction name="fchs" summary="Change Sign"/>
+  <Instruction name="fclex" summary="Clear Exceptions"/>
+  <Instruction name="fcmovcc" summary="Point Conditional Move"/>
+  <Instruction name="fcom" summary="Compare Floating-Point Values"/>
+  <Instruction name="fcomi" summary="Compare Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="fcomip" summary="Compare Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="fcomp" summary="Compare Floating-Point Values"/>
+  <Instruction name="fcompp" summary="Compare Floating-Point Values"/>
+  <Instruction name="fcos" summary="Cosine"/>
+  <Instruction name="fdecstp" summary="Decrement Stack-Top Pointer"/>
+  <Instruction name="fdiv" summary="Divide"/>
+  <Instruction name="fdivp" summary="Divide"/>
+  <Instruction name="fdivr" summary="Reverse Divide"/>
+  <Instruction name="fdivrp" summary="Reverse Divide"/>
+  <Instruction name="femms" summary="Fast Exit Multimedia State"/>
+  <Instruction name="ffree" summary="Free Floating-Point Register"/>
+  <Instruction name="fiadd" summary="Add"/>
+  <Instruction name="ficom" summary="Compare Integer"/>
+  <Instruction name="ficomp" summary="Compare Integer"/>
+  <Instruction name="fidiv" summary="Divide"/>
+  <Instruction name="fidivr" summary="Reverse Divide"/>
+  <Instruction name="fild" summary="Load Integer"/>
+  <Instruction name="fimul" summary="Multiply"/>
+  <Instruction name="fincstp" summary="Increment Stack-Top Pointer"/>
+  <Instruction name="finit" summary="Initialize Floating-Point Unit"/>
+  <Instruction name="fist" summary="Store Integer"/>
+  <Instruction name="fistp" summary="Store Integer"/>
+  <Instruction name="fisttp" summary="Store Integer With Truncation"/>
+  <Instruction name="fisub" summary="Subtract"/>
+  <Instruction name="fisubr" summary="Reverse Subtract"/>
+  <Instruction name="fld" summary="Load Floating-Point Value"/>
+  <Instruction name="fld1" summary="Load Constant"/>
+  <Instruction name="fldcw" summary="Load x87 FPU Control Word"/>
+  <Instruction name="fldenv" summary="Load x87 FPU Environment"/>
+  <Instruction name="fldl2e" summary="Load Constant"/>
+  <Instruction name="fldl2t" summary="Load Constant"/>
+  <Instruction name="fldlg2" summary="Load Constant"/>
+  <Instruction name="fldln2" summary="Load Constant"/>
+  <Instruction name="fldpi" summary="Load Constant"/>
+  <Instruction name="fldz" summary="Load Constant"/>
+  <Instruction name="fmul" summary="Multiply"/>
+  <Instruction name="fmulp" summary="Multiply"/>
+  <Instruction name="fnclex" summary="Clear Exceptions"/>
+  <Instruction name="fninit" summary="Initialize Floating-Point Unit"/>
+  <Instruction name="fnop" summary="No Operation"/>
+  <Instruction name="fnsave" summary="Store x87 FPU State"/>
+  <Instruction name="fnstcw" summary="Store x87 FPU Control Word"/>
+  <Instruction name="fnstenv" summary="Store x87 FPU Environment"/>
+  <Instruction name="fnstsw" summary="Store x87 FPU Status Word"/>
+  <Instruction name="fpatan" summary="Partial Arctangent"/>
+  <Instruction name="fprem" summary="Partial Remainder"/>
+  <Instruction name="fprem1" summary="Partial Remainder"/>
+  <Instruction name="fptan" summary="Partial Tangent"/>
+  <Instruction name="frndint" summary="Round to Integer"/>
+  <Instruction name="frstor" summary="Restore x87 FPU State"/>
+  <Instruction name="fsave" summary="Store x87 FPU State"/>
+  <Instruction name="fscale" summary="Scale"/>
+  <Instruction name="fsin" summary="Sine"/>
+  <Instruction name="fsincos" summary="Sine and Cosine"/>
+  <Instruction name="fsqrt" summary="Square Root"/>
+  <Instruction name="fst" summary="Store Floating-Point Value"/>
+  <Instruction name="fstcw" summary="Store x87 FPU Control Word"/>
+  <Instruction name="fstenv" summary="Store x87 FPU Environment"/>
+  <Instruction name="fstp" summary="Store Floating-Point Value"/>
+  <Instruction name="fstsw" summary="Store x87 FPU Status Word"/>
+  <Instruction name="fsub" summary="Subtract"/>
+  <Instruction name="fsubp" summary="Subtract"/>
+  <Instruction name="fsubr" summary="Reverse Subtract"/>
+  <Instruction name="fsubrp" summary="Reverse Subtract"/>
+  <Instruction name="ftst" summary="TEST"/>
+  <Instruction name="fucom" summary="Unordered Compare Floating-Point Values"/>
+  <Instruction name="fucomi" summary="Compare Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="fucomip" summary="Compare Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="fucomp" summary="Unordered Compare Floating-Point Values"/>
+  <Instruction name="fucompp" summary="Unordered Compare Floating-Point Values"/>
+  <Instruction name="fwait" summary="Wait"/>
+  <Instruction name="fxam" summary="Examine Floating-Point"/>
+  <Instruction name="fxch" summary="Exchange Register Contents"/>
+  <Instruction name="fxrstor" summary="Restore x87 FPU, MMX, XMM, and MXCSR State"/>
+  <Instruction name="fxsave" summary="Save x87 FPU, MMX Technology, and SSE State"/>
+  <Instruction name="fxtract" summary="Extract Exponent and Significand"/>
+  <Instruction name="fyl2x" summary="Compute y ∗ log2x"/>
+  <Instruction name="fyl2xp1" summary="Compute y ∗ log2(x +1)"/>
+  <Instruction name="gf2p8affineinvqb" summary="Galois Field (2^8) Affine Inverse Transformation"/>
+  <Instruction name="gf2p8affineqb" summary="Galois Field (2^8) Affine Transformation"/>
+  <Instruction name="gf2p8mulb" summary="Galois Field Multiply Bytes"/>
+  <Instruction name="haddpd" summary="Packed Double Precision Floating-Point Horizontal Add"/>
+  <Instruction name="haddps" summary="Packed Single Precision Floating-Point Horizontal Add"/>
+  <Instruction name="hlt" summary="Halt"/>
+  <Instruction name="hreset" summary="History Reset"/>
+  <Instruction name="hsubpd" summary="Packed Double Precision Floating-Point Horizontal Subtract"/>
+  <Instruction name="hsubps" summary="Packed Single Precision Floating-Point Horizontal Subtract"/>
+  <Instruction name="idiv" summary="Signed Divide"/>
+  <Instruction name="imul" summary="Signed Multiply"/>
+  <Instruction name="in" summary="Input From Port"/>
+  <Instruction name="inc" summary="Increment by 1"/>
+  <Instruction name="incsspd" summary="Increment Shadow Stack Pointer"/>
+  <Instruction name="incsspq" summary="Increment Shadow Stack Pointer"/>
+  <Instruction name="ins" summary="Input from Port to String"/>
+  <Instruction name="insb" summary="Input from Port to String"/>
+  <Instruction name="insd" summary="Input from Port to String"/>
+  <Instruction name="insertps" summary="Insert Packed Single Precision Floating-Point Value"/>
+  <Instruction name="insertq" summary="Insert Field"/>
+  <Instruction name="insw" summary="Input from Port to String"/>
+  <Instruction name="int" summary="Call to Interrupt Procedure"/>
+  <Instruction name="int n" summary="Call to Interrupt Procedure"/>
+  <Instruction name="int1" summary="Call to Interrupt Procedure"/>
+  <Instruction name="int3" summary="Call to Interrupt Procedure"/>
+  <Instruction name="into" summary="Call to Interrupt Procedure"/>
+  <Instruction name="invd" summary="Invalidate Internal Caches"/>
+  <Instruction name="invept" summary="Invalidate Translations Derived from EPT"/>
+  <Instruction name="invlpg" summary="Invalidate TLB Entries"/>
+  <Instruction name="invpcid" summary="Invalidate Process-Context Identifier"/>
+  <Instruction name="invvpid" summary="Invalidate Translations Based on VPID"/>
+  <Instruction name="iret" summary="Interrupt Return"/>
+  <Instruction name="iretd" summary="Interrupt Return"/>
+  <Instruction name="iretq" summary="Interrupt Return"/>
+  <Instruction name="ja" summary="Jump if above (CF == 0 and ZF == 0)"/>
+  <Instruction name="jae" summary="Jump if above or equal (CF == 0)"/>
+  <Instruction name="jb" summary="Jump if below (CF == 1)"/>
+  <Instruction name="jbe" summary="Jump if below or equal (CF == 1 or ZF == 1)"/>
+  <Instruction name="jc" summary="Jump if carry (CF == 1)"/>
+  <Instruction name="jcc" summary="Jump if Condition Is Met"/>
+  <Instruction name="je" summary="Jump if equal (ZF == 1)"/>
+  <Instruction name="jecxz" summary="Jump if ECX register is 0"/>
+  <Instruction name="jg" summary="Jump if greater (ZF == 0 and SF == OF)"/>
+  <Instruction name="jge" summary="Jump if greater or equal (SF == OF)"/>
+  <Instruction name="jl" summary="Jump if less (SF != OF)"/>
+  <Instruction name="jle" summary="Jump if less or equal (ZF == 1 or SF != OF)"/>
+  <Instruction name="jmp" summary="Jump Unconditionally"/>
+  <Instruction name="jna" summary="Jump if not above (CF == 1 or ZF == 1)"/>
+  <Instruction name="jnae" summary="Jump if not above or equal (CF == 1)"/>
+  <Instruction name="jnb" summary="Jump if not below (CF == 0)"/>
+  <Instruction name="jnbe" summary="Jump if not below or equal (CF == 0 and ZF == 0)"/>
+  <Instruction name="jnc" summary="Jump if not carry (CF == 0)"/>
+  <Instruction name="jne" summary="Jump if not equal (ZF == 0)"/>
+  <Instruction name="jng" summary="Jump if not greater (ZF == 1 or SF != OF)"/>
+  <Instruction name="jnge" summary="Jump if not greater or equal (SF != OF)"/>
+  <Instruction name="jnl" summary="Jump if not less (SF == OF)"/>
+  <Instruction name="jnle" summary="Jump if not less or equal (ZF == 0 and SF == OF)"/>
+  <Instruction name="jno" summary="Jump if not overflow (OF == 0)"/>
+  <Instruction name="jnp" summary="Jump if not parity (PF == 0)"/>
+  <Instruction name="jns" summary="Jump if not sign (SF == 0)"/>
+  <Instruction name="jnz" summary="Jump if not zero (ZF == 0)"/>
+  <Instruction name="jo" summary="Jump if overflow (OF == 1)"/>
+  <Instruction name="jp" summary="Jump if parity (PF == 1)"/>
+  <Instruction name="jpe" summary="Jump if parity even (PF == 1)"/>
+  <Instruction name="jpo" summary="Jump if parity odd (PF == 0)"/>
+  <Instruction name="jrcxz" summary="Jump if RCX register is 0"/>
+  <Instruction name="js" summary="Jump if sign (SF == 1)"/>
+  <Instruction name="jz" summary="Jump if zero (ZF == 1)"/>
+  <Instruction name="kaddb" summary="ADD Two 8-bit Masks"/>
+  <Instruction name="kaddd" summary="ADD Two 32-bit Masks"/>
+  <Instruction name="kaddq" summary="ADD Two 64-bit Masks"/>
+  <Instruction name="kaddw" summary="ADD Two 16-bit Masks"/>
+  <Instruction name="kandb" summary="Bitwise Logical AND 8-bit Masks"/>
+  <Instruction name="kandd" summary="Bitwise Logical AND 32-bit Masks"/>
+  <Instruction name="kandnb" summary="Bitwise Logical AND NOT 8-bit Masks"/>
+  <Instruction name="kandnd" summary="Bitwise Logical AND NOT 32-bit Masks"/>
+  <Instruction name="kandnq" summary="Bitwise Logical AND NOT 64-bit Masks"/>
+  <Instruction name="kandnw" summary="Bitwise Logical AND NOT 16-bit Masks"/>
+  <Instruction name="kandq" summary="Bitwise Logical AND 64-bit Masks"/>
+  <Instruction name="kandw" summary="Bitwise Logical AND 16-bit Masks"/>
+  <Instruction name="kmovb" summary="Move From and to Mask Registers"/>
+  <Instruction name="kmovd" summary="Move From and to Mask Registers"/>
+  <Instruction name="kmovq" summary="Move From and to Mask Registers"/>
+  <Instruction name="kmovw" summary="Move From and to Mask Registers"/>
+  <Instruction name="knotb" summary="NOT 8-bit Mask Register"/>
+  <Instruction name="knotd" summary="NOT 32-bit Mask Register"/>
+  <Instruction name="knotq" summary="NOT 64-bit Mask Register"/>
+  <Instruction name="knotw" summary="NOT 16-bit Mask Register"/>
+  <Instruction name="korb" summary="Bitwise Logical OR 8-bit Masks"/>
+  <Instruction name="kord" summary="Bitwise Logical OR 32-bit Masks"/>
+  <Instruction name="korq" summary="Bitwise Logical OR 64-bit Masks"/>
+  <Instruction name="kortestb" summary="OR 8-bit Masks and Set Flags"/>
+  <Instruction name="kortestd" summary="OR 32-bit Masks and Set Flags"/>
+  <Instruction name="kortestq" summary="OR 64-bit Masks and Set Flags"/>
+  <Instruction name="kortestw" summary="OR 16-bit Masks and Set Flags"/>
+  <Instruction name="korw" summary="Bitwise Logical OR 16-bit Masks"/>
+  <Instruction name="kshiftlb" summary="Shift Left Mask Registers"/>
+  <Instruction name="kshiftld" summary="Shift Left Mask Registers"/>
+  <Instruction name="kshiftlq" summary="Shift Left Mask Registers"/>
+  <Instruction name="kshiftlw" summary="Shift Left Mask Registers"/>
+  <Instruction name="kshiftrb" summary="Shift Right Mask Registers"/>
+  <Instruction name="kshiftrd" summary="Shift Right Mask Registers"/>
+  <Instruction name="kshiftrq" summary="Shift Right Mask Registers"/>
+  <Instruction name="kshiftrw" summary="Shift Right Mask Registers"/>
+  <Instruction name="ktestb" summary="Packed Bit Test Masks and Set Flags"/>
+  <Instruction name="ktestd" summary="Bit Test 32-bit Masks and Set Flags"/>
+  <Instruction name="ktestq" summary="Bit Test 64-bit Masks and Set Flags"/>
+  <Instruction name="ktestw" summary="Bit Test 16-bit Masks and Set Flags"/>
+  <Instruction name="kunpckbw" summary="Unpack and Interleave 8-bit Masks"/>
+  <Instruction name="kunpckdq" summary="Unpack and Interleave 32-bit Masks"/>
+  <Instruction name="kunpckwd" summary="Unpack and Interleave 16-bit Masks"/>
+  <Instruction name="kxnorb" summary="Bitwise Logical XNOR 8-bit Masks"/>
+  <Instruction name="kxnord" summary="Bitwise Logical XNOR 32-bit Masks"/>
+  <Instruction name="kxnorq" summary="Bitwise Logical XNOR 64-bit Masks"/>
+  <Instruction name="kxnorw" summary="Bitwise Logical XNOR 16-bit Masks"/>
+  <Instruction name="kxorb" summary="Bitwise Logical XOR 8-bit Masks"/>
+  <Instruction name="kxord" summary="Bitwise Logical XOR 32-bit Masks"/>
+  <Instruction name="kxorq" summary="Bitwise Logical XOR 64-bit Masks"/>
+  <Instruction name="kxorw" summary="Bitwise Logical XOR 16-bit Masks"/>
+  <Instruction name="lahf" summary="Load Status Flags Into AH Register"/>
+  <Instruction name="lar" summary="Load Access Rights Byte"/>
+  <Instruction name="lddqu" summary="Load Unaligned Integer 128 Bits"/>
+  <Instruction name="ldmxcsr" summary="Load MXCSR Register"/>
+  <Instruction name="lds" summary="Load Far Pointer"/>
+  <Instruction name="ldtilecfg" summary="LoaD TILE ConFiGuration"/>
+  <Instruction name="lea" summary="Load Effective Address"/>
+  <Instruction name="leave" summary="High Level Procedure Exit"/>
+  <Instruction name="les" summary="Load Far Pointer"/>
+  <Instruction name="lfence" summary="Load Fence"/>
+  <Instruction name="lfs" summary="Load Far Pointer"/>
+  <Instruction name="lgdt" summary="Load Global/Interrupt Descriptor Table Register"/>
+  <Instruction name="lgs" summary="Load Far Pointer"/>
+  <Instruction name="lidt" summary="Load Global/Interrupt Descriptor Table Register"/>
+  <Instruction name="lldt" summary="Load Local Descriptor Table Register"/>
+  <Instruction name="lmsw" summary="Load Machine Status Word"/>
+  <Instruction name="loadiwkey" summary="Load Internal Wrapping Key With Key Locker"/>
+  <Instruction name="lock" summary="Assert LOCK# Signal Prefix"/>
+  <Instruction name="lods" summary="Load String"/>
+  <Instruction name="lodsb" summary="Load String"/>
+  <Instruction name="lodsd" summary="Load String"/>
+  <Instruction name="lodsq" summary="Load String"/>
+  <Instruction name="lodsw" summary="Load String"/>
+  <Instruction name="loop" summary="Loop According to ECX Counter"/>
+  <Instruction name="loopcc" summary="Loop According to ECX Counter"/>
+  <Instruction name="lsl" summary="Load Segment Limit"/>
+  <Instruction name="lss" summary="Load Far Pointer"/>
+  <Instruction name="ltr" summary="Load Task Register"/>
+  <Instruction name="lzcnt" summary="Count the Number of Leading Zero Bits"/>
+  <Instruction name="maskmovdqu" summary="Store Selected Bytes of Double Quadword"/>
+  <Instruction name="maskmovq" summary="Store Selected Bytes of Quadword"/>
+  <Instruction name="maxpd" summary="Return Maximum Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="maxps" summary="Return Maximum Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="maxsd" summary="Return Maximum Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="maxss" summary="Return Maximum Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="mcommit" summary="Memory COMMIT"/>
+  <Instruction name="mfence" summary="Memory Fence"/>
+  <Instruction name="minpd" summary="Return Minimum Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="minps" summary="Return Minimum Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="minsd" summary="Return Minimum Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="minss" summary="Return Minimum Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="monitor" summary="Monitor a Linear Address Range"/>
+  <Instruction name="monitorx" summary="Monitor a Linear Address Range with Timeout"/>
+  <Instruction name="mov" summary="Move"/>
+  <Instruction name="movapd" summary="Move Aligned Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="movaps" summary="Move Aligned Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="movbe" summary="Move Data After Swapping Bytes"/>
+  <Instruction name="movd" summary="Move Doubleword/Move Quadword"/>
+  <Instruction name="movddup" summary="Replicate Double Precision Floating-Point Values"/>
+  <Instruction name="movdir64b" summary="MOVe to DIRect store 64 Bytes"/>
+  <Instruction name="movdiri" summary="Move Doubleword as Direct Store"/>
+  <Instruction name="movdq2q" summary="Move Quadword from XMM to MMX Technology Register"/>
+  <Instruction name="movdqa" summary="Move Aligned Packed Integer Values"/>
+  <Instruction name="movdqu" summary="Move Unaligned Packed Integer Values"/>
+  <Instruction name="movhlps" summary="Move Packed Single-Precision Floating-Point Values High to Low"/>
+  <Instruction name="movhpd" summary="Move High Packed Double-Precision Floating-Point Value"/>
+  <Instruction name="movhps" summary="Move High Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="movlhps" summary="Move Packed Single-Precision Floating-Point Values Low to High"/>
+  <Instruction name="movlpd" summary="Move Low Packed Double-Precision Floating-Point Value"/>
+  <Instruction name="movlps" summary="Move Low Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="movmskpd" summary="Extract Packed Double-Precision Floating-Point Sign Mask"/>
+  <Instruction name="movmskps" summary="Extract Packed Single-Precision Floating-Point Sign Mask"/>
+  <Instruction name="movntdq" summary="Store Double Quadword Using Non-Temporal Hint"/>
+  <Instruction name="movntdqa" summary="Load Double Quadword Non-Temporal Aligned Hint"/>
+  <Instruction name="movnti" summary="Store Doubleword Using Non-Temporal Hint"/>
+  <Instruction name="movntpd" summary="Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint"/>
+  <Instruction name="movntps" summary="Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint"/>
+  <Instruction name="movntq" summary="Store of Quadword Using Non-Temporal Hint"/>
+  <Instruction name="movntsd" summary="Store Scalar Double-Precision Floating-Point Values Using Non-Temporal Hint"/>
+  <Instruction name="movntss" summary="Store Scalar Single-Precision Floating-Point Values Using Non-Temporal Hint"/>
+  <Instruction name="movq" summary="Move Doubleword/Move Quadword"/>
+  <Instruction name="movq2dq" summary="Move Quadword from MMX Technology to XMM Register"/>
+  <Instruction name="movs" summary="Move Data From String to String"/>
+  <Instruction name="movsb" summary="Move Data From String to String"/>
+  <Instruction name="movsd" summary="Move Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="movshdup" summary="Replicate Single Precision Floating-Point Values"/>
+  <Instruction name="movsldup" summary="Replicate Single Precision Floating-Point Values"/>
+  <Instruction name="movsq" summary="Move Data From String to String"/>
+  <Instruction name="movss" summary="Move or Merge Scalar Single Precision Floating-Point Value"/>
+  <Instruction name="movsw" summary="Move Data From String to String"/>
+  <Instruction name="movsx" summary="Move with Sign-Extension"/>
+  <Instruction name="movsxd" summary="Move Doubleword to Quadword with Sign-Extension"/>
+  <Instruction name="movupd" summary="Move Unaligned Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="movups" summary="Move Unaligned Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="movzx" summary="Move with Zero-Extend"/>
+  <Instruction name="mpsadbw" summary="Compute Multiple Packed Sums of Absolute Difference"/>
+  <Instruction name="mul" summary="Unsigned Multiply"/>
+  <Instruction name="mulpd" summary="Multiply Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="mulps" summary="Multiply Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="mulsd" summary="Multiply Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="mulss" summary="Multiply Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="mulx" summary="Unsigned Multiply Without Affecting Flags"/>
+  <Instruction name="mwait" summary="Monitor Wait"/>
+  <Instruction name="mwaitx" summary="Monitor Wait with Timeout"/>
+  <Instruction name="neg" summary="Two's Complement Negation"/>
+  <Instruction name="nop" summary="No Operation"/>
+  <Instruction name="not" summary="One's Complement Negation"/>
+  <Instruction name="or" summary="Logical Inclusive OR"/>
+  <Instruction name="orpd" summary="Bitwise Logical OR of Packed Double Precision Floating-Point Values"/>
+  <Instruction name="orps" summary="Bitwise Logical OR of Packed Single Precision Floating-Point Values"/>
+  <Instruction name="out" summary="Output to Port"/>
+  <Instruction name="outs" summary="Output String to Port"/>
+  <Instruction name="outsb" summary="Output String to Port"/>
+  <Instruction name="outsd" summary="Output String to Port"/>
+  <Instruction name="outsw" summary="Output String to Port"/>
+  <Instruction name="pabsb" summary="Packed Absolute Value of Byte Integers"/>
+  <Instruction name="pabsd" summary="Packed Absolute Value of Doubleword Integers"/>
+  <Instruction name="pabsq" summary="Packed Absolute Value"/>
+  <Instruction name="pabsw" summary="Packed Absolute Value of Word Integers"/>
+  <Instruction name="packssdw" summary="Pack Doublewords into Words with Signed Saturation"/>
+  <Instruction name="packsswb" summary="Pack Words into Bytes with Signed Saturation"/>
+  <Instruction name="packusdw" summary="Pack Doublewords into Words with Unsigned Saturation"/>
+  <Instruction name="packuswb" summary="Pack Words into Bytes with Unsigned Saturation"/>
+  <Instruction name="paddb" summary="Add Packed Byte Integers"/>
+  <Instruction name="paddd" summary="Add Packed Doubleword Integers"/>
+  <Instruction name="paddq" summary="Add Packed Quadword Integers"/>
+  <Instruction name="paddsb" summary="Add Packed Signed Byte Integers with Signed Saturation"/>
+  <Instruction name="paddsw" summary="Add Packed Signed Word Integers with Signed Saturation"/>
+  <Instruction name="paddusb" summary="Add Packed Unsigned Byte Integers with Unsigned Saturation"/>
+  <Instruction name="paddusw" summary="Add Packed Unsigned Word Integers with Unsigned Saturation"/>
+  <Instruction name="paddw" summary="Add Packed Word Integers"/>
+  <Instruction name="palignr" summary="Packed Align Right"/>
+  <Instruction name="pand" summary="Packed Bitwise Logical AND"/>
+  <Instruction name="pandn" summary="Packed Bitwise Logical AND NOT"/>
+  <Instruction name="pause" summary="Spin Loop Hint"/>
+  <Instruction name="pavgb" summary="Average Packed Byte Integers"/>
+  <Instruction name="pavgusb" summary="Average Packed Byte Integers"/>
+  <Instruction name="pavgw" summary="Average Packed Word Integers"/>
+  <Instruction name="pblendvb" summary="Variable Blend Packed Bytes"/>
+  <Instruction name="pblendw" summary="Blend Packed Words"/>
+  <Instruction name="pclmulqdq" summary="Less Quadword Multiplication"/>
+  <Instruction name="pcmpeqb" summary="Compare Packed Byte Data for Equality"/>
+  <Instruction name="pcmpeqd" summary="Compare Packed Doubleword Data for Equality"/>
+  <Instruction name="pcmpeqq" summary="Compare Packed Quadword Data for Equality"/>
+  <Instruction name="pcmpeqw" summary="Compare Packed Word Data for Equality"/>
+  <Instruction name="pcmpestri" summary="Packed Compare Explicit Length Strings, Return Index"/>
+  <Instruction name="pcmpestrm" summary="Packed Compare Explicit Length Strings, Return Mask"/>
+  <Instruction name="pcmpgtb" summary="Compare Packed Signed Byte Integers for Greater Than"/>
+  <Instruction name="pcmpgtd" summary="Compare Packed Signed Doubleword Integers for Greater Than"/>
+  <Instruction name="pcmpgtq" summary="Compare Packed Data for Greater Than"/>
+  <Instruction name="pcmpgtw" summary="Compare Packed Signed Word Integers for Greater Than"/>
+  <Instruction name="pcmpistri" summary="Packed Compare Implicit Length Strings, Return Index"/>
+  <Instruction name="pcmpistrm" summary="Packed Compare Implicit Length Strings, Return Mask"/>
+  <Instruction name="pconfig" summary="Platform Configuration"/>
+  <Instruction name="pdep" summary="Parallel Bits Deposit"/>
+  <Instruction name="pext" summary="Parallel Bits Extract"/>
+  <Instruction name="pextrb" summary="Extract Byte/Dword/Qword"/>
+  <Instruction name="pextrd" summary="Extract Byte/Dword/Qword"/>
+  <Instruction name="pextrq" summary="Extract Byte/Dword/Qword"/>
+  <Instruction name="pextrw" summary="Extract Word"/>
+  <Instruction name="pf2id" summary="Packed Floating-Point to Integer Doubleword Converson"/>
+  <Instruction name="pf2iw" summary="Packed Floating-Point to Integer Word Conversion"/>
+  <Instruction name="pfacc" summary="Packed Floating-Point Accumulate"/>
+  <Instruction name="pfadd" summary="Packed Floating-Point Add"/>
+  <Instruction name="pfcmpeq" summary="Packed Floating-Point Compare for Equal"/>
+  <Instruction name="pfcmpge" summary="Packed Floating-Point Compare for Greater or Equal"/>
+  <Instruction name="pfcmpgt" summary="Packed Floating-Point Compare for Greater Than"/>
+  <Instruction name="pfmax" summary="Packed Floating-Point Maximum"/>
+  <Instruction name="pfmin" summary="Packed Floating-Point Minimum"/>
+  <Instruction name="pfmul" summary="Packed Floating-Point Multiply"/>
+  <Instruction name="pfnacc" summary="Packed Floating-Point Negative Accumulate"/>
+  <Instruction name="pfpnacc" summary="Packed Floating-Point Positive-Negative Accumulate"/>
+  <Instruction name="pfrcp" summary="Packed Floating-Point Reciprocal Approximation"/>
+  <Instruction name="pfrcpit1" summary="Packed Floating-Point Reciprocal Iteration 1"/>
+  <Instruction name="pfrcpit2" summary="Packed Floating-Point Reciprocal Iteration 2"/>
+  <Instruction name="pfrsqit1" summary="Packed Floating-Point Reciprocal Square Root Iteration 1"/>
+  <Instruction name="pfrsqrt" summary="Packed Floating-Point Reciprocal Square Root Approximation"/>
+  <Instruction name="pfsub" summary="Packed Floating-Point Subtract"/>
+  <Instruction name="pfsubr" summary="Packed Floating-Point Subtract Reverse"/>
+  <Instruction name="phaddd" summary="Packed Horizontal Add Doubleword Integer"/>
+  <Instruction name="phaddsw" summary="Packed Horizontal Add Signed Word Integers with Signed Saturation"/>
+  <Instruction name="phaddw" summary="Packed Horizontal Add Word Integers"/>
+  <Instruction name="phminposuw" summary="Packed Horizontal Minimum of Unsigned Word Integers"/>
+  <Instruction name="phsubd" summary="Packed Horizontal Subtract Doubleword Integers"/>
+  <Instruction name="phsubsw" summary="Packed Horizontal Subtract Signed Word Integers with Signed Saturation"/>
+  <Instruction name="phsubw" summary="Packed Horizontal Subtract Word Integers"/>
+  <Instruction name="pi2fd" summary="Packed Integer to Floating-Point Doubleword Conversion"/>
+  <Instruction name="pi2fw" summary="Packed Integer to Floating-Point Word Conversion"/>
+  <Instruction name="pinsrb" summary="Insert Byte/Dword/Qword"/>
+  <Instruction name="pinsrd" summary="Insert Byte/Dword/Qword"/>
+  <Instruction name="pinsrq" summary="Insert Byte/Dword/Qword"/>
+  <Instruction name="pinsrw" summary="Insert Word"/>
+  <Instruction name="pmaddubsw" summary="Multiply and Add Packed Signed and Unsigned Byte Integers"/>
+  <Instruction name="pmaddwd" summary="Multiply and Add Packed Signed Word Integers"/>
+  <Instruction name="pmaxsb" summary="Maximum of Packed Signed Byte Integers"/>
+  <Instruction name="pmaxsd" summary="Maximum of Packed Signed Doubleword Integers"/>
+  <Instruction name="pmaxsq" summary="Maximum of Packed Signed Integers"/>
+  <Instruction name="pmaxsw" summary="Maximum of Packed Signed Word Integers"/>
+  <Instruction name="pmaxub" summary="Maximum of Packed Unsigned Byte Integers"/>
+  <Instruction name="pmaxud" summary="Maximum of Packed Unsigned Doubleword Integers"/>
+  <Instruction name="pmaxuq" summary="Maximum of Packed Unsigned Integers"/>
+  <Instruction name="pmaxuw" summary="Maximum of Packed Unsigned Word Integers"/>
+  <Instruction name="pminsb" summary="Minimum of Packed Signed Byte Integers"/>
+  <Instruction name="pminsd" summary="Minimum of Packed Signed Doubleword Integers"/>
+  <Instruction name="pminsq" summary="Minimum of Packed Signed Integers"/>
+  <Instruction name="pminsw" summary="Minimum of Packed Signed Word Integers"/>
+  <Instruction name="pminub" summary="Minimum of Packed Unsigned Byte Integers"/>
+  <Instruction name="pminud" summary="Minimum of Packed Unsigned Doubleword Integers"/>
+  <Instruction name="pminuq" summary="Minimum of Packed Unsigned Integers"/>
+  <Instruction name="pminuw" summary="Minimum of Packed Unsigned Word Integers"/>
+  <Instruction name="pmovmskb" summary="Move Byte Mask"/>
+  <Instruction name="pmovsx" summary="Packed Move With Sign Extend"/>
+  <Instruction name="pmovsxbd" summary="Move Packed Byte Integers to Doubleword Integers with Sign Extension"/>
+  <Instruction name="pmovsxbq" summary="Move Packed Byte Integers to Quadword Integers with Sign Extension"/>
+  <Instruction name="pmovsxbw" summary="Move Packed Byte Integers to Word Integers with Sign Extension"/>
+  <Instruction name="pmovsxdq" summary="Move Packed Doubleword Integers to Quadword Integers with Sign Extension"/>
+  <Instruction name="pmovsxwd" summary="Move Packed Word Integers to Doubleword Integers with Sign Extension"/>
+  <Instruction name="pmovsxwq" summary="Move Packed Word Integers to Quadword Integers with Sign Extension"/>
+  <Instruction name="pmovzx" summary="Packed Move With Zero Extend"/>
+  <Instruction name="pmovzxbd" summary="Move Packed Byte Integers to Doubleword Integers with Zero Extension"/>
+  <Instruction name="pmovzxbq" summary="Move Packed Byte Integers to Quadword Integers with Zero Extension"/>
+  <Instruction name="pmovzxbw" summary="Move Packed Byte Integers to Word Integers with Zero Extension"/>
+  <Instruction name="pmovzxdq" summary="Move Packed Doubleword Integers to Quadword Integers with Zero Extension"/>
+  <Instruction name="pmovzxwd" summary="Move Packed Word Integers to Doubleword Integers with Zero Extension"/>
+  <Instruction name="pmovzxwq" summary="Move Packed Word Integers to Quadword Integers with Zero Extension"/>
+  <Instruction name="pmuldq" summary="Multiply Packed Signed Doubleword Integers and Store Quadword Result"/>
+  <Instruction name="pmulhrsw" summary="Packed Multiply Signed Word Integers and Store High Result with Round and Scale"/>
+  <Instruction name="pmulhrw" summary="Packed Multiply High Rounded Word"/>
+  <Instruction name="pmulhuw" summary="Multiply Packed Unsigned Word Integers and Store High Result"/>
+  <Instruction name="pmulhw" summary="Multiply Packed Signed Word Integers and Store High Result"/>
+  <Instruction name="pmulld" summary="Multiply Packed Signed Doubleword Integers and Store Low Result"/>
+  <Instruction name="pmullq" summary="Multiply Packed Integers and Store Low Result"/>
+  <Instruction name="pmullw" summary="Multiply Packed Signed Word Integers and Store Low Result"/>
+  <Instruction name="pmuludq" summary="Multiply Packed Unsigned Doubleword Integers"/>
+  <Instruction name="pop" summary="Pop a Value from the Stack"/>
+  <Instruction name="popa" summary="Pop All General-Purpose Registers"/>
+  <Instruction name="popad" summary="Pop All General-Purpose Registers"/>
+  <Instruction name="popcnt" summary="Return the Count of Number of Bits Set to 1"/>
+  <Instruction name="popf" summary="Pop Stack Into EFLAGS Register"/>
+  <Instruction name="popfd" summary="Pop Stack Into EFLAGS Register"/>
+  <Instruction name="popfq" summary="Pop Stack Into EFLAGS Register"/>
+  <Instruction name="por" summary="Packed Bitwise Logical OR"/>
+  <Instruction name="prefetch" summary="Prefetch Data into Caches"/>
+  <Instruction name="prefetchh" summary="Prefetch Data Into Caches"/>
+  <Instruction name="prefetchit0" summary="Prefetch Code Into Instruction Caches using IT0 Hint"/>
+  <Instruction name="prefetchit1" summary="Prefetch Code Into Instruction Caches using IT1 Hint"/>
+  <Instruction name="prefetchnta" summary="Prefetch Data Into Caches using NTA Hint"/>
+  <Instruction name="prefetcht0" summary="Prefetch Data Into Caches using T0 Hint"/>
+  <Instruction name="prefetcht1" summary="Prefetch Data Into Caches using T1 Hint"/>
+  <Instruction name="prefetcht2" summary="Prefetch Data Into Caches using T2 Hint"/>
+  <Instruction name="prefetchw" summary="Prefetch Data into Caches in Anticipation of a Write"/>
+  <Instruction name="prefetchwt1" summary="Prefetch Vector Data Into Caches with Intent to Write and T1 Hint"/>
+  <Instruction name="psadbw" summary="Compute Sum of Absolute Differences"/>
+  <Instruction name="pshufb" summary="Packed Shuffle Bytes"/>
+  <Instruction name="pshufd" summary="Shuffle Packed Doublewords"/>
+  <Instruction name="pshufhw" summary="Shuffle Packed High Words"/>
+  <Instruction name="pshuflw" summary="Shuffle Packed Low Words"/>
+  <Instruction name="pshufw" summary="Shuffle Packed Words"/>
+  <Instruction name="psignb" summary="Packed Sign of Byte Integers"/>
+  <Instruction name="psignd" summary="Packed Sign of Doubleword Integers"/>
+  <Instruction name="psignw" summary="Packed Sign of Word Integers"/>
+  <Instruction name="pslld" summary="Shift Packed Doubleword Data Left Logical"/>
+  <Instruction name="pslldq" summary="Shift Packed Double Quadword Left Logical"/>
+  <Instruction name="psllq" summary="Shift Packed Quadword Data Left Logical"/>
+  <Instruction name="psllw" summary="Shift Packed Word Data Left Logical"/>
+  <Instruction name="psrad" summary="Shift Packed Doubleword Data Right Arithmetic"/>
+  <Instruction name="psraq" summary="Shift Packed Data Right Arithmetic"/>
+  <Instruction name="psraw" summary="Shift Packed Word Data Right Arithmetic"/>
+  <Instruction name="psrld" summary="Shift Packed Doubleword Data Right Logical"/>
+  <Instruction name="psrldq" summary="Shift Packed Double Quadword Right Logical"/>
+  <Instruction name="psrlq" summary="Shift Packed Quadword Data Right Logical"/>
+  <Instruction name="psrlw" summary="Shift Packed Word Data Right Logical"/>
+  <Instruction name="psubb" summary="Subtract Packed Byte Integers"/>
+  <Instruction name="psubd" summary="Subtract Packed Doubleword Integers"/>
+  <Instruction name="psubq" summary="Subtract Packed Quadword Integers"/>
+  <Instruction name="psubsb" summary="Subtract Packed Signed Byte Integers with Signed Saturation"/>
+  <Instruction name="psubsw" summary="Subtract Packed Signed Word Integers with Signed Saturation"/>
+  <Instruction name="psubusb" summary="Subtract Packed Unsigned Byte Integers with Unsigned Saturation"/>
+  <Instruction name="psubusw" summary="Subtract Packed Unsigned Word Integers with Unsigned Saturation"/>
+  <Instruction name="psubw" summary="Subtract Packed Word Integers"/>
+  <Instruction name="pswapd" summary="Packed Swap Doubleword"/>
+  <Instruction name="ptest" summary="Packed Logical Compare"/>
+  <Instruction name="ptwrite" summary="Write Data to a Processor Trace Packet"/>
+  <Instruction name="punpckhbw" summary="Unpack and Interleave High-Order Bytes into Words"/>
+  <Instruction name="punpckhdq" summary="Unpack and Interleave High-Order Doublewords into Quadwords"/>
+  <Instruction name="punpckhqdq" summary="Unpack and Interleave High-Order Quadwords into Double Quadwords"/>
+  <Instruction name="punpckhwd" summary="Unpack and Interleave High-Order Words into Doublewords"/>
+  <Instruction name="punpcklbw" summary="Unpack and Interleave Low-Order Bytes into Words"/>
+  <Instruction name="punpckldq" summary="Unpack and Interleave Low-Order Doublewords into Quadwords"/>
+  <Instruction name="punpcklqdq" summary="Unpack and Interleave Low-Order Quadwords into Double Quadwords"/>
+  <Instruction name="punpcklwd" summary="Unpack and Interleave Low-Order Words into Doublewords"/>
+  <Instruction name="push" summary="Push Word, Doubleword, or Quadword Onto the Stack"/>
+  <Instruction name="pusha" summary="Push All General-Purpose Registers"/>
+  <Instruction name="pushad" summary="Push All General-Purpose Registers"/>
+  <Instruction name="pushf" summary="Push EFLAGS Register Onto the Stack"/>
+  <Instruction name="pushfd" summary="Push EFLAGS Register Onto the Stack"/>
+  <Instruction name="pushfq" summary="Push EFLAGS Register Onto the Stack"/>
+  <Instruction name="pxor" summary="Packed Bitwise Logical Exclusive OR"/>
+  <Instruction name="rcl" summary="Rotate Left through Carry Flag"/>
+  <Instruction name="rcpps" summary="Compute Approximate Reciprocals of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="rcpss" summary="Compute Approximate Reciprocal of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="rcr" summary="Rotate Right through Carry Flag"/>
+  <Instruction name="rdfsbase" summary="Read FS/GS Segment Base"/>
+  <Instruction name="rdgsbase" summary="Read FS/GS Segment Base"/>
+  <Instruction name="rdmsr" summary="Read From Model Specific Register"/>
+  <Instruction name="rdpid" summary="Read Processor ID"/>
+  <Instruction name="rdpkru" summary="Read Protection Key Rights for User Pages"/>
+  <Instruction name="rdpmc" summary="Read Performance-Monitoring Counters"/>
+  <Instruction name="rdpru" summary="Read Processor Register in User mode"/>
+  <Instruction name="rdrand" summary="Read Random Number"/>
+  <Instruction name="rdseed" summary="Read Random SEED"/>
+  <Instruction name="rdsspd" summary="Read Shadow Stack Pointer"/>
+  <Instruction name="rdsspq" summary="Read Shadow Stack Pointer"/>
+  <Instruction name="rdtsc" summary="Read Time-Stamp Counter"/>
+  <Instruction name="rdtscp" summary="Read Time-Stamp Counter and Processor ID"/>
+  <Instruction name="rep" summary="Repeat String Operation Prefix"/>
+  <Instruction name="repe" summary="Repeat String Operation Prefix"/>
+  <Instruction name="repne" summary="Repeat String Operation Prefix"/>
+  <Instruction name="repnz" summary="Repeat String Operation Prefix"/>
+  <Instruction name="repz" summary="Repeat String Operation Prefix"/>
+  <Instruction name="ret" summary="Return from Procedure"/>
+  <Instruction name="rol" summary="Rotate Left"/>
+  <Instruction name="ror" summary="Rotate Right"/>
+  <Instruction name="rorx" summary="Rotate Right Logical Without Affecting Flags"/>
+  <Instruction name="roundpd" summary="Round Packed Double Precision Floating-Point Values"/>
+  <Instruction name="roundps" summary="Round Packed Single Precision Floating-Point Values"/>
+  <Instruction name="roundsd" summary="Round Scalar Double Precision Floating-Point Values"/>
+  <Instruction name="roundss" summary="Round Scalar Single Precision Floating-Point Values"/>
+  <Instruction name="rsm" summary="Resume From System Management Mode"/>
+  <Instruction name="rsqrtps" summary="Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="rsqrtss" summary="Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="rstorssp" summary="Restore Saved Shadow Stack Pointer"/>
+  <Instruction name="sahf" summary="Store AH into Flags"/>
+  <Instruction name="sal" summary="Arithmetic Shift Left"/>
+  <Instruction name="sar" summary="Arithmetic Shift Right"/>
+  <Instruction name="sarx" summary="Arithmetic Shift Right Without Affecting Flags"/>
+  <Instruction name="saveprevssp" summary="Save Previous Shadow Stack Pointer"/>
+  <Instruction name="sbb" summary="Integer Subtraction With Borrow"/>
+  <Instruction name="scas" summary="Scan String"/>
+  <Instruction name="scasb" summary="Scan String"/>
+  <Instruction name="scasd" summary="Scan String"/>
+  <Instruction name="scasw" summary="Scan String"/>
+  <Instruction name="senduipi" summary="Send User Interprocessor Interrupt"/>
+  <Instruction name="serialize" summary="Serialize Instruction Execution"/>
+  <Instruction name="seta" summary="Set byte if above (CF == 0 and ZF == 0)"/>
+  <Instruction name="setae" summary="Set byte if above or equal (CF == 0)"/>
+  <Instruction name="setb" summary="Set byte if below (CF == 1)"/>
+  <Instruction name="setbe" summary="Set byte if below or equal (CF == 1 or ZF == 1)"/>
+  <Instruction name="setc" summary="Set byte if carry (CF == 1)"/>
+  <Instruction name="setcc" summary="Set Byte on Condition"/>
+  <Instruction name="sete" summary="Set byte if equal (ZF == 1)"/>
+  <Instruction name="setg" summary="Set byte if greater (ZF == 0 and SF == OF)"/>
+  <Instruction name="setge" summary="Set byte if greater or equal (SF == OF)"/>
+  <Instruction name="setl" summary="Set byte if less (SF != OF)"/>
+  <Instruction name="setle" summary="Set byte if less or equal (ZF == 1 or SF != OF)"/>
+  <Instruction name="setna" summary="Set byte if not above (CF == 1 or ZF == 1)"/>
+  <Instruction name="setnae" summary="Set byte if not above or equal (CF == 1)"/>
+  <Instruction name="setnb" summary="Set byte if not below (CF == 0)"/>
+  <Instruction name="setnbe" summary="Set byte if not below or equal (CF == 0 and ZF == 0)"/>
+  <Instruction name="setnc" summary="Set byte if not carry (CF == 0)"/>
+  <Instruction name="setne" summary="Set byte if not equal (ZF == 0)"/>
+  <Instruction name="setng" summary="Set byte if not greater (ZF == 1 or SF != OF)"/>
+  <Instruction name="setnge" summary="Set byte if not greater or equal (SF != OF)"/>
+  <Instruction name="setnl" summary="Set byte if not less (SF == OF)"/>
+  <Instruction name="setnle" summary="Set byte if not less or equal (ZF == 0 and SF == OF)"/>
+  <Instruction name="setno" summary="Set byte if not overflow (OF == 0)"/>
+  <Instruction name="setnp" summary="Set byte if not parity (PF == 0)"/>
+  <Instruction name="setns" summary="Set byte if not sign (SF == 0)"/>
+  <Instruction name="setnz" summary="Set byte if not zero (ZF == 0)"/>
+  <Instruction name="seto" summary="Set byte if overflow (OF == 1)"/>
+  <Instruction name="setp" summary="Set byte if parity (PF == 1)"/>
+  <Instruction name="setpe" summary="Set byte if parity even (PF == 1)"/>
+  <Instruction name="setpo" summary="Set byte if parity odd (PF == 0)"/>
+  <Instruction name="sets" summary="Set byte if sign (SF == 1)"/>
+  <Instruction name="setssbsy" summary="Mark Shadow Stack Busy"/>
+  <Instruction name="setz" summary="Set byte if zero (ZF == 1)"/>
+  <Instruction name="sfence" summary="Store Fence"/>
+  <Instruction name="sgdt" summary="Store Global Descriptor Table Register"/>
+  <Instruction name="sha1msg1" summary="Perform an Intermediate Calculation for the Next Four SHA1 Message Doublewords"/>
+  <Instruction name="sha1msg2" summary="Perform a Final Calculation for the Next Four SHA1 Message Doublewords"/>
+  <Instruction name="sha1nexte" summary="Calculate SHA1 State Variable E after Four Rounds"/>
+  <Instruction name="sha1rnds4" summary="Perform Four Rounds of SHA1 Operation"/>
+  <Instruction name="sha256msg1" summary="Perform an Intermediate Calculation for the Next Four SHA256 Message Doublewords"/>
+  <Instruction name="sha256msg2" summary="Perform a Final Calculation for the Next Four SHA256 Message Doublewords"/>
+  <Instruction name="sha256rnds2" summary="Perform Two Rounds of SHA256 Operation"/>
+  <Instruction name="shl" summary="Logical Shift Left"/>
+  <Instruction name="shld" summary="Integer Double Precision Shift Left"/>
+  <Instruction name="shlx" summary="Logical Shift Left Without Affecting Flags"/>
+  <Instruction name="shr" summary="Logical Shift Right"/>
+  <Instruction name="shrd" summary="Integer Double Precision Shift Right"/>
+  <Instruction name="shrx" summary="Logical Shift Right Without Affecting Flags"/>
+  <Instruction name="shufpd" summary="Packed Interleave Shuffle of Pairs of Double Precision Floating-Point Values"/>
+  <Instruction name="shufps" summary="Packed Interleave Shuffle of Quadruplets of Single Precision Floating-Point Values"/>
+  <Instruction name="sidt" summary="Store Interrupt Descriptor Table Register"/>
+  <Instruction name="sldt" summary="Store Local Descriptor Table Register"/>
+  <Instruction name="smsw" summary="Store Machine Status Word"/>
+  <Instruction name="sqrtpd" summary="Compute Square Roots of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="sqrtps" summary="Compute Square Roots of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="sqrtsd" summary="Compute Square Root of Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="sqrtss" summary="Compute Square Root of Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="stac" summary="Set AC Flag in EFLAGS Register"/>
+  <Instruction name="stc" summary="Set Carry Flag"/>
+  <Instruction name="std" summary="Set Direction Flag"/>
+  <Instruction name="sti" summary="Set Interrupt Flag"/>
+  <Instruction name="stmxcsr" summary="Store MXCSR Register State"/>
+  <Instruction name="stos" summary="Store String"/>
+  <Instruction name="stosb" summary="Store String"/>
+  <Instruction name="stosd" summary="Store String"/>
+  <Instruction name="stosq" summary="Store String"/>
+  <Instruction name="stosw" summary="Store String"/>
+  <Instruction name="str" summary="Store Task Register"/>
+  <Instruction name="sttilecfg" summary="STore TILE ConFiGuration"/>
+  <Instruction name="stui" summary="Set User Interrupt Flag"/>
+  <Instruction name="sub" summary="Subtract"/>
+  <Instruction name="subpd" summary="Subtract Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="subps" summary="Subtract Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="subsd" summary="Subtract Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="subss" summary="Subtract Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="swapgs" summary="Swap GS Base Register"/>
+  <Instruction name="syscall" summary="Fast System Call"/>
+  <Instruction name="sysenter" summary="Fast System Call"/>
+  <Instruction name="sysexit" summary="Fast Return from Fast System Call"/>
+  <Instruction name="sysret" summary="Return From Fast System Call"/>
+  <Instruction name="t1mskc" summary="Inverse Mask From Trailing Ones"/>
+  <Instruction name="tcmmimfp16ps" summary="Tile Complex Matrix Multiply IMaginary part of FP16 tiles with Packed Single-precision accumulation"/>
+  <Instruction name="tcmmrlfp16ps" summary="Tile Complex Matrix Multiply ReaL part of FP16 tiles with Packed Single-precision accumulation"/>
+  <Instruction name="tdpbf16ps" summary="Tile Dot Product of BF16 tiles with Packed Single-precision accumulation"/>
+  <Instruction name="tdpbssd" summary="Tile Dot Product of Signed bytes by Signed bytes with Doubleword accumulation"/>
+  <Instruction name="tdpbsud" summary="Tile Dot Product of Signed bytes by Unsigned bytes with Doubleword accumulation"/>
+  <Instruction name="tdpbusd" summary="Tile Dot Product of Unsigned bytes by Signed bytes with Doubleword accumulation"/>
+  <Instruction name="tdpbuud" summary="Tile Dot Product of Unsigned bytes by Unsigned bytes with Doubleword accumulation"/>
+  <Instruction name="tdpfp16ps" summary="Tile Dot Product of FP16 tiles with Packed Single-precision accumulation"/>
+  <Instruction name="test" summary="Logical Compare"/>
+  <Instruction name="testui" summary="Determine User Interrupt Flag"/>
+  <Instruction name="tileloadd" summary="TILE LOAD Data"/>
+  <Instruction name="tileloaddt1" summary="TILE LOAD Data with T1 caching hint"/>
+  <Instruction name="tilerelease" summary="TILE RELEASE register state"/>
+  <Instruction name="tilestored" summary="TILE STORE Data"/>
+  <Instruction name="tilezero" summary="TILE ZERO data"/>
+  <Instruction name="tpause" summary="Timed PAUSE"/>
+  <Instruction name="tzcnt" summary="Count the Number of Trailing Zero Bits"/>
+  <Instruction name="tzmsk" summary="Mask From Trailing Zeros"/>
+  <Instruction name="ucomisd" summary="Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="ucomiss" summary="Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="ud" summary="Undefined Instruction"/>
+  <Instruction name="ud2" summary="Undefined Instruction"/>
+  <Instruction name="uiret" summary="Interrupt Return"/>
+  <Instruction name="umonitor" summary="User mode Monitor a Linear Address Range"/>
+  <Instruction name="umwait" summary="User Level Monitor Wait"/>
+  <Instruction name="unpckhpd" summary="Unpack and Interleave High Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="unpckhps" summary="Unpack and Interleave High Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="unpcklpd" summary="Unpack and Interleave Low Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="unpcklps" summary="Unpack and Interleave Low Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="v4fmaddps" summary="Packed Single Precision Floating-Point Fused Multiply-Add(4-Iterations)"/>
+  <Instruction name="v4fmaddss" summary="Scalar Single Precision Floating-Point Fused Multiply-Add(4-Iterations)"/>
+  <Instruction name="v4fnmaddps" summary="Packed Single Precision Floating-Point Fused Multiply-Add(4-Iterations)"/>
+  <Instruction name="v4fnmaddss" summary="Scalar Single Precision Floating-Point Fused Multiply-Add(4-Iterations)"/>
+  <Instruction name="vaddpd" summary="Add Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vaddph" summary="Add Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vaddps" summary="Add Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vaddsd" summary="Add Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vaddsh" summary="Add Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vaddss" summary="Add Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vaddsubpd" summary="Packed Double-FP Add/Subtract"/>
+  <Instruction name="vaddsubps" summary="Packed Single-FP Add/Subtract"/>
+  <Instruction name="vaesdec" summary="Perform One Round of an AES Decryption Flow"/>
+  <Instruction name="vaesdeclast" summary="Perform Last Round of an AES Decryption Flow"/>
+  <Instruction name="vaesenc" summary="Perform One Round of an AES Encryption Flow"/>
+  <Instruction name="vaesenclast" summary="Perform Last Round of an AES Encryption Flow"/>
+  <Instruction name="vaesimc" summary="Perform the AES InvMixColumn Transformation"/>
+  <Instruction name="vaeskeygenassist" summary="AES Round Key Generation Assist"/>
+  <Instruction name="valignd" summary="Align Doubleword/Quadword Vectors"/>
+  <Instruction name="valignq" summary="Align Doubleword/Quadword Vectors"/>
+  <Instruction name="vandnpd" summary="Bitwise Logical AND NOT of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vandnps" summary="Bitwise Logical AND NOT of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vandpd" summary="Bitwise Logical AND of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vandps" summary="Bitwise Logical AND of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vbcstnebf162ps" summary="Load BF16 Element and Convert to FP32 Element With Broadcas"/>
+  <Instruction name="vbcstnesh2ps" summary="Load FP16 Element and Convert to FP32 Element with Broadcast"/>
+  <Instruction name="vblendmpd" summary="Blend Packed Double-Precision Floating-Point Vectors Using an OpMask Control"/>
+  <Instruction name="vblendmps" summary="Blend Packed Single-Precision Floating-Point Vectors Using an OpMask Control"/>
+  <Instruction name="vblendpd" summary="Blend Packed Double Precision Floating-Point Values"/>
+  <Instruction name="vblendps" summary="Blend Packed Single Precision Floating-Point Values"/>
+  <Instruction name="vblendvpd" summary="Variable Blend Packed Double Precision Floating-Point Values"/>
+  <Instruction name="vblendvps" summary="Variable Blend Packed Single Precision Floating-Point Values"/>
+  <Instruction name="vbroadcast" summary="Load with Broadcast Floating-Point Data"/>
+  <Instruction name="vbroadcastf128" summary="Broadcast 128 Bit of Floating-Point Data"/>
+  <Instruction name="vbroadcastf32x2" summary="Broadcast Two Single-Precision Floating-Point Elements"/>
+  <Instruction name="vbroadcastf32x4" summary="Broadcast Four Single-Precision Floating-Point Elements"/>
+  <Instruction name="vbroadcastf32x8" summary="Broadcast Eight Single-Precision Floating-Point Elements"/>
+  <Instruction name="vbroadcastf64x2" summary="Broadcast Two Double-Precision Floating-Point Elements"/>
+  <Instruction name="vbroadcastf64x4" summary="Broadcast Four Double-Precision Floating-Point Elements"/>
+  <Instruction name="vbroadcasti128" summary="Broadcast 128 Bits of Integer Data"/>
+  <Instruction name="vbroadcasti32x2" summary="Broadcast Two Doubleword Elements"/>
+  <Instruction name="vbroadcasti32x4" summary="Broadcast Four Doubleword Elements"/>
+  <Instruction name="vbroadcasti32x8" summary="Broadcast Eight Doubleword Elements"/>
+  <Instruction name="vbroadcasti64x2" summary="Broadcast Two Quadword Elements"/>
+  <Instruction name="vbroadcasti64x4" summary="Broadcast Four Quadword Elements"/>
+  <Instruction name="vbroadcastsd" summary="Broadcast Double-Precision Floating-Point Element"/>
+  <Instruction name="vbroadcastss" summary="Broadcast Single-Precision Floating-Point Element"/>
+  <Instruction name="vcmppd" summary="Compare Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vcmpph" summary="Compare Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vcmpps" summary="Compare Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vcmpsd" summary="Compare Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vcmpsh" summary="Compare Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vcmpss" summary="Compare Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vcomisd" summary="Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="vcomish" summary="Compare Scalar Ordered Half-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="vcomiss" summary="Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="vcompresspd" summary="Store Sparse Packed Double-Precision Floating-Point Values into Dense Memory/Register"/>
+  <Instruction name="vcompressps" summary="Store Sparse Packed Single-Precision Floating-Point Values into Dense Memory/Register"/>
+  <Instruction name="vcompressw" summary="Store Sparse Packed Byte/Word Integer Values Into DenseMemory/Register"/>
+  <Instruction name="vcvtdq2pd" summary="Convert Packed Dword Integers to Packed Double-Precision FP Values"/>
+  <Instruction name="vcvtdq2ph" summary="Convert Packed Dword Integers to Packed Half-Precision FP Values"/>
+  <Instruction name="vcvtdq2ps" summary="Convert Packed Dword Integers to Packed Single-Precision FP Values"/>
+  <Instruction name="vcvtne2ps2bf16" summary="Convert with Nearest-Even rounding 2 Single-Precision FP vectors into BFloat16 FP vector"/>
+  <Instruction name="vcvtneebf162ps" summary="Convert Even Elements of Packed BF16 Values to FP32 Values"/>
+  <Instruction name="vcvtneeph2ps" summary="Convert Even Elements of Packed FP16 Values to FP32 Values"/>
+  <Instruction name="vcvtneobf162ps" summary="Convert Odd Elements of Packed BF16 Values to FP32 Values"/>
+  <Instruction name="vcvtneoph2ps" summary="Convert Odd Elements of Packed FP16 Values to FP32 Values"/>
+  <Instruction name="vcvtneps2bf16" summary="Convert with Nearest-Even rounding a Single-Precision FP vector into a BFloat16 FP vector"/>
+  <Instruction name="vcvtpd2dq" summary="Convert Packed Double-Precision FP Values to Packed Dword Integers"/>
+  <Instruction name="vcvtpd2ph" summary="Convert Packed Double-Precision FP Values to Packed Half-Precision FP Values"/>
+  <Instruction name="vcvtpd2ps" summary="Convert Packed Double-Precision FP Values to Packed Single-Precision FP Values"/>
+  <Instruction name="vcvtpd2qq" summary="Convert Packed Double-Precision Floating-Point Values to Packed Quadword Integers"/>
+  <Instruction name="vcvtpd2udq" summary="Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers"/>
+  <Instruction name="vcvtpd2uqq" summary="Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers"/>
+  <Instruction name="vcvtph2dq" summary="Convert Packed Half-Precision FP Values to Packed Dword Integers"/>
+  <Instruction name="vcvtph2pd" summary="Convert Packed Half-Precision FP Values to Packed Double-Precision FP Values"/>
+  <Instruction name="vcvtph2ps" summary="Convert Packed FP16 Values to Single Precision Floating-PointValues"/>
+  <Instruction name="vcvtph2psx" summary="Convert Packed FP16 Values to Single Precision Floating-PointValues"/>
+  <Instruction name="vcvtph2qq" summary="Convert Packed Half Precision Floating-Point Values to Packed Singed Quadword Integer Values"/>
+  <Instruction name="vcvtph2udq" summary="Convert Packed Half-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values"/>
+  <Instruction name="vcvtph2uqq" summary="Convert Packed Half Precision Floating-Point Values to Packed Unsigned Quadword Integer Values"/>
+  <Instruction name="vcvtph2uw" summary="Convert Packed Half-Precision Floating-Point Values to Packed Unsigned Word Integer Values"/>
+  <Instruction name="vcvtph2w" summary="Convert Packed Half-Precision Floating-Point Values to Packed Word Integer Values"/>
+  <Instruction name="vcvtps2dq" summary="Convert Packed Single-Precision FP Values to Packed Dword Integers"/>
+  <Instruction name="vcvtps2pd" summary="Convert Packed Single-Precision FP Values to Packed Double-Precision FP Values"/>
+  <Instruction name="vcvtps2ph" summary="Convert Single-Precision FP value to Half-Precision FP value"/>
+  <Instruction name="vcvtps2phx" summary="Convert Packed Single Precision Floating-Point Values to Packed FP16 Values"/>
+  <Instruction name="vcvtps2qq" summary="Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values"/>
+  <Instruction name="vcvtps2udq" summary="Convert Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values"/>
+  <Instruction name="vcvtps2uqq" summary="Convert Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values"/>
+  <Instruction name="vcvtqq2pd" summary="Convert Packed Quadword Integers to Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vcvtqq2ph" summary="Convert Packed Quadword Integers to Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vcvtqq2ps" summary="Convert Packed Quadword Integers to Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vcvtsd2sh" summary="Convert Scalar Double-Precision FP Value to Scalar Half-Precision FP Value"/>
+  <Instruction name="vcvtsd2si" summary="Convert Scalar Double-Precision FP Value to Integer"/>
+  <Instruction name="vcvtsd2ss" summary="Convert Scalar Double-Precision FP Value to Scalar Single-Precision FP Value"/>
+  <Instruction name="vcvtsd2usi" summary="Convert Scalar Double-Precision Floating-Point Value to Unsigned Doubleword Integer"/>
+  <Instruction name="vcvtsh2sd" summary="Convert Scalar Half-Precision FP Value to Scalar Double-Precision FP Value"/>
+  <Instruction name="vcvtsh2si" summary="Convert Scalar Half-Precision FP Value to Dword Integer"/>
+  <Instruction name="vcvtsh2ss" summary="Convert Scalar Half-Precision FP Value to Scalar Double-Precision FP Value"/>
+  <Instruction name="vcvtsh2usi" summary="Convert Scalar Half-Precision Floating-Point Value to Unsigned Doubleword Integer"/>
+  <Instruction name="vcvtsi2sd" summary="Convert Dword Integer to Scalar Double-Precision FP Value"/>
+  <Instruction name="vcvtsi2sh" summary="Convert a Signed Doubleword/Quadword Integer to an FP16 Value"/>
+  <Instruction name="vcvtsi2ss" summary="Convert Dword Integer to Scalar Single-Precision FP Value"/>
+  <Instruction name="vcvtss2sd" summary="Convert Scalar Single-Precision FP Value to Scalar Double-Precision FP Value"/>
+  <Instruction name="vcvtss2sh" summary="Convert Scalar Single-Precision FP Value to Scalar Half-Precision FP Value"/>
+  <Instruction name="vcvtss2si" summary="Convert Scalar Single-Precision FP Value to Dword Integer"/>
+  <Instruction name="vcvtss2usi" summary="Convert Scalar Single-Precision Floating-Point Value to Unsigned Doubleword Integer"/>
+  <Instruction name="vcvttpd2dq" summary="Convert with Truncation Packed Double-Precision FP Values to Packed Dword Integers"/>
+  <Instruction name="vcvttpd2qq" summary="Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Quadword Integers"/>
+  <Instruction name="vcvttpd2udq" summary="Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers"/>
+  <Instruction name="vcvttpd2uqq" summary="Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers"/>
+  <Instruction name="vcvttph2dq" summary="Convert with Truncation Packed Half-Precision FP Values to Packed Dword Integers"/>
+  <Instruction name="vcvttph2qq" summary="Convert with Truncation Packed Half Precision Floating-Point Values to Packed Singed Quadword Integer Values"/>
+  <Instruction name="vcvttph2udq" summary="Convert with Truncation Packed Half-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values"/>
+  <Instruction name="vcvttph2uqq" summary="Convert with Truncation Packed Half Precision Floating-Point Values to Packed Unsigned Quadword Integer Values"/>
+  <Instruction name="vcvttph2uw" summary="Convert with Truncation Packed Half-Precision Floating-Point Values to Packed Unsigned Word Integer Values"/>
+  <Instruction name="vcvttph2w" summary="Convert with Truncation Packed Half-Precision Floating-Point Values to Packed Word Integer Values"/>
+  <Instruction name="vcvttps2dq" summary="Convert with Truncation Packed Single-Precision FP Values to Packed Dword Integers"/>
+  <Instruction name="vcvttps2qq" summary="Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values"/>
+  <Instruction name="vcvttps2udq" summary="Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values"/>
+  <Instruction name="vcvttps2uqq" summary="Convert with Truncation Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values"/>
+  <Instruction name="vcvttsd2si" summary="Convert with Truncation Scalar Double-Precision FP Value to Signed Integer"/>
+  <Instruction name="vcvttsd2usi" summary="Convert with Truncation Scalar Double-Precision Floating-Point Value to Unsigned Integer"/>
+  <Instruction name="vcvttsh2si" summary="Convert with Truncation Scalar Half-Precision FP Value to Dword Integer"/>
+  <Instruction name="vcvttsh2usi" summary="Convert with Truncation Scalar Half-Precision Floating-Point Value to Unsigned Integer"/>
+  <Instruction name="vcvttss2si" summary="Convert with Truncation Scalar Single-Precision FP Value to Dword Integer"/>
+  <Instruction name="vcvttss2usi" summary="Convert with Truncation Scalar Single-Precision Floating-Point Value to Unsigned Integer"/>
+  <Instruction name="vcvtudq2pd" summary="Convert Packed Unsigned Doubleword Integers to Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vcvtudq2ph" summary="Convert Packed Unsigned Doubleword Integers to Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vcvtudq2ps" summary="Convert Packed Unsigned Doubleword Integers to Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vcvtuqq2pd" summary="Convert Packed Unsigned Quadword Integers to Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vcvtuqq2ph" summary="Convert Packed Unsigned Quadword Integers to Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vcvtuqq2ps" summary="Convert Packed Unsigned Quadword Integers to Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vcvtusi2sd" summary="Convert Unsigned Integer to Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vcvtusi2sh" summary="Convert Unsigned Integer to Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vcvtusi2ss" summary="Convert Unsigned Integer to Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vcvtuw2ph" summary="Convert Packed Unsigned Word Integers to Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vcvtw2ph" summary="Convert Packed Word Integers to Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vdbpsadbw" summary="Double Block Packed Sum-Absolute-Differences (SAD) on Unsigned Bytes"/>
+  <Instruction name="vdivpd" summary="Divide Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vdivph" summary="Divide Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vdivps" summary="Divide Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vdivsd" summary="Divide Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vdivsh" summary="Divide Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vdivss" summary="Divide Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vdpbf16ps" summary="Packed Dot Product of BFloat16 FP subvectors into Single-Precision FP values"/>
+  <Instruction name="vdppd" summary="Dot Product of Packed Double Precision Floating-Point Values"/>
+  <Instruction name="vdpps" summary="Dot Product of Packed Single Precision Floating-Point Values"/>
+  <Instruction name="verr" summary="Verify a Segment for Reading or Writing"/>
+  <Instruction name="verw" summary="Verify a Segment for Reading or Writing"/>
+  <Instruction name="vexp2pd" summary="Approximation to the Exponential 2^x of Packed Double-Precision Floating-Point Values with Less Than 2^-23 Relative Error"/>
+  <Instruction name="vexp2ps" summary="Approximation to the Exponential 2^x of Packed Single-Precision Floating-Point Values with Less Than 2^-23 Relative Error"/>
+  <Instruction name="vexpandpd" summary="Load Sparse Packed Double-Precision Floating-Point Values from Dense Memory"/>
+  <Instruction name="vexpandps" summary="Load Sparse Packed Single-Precision Floating-Point Values from Dense Memory"/>
+  <Instruction name="vextractf128" summary="Extract Packed Floating-Point Values"/>
+  <Instruction name="vextractf32x4" summary="Extract 128 Bits of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vextractf32x8" summary="Extract 256 Bits of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vextractf64x2" summary="Extract 128 Bits of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vextractf64x4" summary="Extract 256 Bits of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vextracti128" summary="Extract Packed Integer Values"/>
+  <Instruction name="vextracti32x4" summary="Extract 128 Bits of Packed Doubleword Integer Values"/>
+  <Instruction name="vextracti32x8" summary="Extract 256 Bits of Packed Doubleword Integer Values"/>
+  <Instruction name="vextracti64x2" summary="Extract 128 Bits of Packed Quadword Integer Values"/>
+  <Instruction name="vextracti64x4" summary="Extract 256 Bits of Packed Quadword Integer Values"/>
+  <Instruction name="vextractps" summary="Extract Packed Single Precision Floating-Point Value"/>
+  <Instruction name="vfcmaddcph" summary="Fused Conjugate Multiply-Add of Complex Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfcmaddcsh" summary="Fused Conjugate Multiply-Add of Complex Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfcmulcph" summary="Fused Conjugate Multiply of Complex Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfcmulcsh" summary="Fused Conjugate Multiply of Complex Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfixupimmpd" summary="Fix Up Special Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfixupimmps" summary="Fix Up Special Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfixupimmsd" summary="Fix Up Special Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vfixupimmss" summary="Fix Up Special Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vfmadd132pd" summary="Fused Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd132ph" summary="Fused Multiply-Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd132ps" summary="Fused Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd132sd" summary="Fused Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd132sh" summary="Fused Multiply-Add of Scalar FP16 Values"/>
+  <Instruction name="vfmadd132ss" summary="Fused Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd213pd" summary="Fused Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd213ph" summary="Fused Multiply-Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd213ps" summary="Fused Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd213sd" summary="Fused Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd213sh" summary="Fused Multiply-Add of Scalar FP16 Values"/>
+  <Instruction name="vfmadd213ss" summary="Fused Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd231pd" summary="Fused Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd231ph" summary="Fused Multiply-Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd231ps" summary="Fused Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd231sd" summary="Fused Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmadd231sh" summary="Fused Multiply-Add of Scalar FP16 Values"/>
+  <Instruction name="vfmadd231ss" summary="Fused Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddcph" summary="Fused Multiply-Add of Complex Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddcsh" summary="Fused Multiply-Add of Complex Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddpd" summary="Fused Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddps" summary="Fused Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddrnd231pd" summary="Fused Multiply-Add of Packed Double-Precision Floating-Point Valueswith rounding control"/>
+  <Instruction name="vfmaddsd" summary="Fused Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddss" summary="Fused Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub132pd" summary="Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub132ph" summary="Fused Multiply-Alternating Add/Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub132ps" summary="Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub213pd" summary="Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub213ph" summary="Fused Multiply-Alternating Add/Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub213ps" summary="Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub231pd" summary="Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub231ph" summary="Fused Multiply-Alternating Add/Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsub231ps" summary="Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsubpd" summary="Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmaddsubps" summary="Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub132pd" summary="Fused Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub132ph" summary="Fused Multiply-Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub132ps" summary="Fused Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub132sd" summary="Fused Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub132sh" summary="Fused Multiply-Subtract of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub132ss" summary="Fused Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub213pd" summary="Fused Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub213ph" summary="Fused Multiply-Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub213ps" summary="Fused Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub213sd" summary="Fused Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub213sh" summary="Fused Multiply-Subtract of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub213ss" summary="Fused Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub231pd" summary="Fused Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub231ph" summary="Fused Multiply-Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub231ps" summary="Fused Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub231sd" summary="Fused Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub231sh" summary="Fused Multiply-Subtract of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsub231ss" summary="Fused Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd132pd" summary="Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd132ph" summary="Fused Multiply-Alternating Subtract/Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd132ps" summary="Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd213pd" summary="Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd213ph" summary="Fused Multiply-Alternating Subtract/Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd213ps" summary="Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd231pd" summary="Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd231ph" summary="Fused Multiply-Alternating Subtract/Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubadd231ps" summary="Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubaddpd" summary="Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubaddps" summary="Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubpd" summary="Fused Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubps" summary="Fused Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubsd" summary="Fused Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfmsubss" summary="Fused Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfmulcph" summary="Fused Fused Multiply of Complex Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfmulcsh" summary="Fused Multiply of Complex Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd132pd" summary="Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd132ph" summary="Fused Negative Multiply-Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd132ps" summary="Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd132sd" summary="Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd132sh" summary="Fused Multiply-Add of Scalar FP16 Values"/>
+  <Instruction name="vfnmadd132ss" summary="Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd213pd" summary="Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd213ph" summary="Fused Negative Multiply-Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd213ps" summary="Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd213sd" summary="Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd213sh" summary="Fused Multiply-Add of Scalar FP16 Values"/>
+  <Instruction name="vfnmadd213ss" summary="Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd231pd" summary="Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd231ph" summary="Fused Negative Multiply-Add of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd231ps" summary="Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd231sd" summary="Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmadd231sh" summary="Fused Multiply-Add of Scalar FP16 Values"/>
+  <Instruction name="vfnmadd231ss" summary="Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmaddpd" summary="Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmaddps" summary="Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmaddsd" summary="Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmaddss" summary="Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub132pd" summary="Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub132ph" summary="Fused Negative Multiply-Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub132ps" summary="Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub132sd" summary="Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub132sh" summary="Fused Negative Multiply-Subtract of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub132ss" summary="Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub213pd" summary="Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub213ph" summary="Fused Negative Multiply-Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub213ps" summary="Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub213sd" summary="Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub213sh" summary="Fused Negative Multiply-Subtract of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub213ss" summary="Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub231pd" summary="Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub231ph" summary="Fused Negative Multiply-Subtract of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub231ps" summary="Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub231sd" summary="Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub231sh" summary="Fused Negative Multiply-Subtract of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsub231ss" summary="Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsubpd" summary="Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsubps" summary="Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsubsd" summary="Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vfnmsubss" summary="Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vfpclasspd" summary="Test Class of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vfpclassph" summary="Test Class of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vfpclassps" summary="Test Class of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vfpclasssd" summary="Test Class of Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vfpclasssh" summary="Test Class of Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vfpclassss" summary="Test Class of Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vfrczpd" summary="Extract Fraction Packed Double-Precision Floating-Point"/>
+  <Instruction name="vfrczps" summary="Extract Fraction Packed Single-Precision Floating-Point"/>
+  <Instruction name="vfrczsd" summary="Extract Fraction Scalar Double-Precision Floating-Point"/>
+  <Instruction name="vfrczss" summary="Extract Fraction Scalar Single-Precision Floating Point"/>
+  <Instruction name="vgatherdpd" summary="Gather Packed Double-Precision Floating-Point Values Using Signed Doubleword Indices"/>
+  <Instruction name="vgatherdps" summary="Gather Packed Single-Precision Floating-Point Values Using Signed Doubleword Indices"/>
+  <Instruction name="vgatherpf0dpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Doubleword Indices Using T0 Hint"/>
+  <Instruction name="vgatherpf0dps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Doubleword Indices Using T0 Hint"/>
+  <Instruction name="vgatherpf0qpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Quadword Indices Using T0 Hint"/>
+  <Instruction name="vgatherpf0qps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Quadword Indices Using T0 Hint"/>
+  <Instruction name="vgatherpf1dpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Doubleword Indices Using T1 Hint"/>
+  <Instruction name="vgatherpf1dps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Doubleword Indices Using T1 Hint"/>
+  <Instruction name="vgatherpf1qpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Quadword Indices Using T1 Hint"/>
+  <Instruction name="vgatherpf1qps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Quadword Indices Using T1 Hint"/>
+  <Instruction name="vgatherqpd" summary="Gather Packed Double Precision Floating-Point Values UsingSigned Dword/Qword Indices"/>
+  <Instruction name="vgatherqps" summary="Gather Packed Single Precision Floating-Point Values UsingSigned Dword/Qword Indices"/>
+  <Instruction name="vgetexppd" summary="Extract Exponents of Packed Double-Precision Floating-Point Values as Double-Precision Floating-Point Values"/>
+  <Instruction name="vgetexpph" summary="Extract Exponents of Packed Half-Precision Floating-Point Values as Half-Precision Floating-Point Values"/>
+  <Instruction name="vgetexpps" summary="Extract Exponents of Packed Single-Precision Floating-Point Values as Single-Precision Floating-Point Values"/>
+  <Instruction name="vgetexpsd" summary="Extract Exponent of Scalar Double-Precision Floating-Point Value as Double-Precision Floating-Point Value"/>
+  <Instruction name="vgetexpsh" summary="Extract Exponent of Scalar Half-Precision Floating-Point Value as Half-Precision Floating-Point Value"/>
+  <Instruction name="vgetexpss" summary="Extract Exponent of Scalar Single-Precision Floating-Point Value as Single-Precision Floating-Point Value"/>
+  <Instruction name="vgetmantpd" summary="Extract Normalized Mantissas from Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vgetmantph" summary="Extract Normalized Mantissas from Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vgetmantps" summary="Extract Normalized Mantissas from Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vgetmantsd" summary="Extract Normalized Mantissa from Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vgetmantsh" summary="Extract Normalized Mantissa from Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vgetmantss" summary="Extract Normalized Mantissa from Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vgf2p8affineinvqb" summary="Galois Field (2^8) Affine Inverse Transformation"/>
+  <Instruction name="vgf2p8affineqb" summary="Galois Field (2^8) Affine Transformation"/>
+  <Instruction name="vgf2p8mulb" summary="Galois Field Multiply Bytes"/>
+  <Instruction name="vhaddpd" summary="Packed Double-FP Horizontal Add"/>
+  <Instruction name="vhaddps" summary="Packed Single-FP Horizontal Add"/>
+  <Instruction name="vhsubpd" summary="Packed Double-FP Horizontal Subtract"/>
+  <Instruction name="vhsubps" summary="Packed Single-FP Horizontal Subtract"/>
+  <Instruction name="vinsertf128" summary="Insert Packed Floating-Point Values"/>
+  <Instruction name="vinsertf32x4" summary="Insert 128 Bits of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vinsertf32x8" summary="Insert 256 Bits of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vinsertf64x2" summary="Insert 128 Bits of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vinsertf64x4" summary="Insert 256 Bits of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vinserti128" summary="Insert Packed Integer Values"/>
+  <Instruction name="vinserti32x4" summary="Insert 128 Bits of Packed Doubleword Integer Values"/>
+  <Instruction name="vinserti32x8" summary="Insert 256 Bits of Packed Doubleword Integer Values"/>
+  <Instruction name="vinserti64x2" summary="Insert 128 Bits of Packed Quadword Integer Values"/>
+  <Instruction name="vinserti64x4" summary="Insert 256 Bits of Packed Quadword Integer Values"/>
+  <Instruction name="vinsertps" summary="Insert Packed Single Precision Floating-Point Value"/>
+  <Instruction name="vlddqu" summary="Load Unaligned Integer 128 Bits"/>
+  <Instruction name="vldmxcsr" summary="Load MXCSR Register"/>
+  <Instruction name="vmaskmov" summary="Conditional SIMD Packed Loads and Stores"/>
+  <Instruction name="vmaskmovdqu" summary="Store Selected Bytes of Double Quadword"/>
+  <Instruction name="vmaskmovpd" summary="Conditional Move Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vmaskmovps" summary="Conditional Move Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmaxpd" summary="Return Maximum Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vmaxph" summary="Return Maximum Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vmaxps" summary="Return Maximum Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmaxsd" summary="Return Maximum Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vmaxsh" summary="Return Maximum Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vmaxss" summary="Return Maximum Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vmcall" summary="Call to VM Monitor"/>
+  <Instruction name="vmclear" summary="Clear Virtual-Machine Control Structure"/>
+  <Instruction name="vmfunc" summary="Invoke VM function"/>
+  <Instruction name="vminpd" summary="Return Minimum Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vminph" summary="Return Minimum Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vminps" summary="Return Minimum Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vminsd" summary="Return Minimum Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vminsh" summary="Return Minimum Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vminss" summary="Return Minimum Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vmlaunch" summary="Launch/Resume Virtual Machine"/>
+  <Instruction name="vmovapd" summary="Move Aligned Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vmovaps" summary="Move Aligned Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmovd" summary="Move Doubleword"/>
+  <Instruction name="vmovddup" summary="Move One Double-FP and Duplicate"/>
+  <Instruction name="vmovdqa" summary="Move Aligned Double Quadword"/>
+  <Instruction name="vmovdqa32" summary="Move Aligned Packed Integer Values"/>
+  <Instruction name="vmovdqa64" summary="Move Aligned Packed Integer Values"/>
+  <Instruction name="vmovdqu" summary="Move Unaligned Double Quadword"/>
+  <Instruction name="vmovdqu16" summary="Move Unaligned Packed Integer Values"/>
+  <Instruction name="vmovdqu32" summary="Move Unaligned Packed Integer Values"/>
+  <Instruction name="vmovdqu64" summary="Move Unaligned Packed Integer Values"/>
+  <Instruction name="vmovdqu8" summary="Move Unaligned Packed Integer Values"/>
+  <Instruction name="vmovhlps" summary="Move Packed Single-Precision Floating-Point Values High to Low"/>
+  <Instruction name="vmovhpd" summary="Move High Packed Double-Precision Floating-Point Value"/>
+  <Instruction name="vmovhps" summary="Move High Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmovlhps" summary="Move Packed Single-Precision Floating-Point Values Low to High"/>
+  <Instruction name="vmovlpd" summary="Move Low Packed Double-Precision Floating-Point Value"/>
+  <Instruction name="vmovlps" summary="Move Low Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmovmskpd" summary="Extract Packed Double-Precision Floating-Point Sign Mask"/>
+  <Instruction name="vmovmskps" summary="Extract Packed Single-Precision Floating-Point Sign Mask"/>
+  <Instruction name="vmovntdq" summary="Store Double Quadword Using Non-Temporal Hint"/>
+  <Instruction name="vmovntdqa" summary="Load Double Quadword Non-Temporal Aligned Hint"/>
+  <Instruction name="vmovntpd" summary="Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint"/>
+  <Instruction name="vmovntps" summary="Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint"/>
+  <Instruction name="vmovq" summary="Move Quadword"/>
+  <Instruction name="vmovsd" summary="Move Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vmovsh" summary="Move Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vmovshdup" summary="Move Packed Single-FP High and Duplicate"/>
+  <Instruction name="vmovsldup" summary="Move Packed Single-FP Low and Duplicate"/>
+  <Instruction name="vmovss" summary="Move Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vmovupd" summary="Move Unaligned Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vmovups" summary="Move Unaligned Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmovw" summary="Move Word"/>
+  <Instruction name="vmpsadbw" summary="Compute Multiple Packed Sums of Absolute Difference"/>
+  <Instruction name="vmptrld" summary="Load Pointer to Virtual-Machine Control Structure"/>
+  <Instruction name="vmptrst" summary="Store Pointer to Virtual-Machine Control Structure"/>
+  <Instruction name="vmread" summary="Read Field from Virtual-Machine Control Structure"/>
+  <Instruction name="vmresume" summary="Launch/Resume Virtual Machine"/>
+  <Instruction name="vmulpd" summary="Multiply Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vmulph" summary="Multiply Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vmulps" summary="Multiply Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vmulsd" summary="Multiply Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vmulsh" summary="Fused Multiply Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vmulss" summary="Multiply Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vmwrite" summary="Write Field to Virtual-Machine Control Structure"/>
+  <Instruction name="vmxoff" summary="Leave VMX Operation"/>
+  <Instruction name="vmxon" summary="Enter VMX Operation"/>
+  <Instruction name="vorpd" summary="Bitwise Logical OR of Double-Precision Floating-Point Values"/>
+  <Instruction name="vorps" summary="Bitwise Logical OR of Single-Precision Floating-Point Values"/>
+  <Instruction name="vp2intersectd" summary="Compute Intersection Between DWORDS/QUADWORDS to aPair of Mask Registers"/>
+  <Instruction name="vp2intersectq" summary="Compute Intersection Between DWORDS/QUADWORDS to aPair of Mask Registers"/>
+  <Instruction name="vp4dpwssd" summary="Dot Product of Signed Words With Dword Accumulation (4-Iterations)"/>
+  <Instruction name="vp4dpwssds" summary="Dot Product of Signed Words With Dword Accumulation and Saturation(4-Iterations)"/>
+  <Instruction name="vpabsb" summary="Packed Absolute Value of Byte Integers"/>
+  <Instruction name="vpabsd" summary="Packed Absolute Value of Doubleword Integers"/>
+  <Instruction name="vpabsq" summary="Packed Absolute Value of Quadword Integers"/>
+  <Instruction name="vpabsw" summary="Packed Absolute Value of Word Integers"/>
+  <Instruction name="vpackssdw" summary="Pack Doublewords into Words with Signed Saturation"/>
+  <Instruction name="vpacksswb" summary="Pack Words into Bytes with Signed Saturation"/>
+  <Instruction name="vpackusdw" summary="Pack Doublewords into Words with Unsigned Saturation"/>
+  <Instruction name="vpackuswb" summary="Pack Words into Bytes with Unsigned Saturation"/>
+  <Instruction name="vpaddb" summary="Add Packed Byte Integers"/>
+  <Instruction name="vpaddd" summary="Add Packed Doubleword Integers"/>
+  <Instruction name="vpaddq" summary="Add Packed Quadword Integers"/>
+  <Instruction name="vpaddsb" summary="Add Packed Signed Byte Integers with Signed Saturation"/>
+  <Instruction name="vpaddsw" summary="Add Packed Signed Word Integers with Signed Saturation"/>
+  <Instruction name="vpaddusb" summary="Add Packed Unsigned Byte Integers with Unsigned Saturation"/>
+  <Instruction name="vpaddusw" summary="Add Packed Unsigned Word Integers with Unsigned Saturation"/>
+  <Instruction name="vpaddw" summary="Add Packed Word Integers"/>
+  <Instruction name="vpalignr" summary="Packed Align Right"/>
+  <Instruction name="vpand" summary="Packed Bitwise Logical AND"/>
+  <Instruction name="vpandd" summary="Bitwise Logical AND of Packed Doubleword Integers"/>
+  <Instruction name="vpandn" summary="Packed Bitwise Logical AND NOT"/>
+  <Instruction name="vpandnd" summary="Bitwise Logical AND NOT of Packed Doubleword Integers"/>
+  <Instruction name="vpandnq" summary="Bitwise Logical AND NOT of Packed Quadword Integers"/>
+  <Instruction name="vpandq" summary="Bitwise Logical AND of Packed Quadword Integers"/>
+  <Instruction name="vpavgb" summary="Average Packed Byte Integers"/>
+  <Instruction name="vpavgw" summary="Average Packed Word Integers"/>
+  <Instruction name="vpblendd" summary="Blend Packed Doublewords"/>
+  <Instruction name="vpblendmb" summary="Blend Byte/Word Vectors Using an Opmask Control"/>
+  <Instruction name="vpblendmd" summary="Blend Int32/Int64 Vectors Using an OpMask Control"/>
+  <Instruction name="vpblendmq" summary="Blend Int32/Int64 Vectors Using an OpMask Control"/>
+  <Instruction name="vpblendmw" summary="Blend Byte/Word Vectors Using an Opmask Control"/>
+  <Instruction name="vpblendvb" summary="Variable Blend Packed Bytes"/>
+  <Instruction name="vpblendw" summary="Blend Packed Words"/>
+  <Instruction name="vpbroadcast" summary="Load Integer and Broadcast"/>
+  <Instruction name="vpbroadcastb" summary="Load With Broadcast Integer Data From General Purpose Register"/>
+  <Instruction name="vpbroadcastd" summary="Load With Broadcast Integer Data From General Purpose Register"/>
+  <Instruction name="vpbroadcastm" summary="Broadcast Mask to Vector Register"/>
+  <Instruction name="vpbroadcastmb2q" summary="Broadcast Low Byte of Mask Register to Packed Quadword Values"/>
+  <Instruction name="vpbroadcastmw2d" summary="Broadcast Low Word of Mask Register to Packed Doubleword Values"/>
+  <Instruction name="vpbroadcastq" summary="Load With Broadcast Integer Data From General Purpose Register"/>
+  <Instruction name="vpbroadcastw" summary="Load With Broadcast Integer Data From General Purpose Register"/>
+  <Instruction name="vpclmulqdq" summary="Less Quadword Multiplication"/>
+  <Instruction name="vpcmov" summary="Packed Conditional Move"/>
+  <Instruction name="vpcmpb" summary="Compare Packed Byte Values Into Mask"/>
+  <Instruction name="vpcmpd" summary="Compare Packed Signed Doubleword Values"/>
+  <Instruction name="vpcmpeqb" summary="Compare Packed Byte Data for Equality"/>
+  <Instruction name="vpcmpeqd" summary="Compare Packed Doubleword Data for Equality"/>
+  <Instruction name="vpcmpeqq" summary="Compare Packed Quadword Data for Equality"/>
+  <Instruction name="vpcmpeqw" summary="Compare Packed Word Data for Equality"/>
+  <Instruction name="vpcmpestri" summary="Packed Compare Explicit Length Strings, Return Index"/>
+  <Instruction name="vpcmpestrm" summary="Packed Compare Explicit Length Strings, Return Mask"/>
+  <Instruction name="vpcmpgtb" summary="Compare Packed Signed Byte Integers for Greater Than"/>
+  <Instruction name="vpcmpgtd" summary="Compare Packed Signed Doubleword Integers for Greater Than"/>
+  <Instruction name="vpcmpgtq" summary="Compare Packed Data for Greater Than"/>
+  <Instruction name="vpcmpgtw" summary="Compare Packed Signed Word Integers for Greater Than"/>
+  <Instruction name="vpcmpistri" summary="Packed Compare Implicit Length Strings, Return Index"/>
+  <Instruction name="vpcmpistrm" summary="Packed Compare Implicit Length Strings, Return Mask"/>
+  <Instruction name="vpcmpq" summary="Compare Packed Integer Values Into Mask"/>
+  <Instruction name="vpcmpub" summary="Compare Packed Byte Values Into Mask"/>
+  <Instruction name="vpcmpud" summary="Compare Packed Unsigned Doubleword Values"/>
+  <Instruction name="vpcmpuq" summary="Compare Packed Unsigned Quadword Values"/>
+  <Instruction name="vpcmpuw" summary="Compare Packed Word Values Into Mask"/>
+  <Instruction name="vpcmpw" summary="Compare Packed Word Values Into Mask"/>
+  <Instruction name="vpcomb" summary="Compare Packed Signed Byte Integers"/>
+  <Instruction name="vpcomd" summary="Compare Packed Signed Doubleword Integers"/>
+  <Instruction name="vpcompressb" summary="Store Sparse Packed Byte/Word Integer Values Into DenseMemory/Register"/>
+  <Instruction name="vpcompressd" summary="Store Sparse Packed Doubleword Integer Values into Dense Memory/Register"/>
+  <Instruction name="vpcompressq" summary="Store Sparse Packed Quadword Integer Values into Dense Memory/Register"/>
+  <Instruction name="vpcompressw" summary="Store Sparse Packed Word Integer Values into Dense Memory/Register"/>
+  <Instruction name="vpcomq" summary="Compare Packed Signed Quadword Integers"/>
+  <Instruction name="vpcomub" summary="Compare Packed Unsigned Byte Integers"/>
+  <Instruction name="vpcomud" summary="Compare Packed Unsigned Doubleword Integers"/>
+  <Instruction name="vpcomuq" summary="Compare Packed Unsigned Quadword Integers"/>
+  <Instruction name="vpcomuw" summary="Compare Packed Unsigned Word Integers"/>
+  <Instruction name="vpcomw" summary="Compare Packed Signed Word Integers"/>
+  <Instruction name="vpconflictd" summary="Detect Conflicts Within a Vector of Packed Dword/Qword Values Into DenseMemory/ Register"/>
+  <Instruction name="vpconflictq" summary="Detect Conflicts Within a Vector of Packed Dword/Qword Values Into DenseMemory/ Register"/>
+  <Instruction name="vpdpbssd" summary="Packed Dot Product of Signed-by-Singed Byte subvectors into Doubleword"/>
+  <Instruction name="vpdpbssds" summary="Packed Dot Product of Signed-by-Singed Byte subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpbsud" summary="Packed Dot Product of Signed-by-Unsinged Byte subvectors into Doubleword"/>
+  <Instruction name="vpdpbsuds" summary="Packed Dot Product of Signed-by-Unsinged Byte subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpbusd" summary="Packed Dot Product of Unsigned-by-Singed Byte subvectors into Doubleword"/>
+  <Instruction name="vpdpbusds" summary="Packed Dot Product of Unsigned-by-Singed Byte subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpbuud" summary="Packed Dot Product of Unsigned-by-Unsinged Byte subvectors into Doubleword"/>
+  <Instruction name="vpdpbuuds" summary="Packed Dot Product of Unsigned-by-Unsinged Byte subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpwssd" summary="Packed Dot Product of Signed-by-Signed Word subvectors into Doubleword"/>
+  <Instruction name="vpdpwssds" summary="Packed Dot Product of Signed-by-Signed Word subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpwsud" summary="Packed Dot Product of Signed-by-Unsigned Word subvectors into Doubleword"/>
+  <Instruction name="vpdpwsuds" summary="Packed Dot Product of Signed-by-Unsigned Word subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpwusd" summary="Packed Dot Product of Unsigned-by-Signed Word subvectors into Doubleword"/>
+  <Instruction name="vpdpwusds" summary="Packed Dot Product of Unsigned-by-Signed Word subvectors into Doubleword with Saturation"/>
+  <Instruction name="vpdpwuud" summary="Packed Dot Product of Unsigned-by-Unsigned Word subvectors into Doubleword"/>
+  <Instruction name="vpdpwuuds" summary="Packed Dot Product of Unsigned-by-Unsigned Word subvectors into Doubleword with Saturation"/>
+  <Instruction name="vperm2f128" summary="Permute Floating-Point Values"/>
+  <Instruction name="vperm2i128" summary="Permute 128-Bit Integer Values"/>
+  <Instruction name="vpermb" summary="Permute Packed Bytes Elements"/>
+  <Instruction name="vpermd" summary="Permute Packed Doubleword/Word Elements"/>
+  <Instruction name="vpermi2b" summary="Full Permute of Bytes From Two Tables Overwriting the Index"/>
+  <Instruction name="vpermi2d" summary="Full Permute of Doublewords From Two Tables Overwriting the Index"/>
+  <Instruction name="vpermi2pd" summary="Full Permute of Double-Precision Floating-Point Values From Two Tables Overwriting the Index"/>
+  <Instruction name="vpermi2ps" summary="Full Permute of Single-Precision Floating-Point Values From Two Tables Overwriting the Index"/>
+  <Instruction name="vpermi2q" summary="Full Permute of Quadwords From Two Tables Overwriting the Index"/>
+  <Instruction name="vpermi2w" summary="Full Permute of Words From Two Tables Overwriting the Index"/>
+  <Instruction name="vpermil2pd" summary="Permute Two-Source Double-Precision Floating-Point Vectors"/>
+  <Instruction name="vpermil2ps" summary="Permute Two-Source Single-Precision Floating-Point Vectors"/>
+  <Instruction name="vpermilpd" summary="Permute In-Lane of Pairs of Double Precision Floating-Point Values"/>
+  <Instruction name="vpermilps" summary="Permute In-Lane of Quadruples of Single Precision Floating-Point Values"/>
+  <Instruction name="vpermpd" summary="Permute Double-Precision Floating-Point Elements"/>
+  <Instruction name="vpermps" summary="Permute Single-Precision Floating-Point Elements"/>
+  <Instruction name="vpermq" summary="Qwords Element Permutation"/>
+  <Instruction name="vpermt2b" summary="Full Permute of Bytes From Two Tables Overwriting a Table"/>
+  <Instruction name="vpermt2d" summary="Full Permute of Doublewords From Two Tables Overwriting a Table"/>
+  <Instruction name="vpermt2pd" summary="Full Permute of Double-Precision Floating-Point Values From Two Tables Overwriting a Table"/>
+  <Instruction name="vpermt2ps" summary="Full Permute of Single-Precision Floating-Point Values From Two Tables Overwriting a Table"/>
+  <Instruction name="vpermt2q" summary="Full Permute of Quadwords From Two Tables Overwriting a Table"/>
+  <Instruction name="vpermt2w" summary="Full Permute of Words From Two Tables Overwriting a Table"/>
+  <Instruction name="vpermw" summary="Permute Packed Doubleword/Word Elements"/>
+  <Instruction name="vpexpandb" summary="Load Sparse Packed Byte Integer Values from Dense Memory/Register"/>
+  <Instruction name="vpexpandd" summary="Load Sparse Packed Doubleword Integer Values from Dense Memory/Register"/>
+  <Instruction name="vpexpandq" summary="Load Sparse Packed Quadword Integer Values from Dense Memory/Register"/>
+  <Instruction name="vpexpandw" summary="Load Sparse Packed Word Integer Values from Dense Memory/Register"/>
+  <Instruction name="vpextrb" summary="Extract Byte"/>
+  <Instruction name="vpextrd" summary="Extract Doubleword"/>
+  <Instruction name="vpextrq" summary="Extract Quadword"/>
+  <Instruction name="vpextrw" summary="Extract Word"/>
+  <Instruction name="vpgatherdd" summary="Gather Packed Doubleword Values Using Signed Doubleword Indices"/>
+  <Instruction name="vpgatherdq" summary="Gather Packed Quadword Values Using Signed Doubleword Indices"/>
+  <Instruction name="vpgatherqd" summary="Gather Packed Doubleword Values Using Signed Quadword Indices"/>
+  <Instruction name="vpgatherqq" summary="Gather Packed Quadword Values Using Signed Quadword Indices"/>
+  <Instruction name="vphaddbd" summary="Packed Horizontal Add Signed Byte to Signed Doubleword"/>
+  <Instruction name="vphaddbq" summary="Packed Horizontal Add Signed Byte to Signed Quadword"/>
+  <Instruction name="vphaddbw" summary="Packed Horizontal Add Signed Byte to Signed Word"/>
+  <Instruction name="vphaddd" summary="Packed Horizontal Add Doubleword Integer"/>
+  <Instruction name="vphadddq" summary="Packed Horizontal Add Signed Doubleword to Signed Quadword"/>
+  <Instruction name="vphaddsw" summary="Packed Horizontal Add Signed Word Integers with Signed Saturation"/>
+  <Instruction name="vphaddubd" summary="Packed Horizontal Add Unsigned Byte to Doubleword"/>
+  <Instruction name="vphaddubq" summary="Packed Horizontal Add Unsigned Byte to Quadword"/>
+  <Instruction name="vphaddubw" summary="Packed Horizontal Add Unsigned Byte to Word"/>
+  <Instruction name="vphaddudq" summary="Packed Horizontal Add Unsigned Doubleword to Quadword"/>
+  <Instruction name="vphadduwd" summary="Packed Horizontal Add Unsigned Word to Doubleword"/>
+  <Instruction name="vphadduwq" summary="Packed Horizontal Add Unsigned Word to Quadword"/>
+  <Instruction name="vphaddw" summary="Packed Horizontal Add Word Integers"/>
+  <Instruction name="vphaddwd" summary="Packed Horizontal Add Signed Word to Signed Doubleword"/>
+  <Instruction name="vphaddwq" summary="Packed Horizontal Add Signed Word to Signed Quadword"/>
+  <Instruction name="vphminposuw" summary="Packed Horizontal Minimum of Unsigned Word Integers"/>
+  <Instruction name="vphsubbw" summary="Packed Horizontal Subtract Signed Byte to Signed Word"/>
+  <Instruction name="vphsubd" summary="Packed Horizontal Subtract Doubleword Integers"/>
+  <Instruction name="vphsubdq" summary="Packed Horizontal Subtract Signed Doubleword to Signed Quadword"/>
+  <Instruction name="vphsubsw" summary="Packed Horizontal Subtract Signed Word Integers with Signed Saturation"/>
+  <Instruction name="vphsubw" summary="Packed Horizontal Subtract Word Integers"/>
+  <Instruction name="vphsubwd" summary="Packed Horizontal Subtract Signed Word to Signed Doubleword"/>
+  <Instruction name="vpinsrb" summary="Insert Byte"/>
+  <Instruction name="vpinsrd" summary="Insert Doubleword"/>
+  <Instruction name="vpinsrq" summary="Insert Quadword"/>
+  <Instruction name="vpinsrw" summary="Insert Word"/>
+  <Instruction name="vplzcntd" summary="Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values"/>
+  <Instruction name="vplzcntq" summary="Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values"/>
+  <Instruction name="vpmacsdd" summary="Packed Multiply Accumulate Signed Doubleword to Signed Doubleword"/>
+  <Instruction name="vpmacsdqh" summary="Packed Multiply Accumulate Signed High Doubleword to Signed Quadword"/>
+  <Instruction name="vpmacsdql" summary="Packed Multiply Accumulate Signed Low Doubleword to Signed Quadword"/>
+  <Instruction name="vpmacssdd" summary="Packed Multiply Accumulate with Saturation Signed Doubleword to Signed Doubleword"/>
+  <Instruction name="vpmacssdqh" summary="Packed Multiply Accumulate with Saturation Signed High Doubleword to Signed Quadword"/>
+  <Instruction name="vpmacssdql" summary="Packed Multiply Accumulate with Saturation Signed Low Doubleword to Signed Quadword"/>
+  <Instruction name="vpmacsswd" summary="Packed Multiply Accumulate with Saturation Signed Word to Signed Doubleword"/>
+  <Instruction name="vpmacssww" summary="Packed Multiply Accumulate with Saturation Signed Word to Signed Word"/>
+  <Instruction name="vpmacswd" summary="Packed Multiply Accumulate Signed Word to Signed Doubleword"/>
+  <Instruction name="vpmacsww" summary="Packed Multiply Accumulate Signed Word to Signed Word"/>
+  <Instruction name="vpmadcsswd" summary="Packed Multiply Add Accumulate with Saturation Signed Word to Signed Doubleword"/>
+  <Instruction name="vpmadcswd" summary="Packed Multiply Add Accumulate Signed Word to Signed Doubleword"/>
+  <Instruction name="vpmadd52huq" summary="Packed Multiply of Unsigned 52-bit Unsigned Integers and Add High 52-bit Products to Quadword Accumulators"/>
+  <Instruction name="vpmadd52luq" summary="Packed Multiply of Unsigned 52-bit Integers and Add the Low 52-bit Products to Quadword Accumulators"/>
+  <Instruction name="vpmaddubsw" summary="Multiply and Add Packed Signed and Unsigned Byte Integers"/>
+  <Instruction name="vpmaddwd" summary="Multiply and Add Packed Signed Word Integers"/>
+  <Instruction name="vpmaskmov" summary="Conditional SIMD Integer Packed Loads and Stores"/>
+  <Instruction name="vpmaskmovd" summary="Conditional Move Packed Doubleword Integers"/>
+  <Instruction name="vpmaskmovq" summary="Conditional Move Packed Quadword Integers"/>
+  <Instruction name="vpmaxsb" summary="Maximum of Packed Signed Byte Integers"/>
+  <Instruction name="vpmaxsd" summary="Maximum of Packed Signed Doubleword Integers"/>
+  <Instruction name="vpmaxsq" summary="Maximum of Packed Signed Quadword Integers"/>
+  <Instruction name="vpmaxsw" summary="Maximum of Packed Signed Word Integers"/>
+  <Instruction name="vpmaxub" summary="Maximum of Packed Unsigned Byte Integers"/>
+  <Instruction name="vpmaxud" summary="Maximum of Packed Unsigned Doubleword Integers"/>
+  <Instruction name="vpmaxuq" summary="Maximum of Packed Unsigned Quadword Integers"/>
+  <Instruction name="vpmaxuw" summary="Maximum of Packed Unsigned Word Integers"/>
+  <Instruction name="vpminsb" summary="Minimum of Packed Signed Byte Integers"/>
+  <Instruction name="vpminsd" summary="Minimum of Packed Signed Doubleword Integers"/>
+  <Instruction name="vpminsq" summary="Minimum of Packed Signed Quadword Integers"/>
+  <Instruction name="vpminsw" summary="Minimum of Packed Signed Word Integers"/>
+  <Instruction name="vpminub" summary="Minimum of Packed Unsigned Byte Integers"/>
+  <Instruction name="vpminud" summary="Minimum of Packed Unsigned Doubleword Integers"/>
+  <Instruction name="vpminuq" summary="Minimum of Packed Unsigned Quadword Integers"/>
+  <Instruction name="vpminuw" summary="Minimum of Packed Unsigned Word Integers"/>
+  <Instruction name="vpmovb2m" summary="Move Signs of Packed Byte Integers to Mask Register"/>
+  <Instruction name="vpmovd2m" summary="Move Signs of Packed Doubleword Integers to Mask Register"/>
+  <Instruction name="vpmovdb" summary="Down Convert Packed Doubleword Values to Byte Values with Truncation"/>
+  <Instruction name="vpmovdw" summary="Down Convert Packed Doubleword Values to Word Values with Truncation"/>
+  <Instruction name="vpmovm2b" summary="Expand Bits of Mask Register to Packed Byte Integers"/>
+  <Instruction name="vpmovm2d" summary="Expand Bits of Mask Register to Packed Doubleword Integers"/>
+  <Instruction name="vpmovm2q" summary="Expand Bits of Mask Register to Packed Quadword Integers"/>
+  <Instruction name="vpmovm2w" summary="Expand Bits of Mask Register to Packed Word Integers"/>
+  <Instruction name="vpmovmskb" summary="Move Byte Mask"/>
+  <Instruction name="vpmovq2m" summary="Move Signs of Packed Quadword Integers to Mask Register"/>
+  <Instruction name="vpmovqb" summary="Down Convert Packed Quadword Values to Byte Values with Truncation"/>
+  <Instruction name="vpmovqd" summary="Down Convert Packed Quadword Values to Doubleword Values with Truncation"/>
+  <Instruction name="vpmovqw" summary="Down Convert Packed Quadword Values to Word Values with Truncation"/>
+  <Instruction name="vpmovsdb" summary="Down Convert Packed Doubleword Values to Byte Values with Signed Saturation"/>
+  <Instruction name="vpmovsdw" summary="Down Convert Packed Doubleword Values to Word Values with Signed Saturation"/>
+  <Instruction name="vpmovsqb" summary="Down Convert Packed Quadword Values to Byte Values with Signed Saturation"/>
+  <Instruction name="vpmovsqd" summary="Down Convert Packed Quadword Values to Doubleword Values with Signed Saturation"/>
+  <Instruction name="vpmovsqw" summary="Down Convert Packed Quadword Values to Word Values with Signed Saturation"/>
+  <Instruction name="vpmovswb" summary="Down Convert Packed Word Values to Byte Values with Signed Saturation"/>
+  <Instruction name="vpmovsxbd" summary="Move Packed Byte Integers to Doubleword Integers with Sign Extension"/>
+  <Instruction name="vpmovsxbq" summary="Move Packed Byte Integers to Quadword Integers with Sign Extension"/>
+  <Instruction name="vpmovsxbw" summary="Move Packed Byte Integers to Word Integers with Sign Extension"/>
+  <Instruction name="vpmovsxdq" summary="Move Packed Doubleword Integers to Quadword Integers with Sign Extension"/>
+  <Instruction name="vpmovsxwd" summary="Move Packed Word Integers to Doubleword Integers with Sign Extension"/>
+  <Instruction name="vpmovsxwq" summary="Move Packed Word Integers to Quadword Integers with Sign Extension"/>
+  <Instruction name="vpmovusdb" summary="Down Convert Packed Doubleword Values to Byte Values with Unsigned Saturation"/>
+  <Instruction name="vpmovusdw" summary="Down Convert Packed Doubleword Values to Word Values with Unsigned Saturation"/>
+  <Instruction name="vpmovusqb" summary="Down Convert Packed Quadword Values to Byte Values with Unsigned Saturation"/>
+  <Instruction name="vpmovusqd" summary="Down Convert Packed Quadword Values to Doubleword Values with Unsigned Saturation"/>
+  <Instruction name="vpmovusqw" summary="Down Convert Packed Quadword Values to Word Values with Unsigned Saturation"/>
+  <Instruction name="vpmovuswb" summary="Down Convert Packed Word Values to Byte Values with Unsigned Saturation"/>
+  <Instruction name="vpmovw2m" summary="Move Signs of Packed Word Integers to Mask Register"/>
+  <Instruction name="vpmovwb" summary="Down Convert Packed Word Values to Byte Values with Truncation"/>
+  <Instruction name="vpmovzxbd" summary="Move Packed Byte Integers to Doubleword Integers with Zero Extension"/>
+  <Instruction name="vpmovzxbq" summary="Move Packed Byte Integers to Quadword Integers with Zero Extension"/>
+  <Instruction name="vpmovzxbw" summary="Move Packed Byte Integers to Word Integers with Zero Extension"/>
+  <Instruction name="vpmovzxdq" summary="Move Packed Doubleword Integers to Quadword Integers with Zero Extension"/>
+  <Instruction name="vpmovzxwd" summary="Move Packed Word Integers to Doubleword Integers with Zero Extension"/>
+  <Instruction name="vpmovzxwq" summary="Move Packed Word Integers to Quadword Integers with Zero Extension"/>
+  <Instruction name="vpmuldq" summary="Multiply Packed Signed Doubleword Integers and Store Quadword Result"/>
+  <Instruction name="vpmulhrsw" summary="Packed Multiply Signed Word Integers and Store High Result with Round and Scale"/>
+  <Instruction name="vpmulhuw" summary="Multiply Packed Unsigned Word Integers and Store High Result"/>
+  <Instruction name="vpmulhw" summary="Multiply Packed Signed Word Integers and Store High Result"/>
+  <Instruction name="vpmulld" summary="Multiply Packed Signed Doubleword Integers and Store Low Result"/>
+  <Instruction name="vpmullq" summary="Multiply Packed Signed Quadword Integers and Store Low Result"/>
+  <Instruction name="vpmullw" summary="Multiply Packed Signed Word Integers and Store Low Result"/>
+  <Instruction name="vpmultishiftqb" summary="Select Packed Unaligned Bytes from Quadword Sources"/>
+  <Instruction name="vpmuludq" summary="Multiply Packed Unsigned Doubleword Integers"/>
+  <Instruction name="vpopcnt" summary="Return the Count of Number of Bits Set to 1 in BYTE/WORD/DWORD/QWORD"/>
+  <Instruction name="vpopcntb" summary="Packed Population Count for Byte Integers"/>
+  <Instruction name="vpopcntd" summary="Packed Population Count for Doubleword Integers"/>
+  <Instruction name="vpopcntq" summary="Packed Population Count for Quadword Integers"/>
+  <Instruction name="vpopcntw" summary="Packed Population Count for Word Integers"/>
+  <Instruction name="vpor" summary="Packed Bitwise Logical OR"/>
+  <Instruction name="vpord" summary="Bitwise Logical OR of Packed Doubleword Integers"/>
+  <Instruction name="vporq" summary="Bitwise Logical OR of Packed Quadword Integers"/>
+  <Instruction name="vpperm" summary="Packed Permute Bytes"/>
+  <Instruction name="vprold" summary="Rotate Packed Doubleword Left"/>
+  <Instruction name="vprolq" summary="Rotate Packed Quadword Left"/>
+  <Instruction name="vprolvd" summary="Variable Rotate Packed Doubleword Left"/>
+  <Instruction name="vprolvq" summary="Variable Rotate Packed Quadword Left"/>
+  <Instruction name="vprord" summary="Rotate Packed Doubleword Right"/>
+  <Instruction name="vprorq" summary="Rotate Packed Quadword Right"/>
+  <Instruction name="vprorvd" summary="Variable Rotate Packed Doubleword Right"/>
+  <Instruction name="vprorvq" summary="Variable Rotate Packed Quadword Right"/>
+  <Instruction name="vprotb" summary="Packed Rotate Bytes"/>
+  <Instruction name="vprotd" summary="Packed Rotate Doublewords"/>
+  <Instruction name="vprotq" summary="Packed Rotate Quadwords"/>
+  <Instruction name="vprotw" summary="Packed Rotate Words"/>
+  <Instruction name="vpsadbw" summary="Compute Sum of Absolute Differences"/>
+  <Instruction name="vpscatterdd" summary="Scatter Packed Dword, PackedQword with Signed Dword, Signed Qword Indices"/>
+  <Instruction name="vpscatterdq" summary="Scatter Packed Dword, PackedQword with Signed Dword, Signed Qword Indices"/>
+  <Instruction name="vpscatterqd" summary="Scatter Packed Dword, PackedQword with Signed Dword, Signed Qword Indices"/>
+  <Instruction name="vpscatterqq" summary="Scatter Packed Dword, PackedQword with Signed Dword, Signed Qword Indices"/>
+  <Instruction name="vpshab" summary="Packed Shift Arithmetic Bytes"/>
+  <Instruction name="vpshad" summary="Packed Shift Arithmetic Doublewords"/>
+  <Instruction name="vpshaq" summary="Packed Shift Arithmetic Quadwords"/>
+  <Instruction name="vpshaw" summary="Packed Shift Arithmetic Words"/>
+  <Instruction name="vpshlb" summary="Packed Shift Logical Bytes"/>
+  <Instruction name="vpshld" summary="Concatenate and Shift Packed Data Left Logical"/>
+  <Instruction name="vpshldd" summary="Concatenate and Shift Packed Doubleword Data Left Logical"/>
+  <Instruction name="vpshldq" summary="Concatenate and Shift Packed Quadword Data Left Logical"/>
+  <Instruction name="vpshldv" summary="Concatenate and Variable Shift Packed Data Left Logical"/>
+  <Instruction name="vpshldvd" summary="Concatenate and Variable Shift Packed Doubleword Data Left Logical"/>
+  <Instruction name="vpshldvq" summary="Concatenate and Variable Shift Packed Quadword Data Left Logical"/>
+  <Instruction name="vpshldvw" summary="Concatenate and Variable Shift Packed Word Data Left Logical"/>
+  <Instruction name="vpshldw" summary="Concatenate and Shift Packed Word Data Left Logical"/>
+  <Instruction name="vpshlq" summary="Packed Shift Logical Quadwords"/>
+  <Instruction name="vpshlw" summary="Packed Shift Logical Words"/>
+  <Instruction name="vpshrd" summary="Concatenate and Shift Packed Data Right Logical"/>
+  <Instruction name="vpshrdd" summary="Concatenate and Shift Packed Doubleword Data Right Logical"/>
+  <Instruction name="vpshrdq" summary="Concatenate and Shift Packed Quadword Data Right Logical"/>
+  <Instruction name="vpshrdv" summary="Concatenate and Variable Shift Packed Data Right Logical"/>
+  <Instruction name="vpshrdvd" summary="Concatenate and Variable Shift Packed Doubleword Data Right Logical"/>
+  <Instruction name="vpshrdvq" summary="Concatenate and Variable Shift Packed Quadword Data Right Logical"/>
+  <Instruction name="vpshrdvw" summary="Concatenate and Variable Shift Packed Word Data Right Logical"/>
+  <Instruction name="vpshrdw" summary="Concatenate and Shift Packed Word Data Right Logical"/>
+  <Instruction name="vpshufb" summary="Packed Shuffle Bytes"/>
+  <Instruction name="vpshufbitqmb" summary="Shuffle Bits From Quadword Elements Using Byte Indexes Into Mask"/>
+  <Instruction name="vpshufd" summary="Shuffle Packed Doublewords"/>
+  <Instruction name="vpshufhw" summary="Shuffle Packed High Words"/>
+  <Instruction name="vpshuflw" summary="Shuffle Packed Low Words"/>
+  <Instruction name="vpsignb" summary="Packed Sign of Byte Integers"/>
+  <Instruction name="vpsignd" summary="Packed Sign of Doubleword Integers"/>
+  <Instruction name="vpsignw" summary="Packed Sign of Word Integers"/>
+  <Instruction name="vpslld" summary="Shift Packed Doubleword Data Left Logical"/>
+  <Instruction name="vpslldq" summary="Shift Packed Double Quadword Left Logical"/>
+  <Instruction name="vpsllq" summary="Shift Packed Quadword Data Left Logical"/>
+  <Instruction name="vpsllvd" summary="Variable Shift Packed Doubleword Data Left Logical"/>
+  <Instruction name="vpsllvq" summary="Variable Shift Packed Quadword Data Left Logical"/>
+  <Instruction name="vpsllvw" summary="Variable Shift Packed Word Data Left Logical"/>
+  <Instruction name="vpsllw" summary="Shift Packed Word Data Left Logical"/>
+  <Instruction name="vpsrad" summary="Shift Packed Doubleword Data Right Arithmetic"/>
+  <Instruction name="vpsraq" summary="Shift Packed Quadword Data Right Arithmetic"/>
+  <Instruction name="vpsravd" summary="Variable Shift Packed Doubleword Data Right Arithmetic"/>
+  <Instruction name="vpsravq" summary="Variable Shift Packed Quadword Data Right Arithmetic"/>
+  <Instruction name="vpsravw" summary="Variable Shift Packed Word Data Right Arithmetic"/>
+  <Instruction name="vpsraw" summary="Shift Packed Word Data Right Arithmetic"/>
+  <Instruction name="vpsrld" summary="Shift Packed Doubleword Data Right Logical"/>
+  <Instruction name="vpsrldq" summary="Shift Packed Double Quadword Right Logical"/>
+  <Instruction name="vpsrlq" summary="Shift Packed Quadword Data Right Logical"/>
+  <Instruction name="vpsrlvd" summary="Variable Shift Packed Doubleword Data Right Logical"/>
+  <Instruction name="vpsrlvq" summary="Variable Shift Packed Quadword Data Right Logical"/>
+  <Instruction name="vpsrlvw" summary="Variable Shift Packed Word Data Right Logical"/>
+  <Instruction name="vpsrlw" summary="Shift Packed Word Data Right Logical"/>
+  <Instruction name="vpsubb" summary="Subtract Packed Byte Integers"/>
+  <Instruction name="vpsubd" summary="Subtract Packed Doubleword Integers"/>
+  <Instruction name="vpsubq" summary="Subtract Packed Quadword Integers"/>
+  <Instruction name="vpsubsb" summary="Subtract Packed Signed Byte Integers with Signed Saturation"/>
+  <Instruction name="vpsubsw" summary="Subtract Packed Signed Word Integers with Signed Saturation"/>
+  <Instruction name="vpsubusb" summary="Subtract Packed Unsigned Byte Integers with Unsigned Saturation"/>
+  <Instruction name="vpsubusw" summary="Subtract Packed Unsigned Word Integers with Unsigned Saturation"/>
+  <Instruction name="vpsubw" summary="Subtract Packed Word Integers"/>
+  <Instruction name="vpternlogd" summary="Bitwise Ternary Logical Operation on Doubleword Values"/>
+  <Instruction name="vpternlogq" summary="Bitwise Ternary Logical Operation on Quadword Values"/>
+  <Instruction name="vptest" summary="Packed Logical Compare"/>
+  <Instruction name="vptestmb" summary="Logical AND of Packed Byte Integer Values and Set Mask"/>
+  <Instruction name="vptestmd" summary="Logical AND of Packed Doubleword Integer Values and Set Mask"/>
+  <Instruction name="vptestmq" summary="Logical AND of Packed Quadword Integer Values and Set Mask"/>
+  <Instruction name="vptestmw" summary="Logical AND of Packed Word Integer Values and Set Mask"/>
+  <Instruction name="vptestnmb" summary="Logical NAND of Packed Byte Integer Values and Set Mask"/>
+  <Instruction name="vptestnmd" summary="Logical NAND of Packed Doubleword Integer Values and Set Mask"/>
+  <Instruction name="vptestnmq" summary="Logical NAND of Packed Quadword Integer Values and Set Mask"/>
+  <Instruction name="vptestnmw" summary="Logical NAND of Packed Word Integer Values and Set Mask"/>
+  <Instruction name="vpunpckhbw" summary="Unpack and Interleave High-Order Bytes into Words"/>
+  <Instruction name="vpunpckhdq" summary="Unpack and Interleave High-Order Doublewords into Quadwords"/>
+  <Instruction name="vpunpckhqdq" summary="Unpack and Interleave High-Order Quadwords into Double Quadwords"/>
+  <Instruction name="vpunpckhwd" summary="Unpack and Interleave High-Order Words into Doublewords"/>
+  <Instruction name="vpunpcklbw" summary="Unpack and Interleave Low-Order Bytes into Words"/>
+  <Instruction name="vpunpckldq" summary="Unpack and Interleave Low-Order Doublewords into Quadwords"/>
+  <Instruction name="vpunpcklqdq" summary="Unpack and Interleave Low-Order Quadwords into Double Quadwords"/>
+  <Instruction name="vpunpcklwd" summary="Unpack and Interleave Low-Order Words into Doublewords"/>
+  <Instruction name="vpxor" summary="Packed Bitwise Logical Exclusive OR"/>
+  <Instruction name="vpxord" summary="Bitwise Logical Exclusive OR of Packed Doubleword Integers"/>
+  <Instruction name="vpxorq" summary="Bitwise Logical Exclusive OR of Packed Quadword Integers"/>
+  <Instruction name="vrangepd" summary="Range Restriction Calculation For Packed Pairs of Double-Precision Floating-Point Values"/>
+  <Instruction name="vrangeps" summary="Range Restriction Calculation For Packed Pairs of Single-Precision Floating-Point Values"/>
+  <Instruction name="vrangesd" summary="Range Restriction Calculation For a pair of Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vrangess" summary="Range Restriction Calculation For a pair of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vrcp14pd" summary="Compute Approximate Reciprocals of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vrcp14ps" summary="Compute Approximate Reciprocals of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vrcp14sd" summary="Compute Approximate Reciprocal of a Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vrcp14ss" summary="Compute Approximate Reciprocal of a Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vrcp28pd" summary="Approximation to the Reciprocal of Packed Double-Precision Floating-Point Values with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrcp28ps" summary="Approximation to the Reciprocal of Packed Single-Precision Floating-Point Values with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrcp28sd" summary="Approximation to the Reciprocal of a Scalar Double-Precision Floating-Point Value with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrcp28ss" summary="Approximation to the Reciprocal of a Scalar Single-Precision Floating-Point Value with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrcpph" summary="Compute Approximate Reciprocals of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vrcpps" summary="Compute Approximate Reciprocals of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vrcpsh" summary="Compute Approximate Reciprocal of Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vrcpss" summary="Compute Approximate Reciprocal of Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vreducepd" summary="Perform Reduction Transformation on Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vreduceph" summary="Perform Reduction Transformation on Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vreduceps" summary="Perform Reduction Transformation on Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vreducesd" summary="Perform Reduction Transformation on a Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vreducesh" summary="Perform Reduction Transformation on a Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vreducess" summary="Perform Reduction Transformation on a Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vrndscalepd" summary="Round Packed Double-Precision Floating-Point Values To Include A Given Number Of Fraction Bits"/>
+  <Instruction name="vrndscaleph" summary="Round Packed Half-Precision Floating-Point Values To Include A Given Number Of Fraction Bits"/>
+  <Instruction name="vrndscaleps" summary="Round Packed Single-Precision Floating-Point Values To Include A Given Number Of Fraction Bits"/>
+  <Instruction name="vrndscalesd" summary="Round Scalar Double-Precision Floating-Point Value To Include A Given Number Of Fraction Bits"/>
+  <Instruction name="vrndscalesh" summary="Round Scalar Half-Precision Floating-Point Value To Include A Given Number Of Fraction Bits"/>
+  <Instruction name="vrndscaless" summary="Round Scalar Single-Precision Floating-Point Value To Include A Given Number Of Fraction Bits"/>
+  <Instruction name="vroundpd" summary="Round Packed Double Precision Floating-Point Values"/>
+  <Instruction name="vroundps" summary="Round Packed Single Precision Floating-Point Values"/>
+  <Instruction name="vroundsd" summary="Round Scalar Double Precision Floating-Point Values"/>
+  <Instruction name="vroundss" summary="Round Scalar Single Precision Floating-Point Values"/>
+  <Instruction name="vrsqrt14pd" summary="Compute Approximate Reciprocals of Square Roots of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vrsqrt14ps" summary="Compute Approximate Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vrsqrt14sd" summary="Compute Approximate Reciprocal of a Square Root of a Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vrsqrt14ss" summary="Compute Approximate Reciprocal of a Square Root of a Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vrsqrt28pd" summary="Approximation to the Reciprocal Square Root of Packed Double-Precision Floating-Point Values with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrsqrt28ps" summary="Approximation to the Reciprocal Square Root of Packed Single-Precision Floating-Point Values with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrsqrt28sd" summary="Approximation to the Reciprocal Square Root of a Scalar Double-Precision Floating-Point Value with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrsqrt28ss" summary="Approximation to the Reciprocal Square Root of a Scalar Single-Precision Floating-Point Value with Less Than 2^-28 Relative Error"/>
+  <Instruction name="vrsqrtph" summary="Compute Reciprocals of Square Roots of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vrsqrtps" summary="Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vrsqrtsh" summary="Compute Reciprocal of Square Root of Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vrsqrtss" summary="Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vscalefpd" summary="Scale Packed Double-Precision Floating-Point Values With Double-Precision Floating-Point Values"/>
+  <Instruction name="vscalefph" summary="Scale Packed Half-Precision Floating-Point Values With Half-Precision Floating-Point Values"/>
+  <Instruction name="vscalefps" summary="Scale Packed Single-Precision Floating-Point Values With Single-Precision Floating-Point Values"/>
+  <Instruction name="vscalefsd" summary="Scale Scalar Double-Precision Floating-Point Value With a Double-Precision Floating-Point Value"/>
+  <Instruction name="vscalefsh" summary="Scale Scalar Half-Precision Floating-Point Value With a Half-Precision Floating-Point Value"/>
+  <Instruction name="vscalefss" summary="Scale Scalar Single-Precision Floating-Point Value With a Single-Precision Floating-Point Value"/>
+  <Instruction name="vscatterdpd" summary="Scatter Packed Double-Precision Floating-Point Values with Signed Doubleword Indices"/>
+  <Instruction name="vscatterdps" summary="Scatter Packed Single-Precision Floating-Point Values with Signed Doubleword Indices"/>
+  <Instruction name="vscatterpf0dpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Doubleword Indices Using T0 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf0dps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Doubleword Indices Using T0 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf0qpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Quadword Indices Using T0 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf0qps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Quadword Indices Using T0 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf1dpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Doubleword Indices Using T1 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf1dps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Doubleword Indices Using T1 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf1qpd" summary="Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Quadword Indices Using T1 Hint with Intent to Write"/>
+  <Instruction name="vscatterpf1qps" summary="Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Quadword Indices Using T1 Hint with Intent to Write"/>
+  <Instruction name="vscatterqpd" summary="Scatter Packed Double-Precision Floating-Point Values with Signed Quadword Indices"/>
+  <Instruction name="vscatterqps" summary="Scatter Packed Single-Precision Floating-Point Values with Signed Quadword Indices"/>
+  <Instruction name="vsha512msg1" summary="Perform an Intermediate Calculation for the Next Four SHA512 Message Quadwords"/>
+  <Instruction name="vsha512msg2" summary="Perform a Final Calculation for the Next Four SHA512 Message Quadwords"/>
+  <Instruction name="vsha512rnds2" summary="Perform Two Rounds of SHA512 Operation"/>
+  <Instruction name="vshuff32x4" summary="Shuffle 128-Bit Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vshuff64x2" summary="Shuffle 128-Bit Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vshufi32x4" summary="Shuffle 128-Bit Packed Doubleword Integer Values"/>
+  <Instruction name="vshufi64x2" summary="Shuffle 128-Bit Packed Quadword Integer Values"/>
+  <Instruction name="vshufpd" summary="Shuffle Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vshufps" summary="Shuffle Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vsm3msg1" summary="Perform Initial Calculation for the Next Four SM3 Message Words"/>
+  <Instruction name="vsm3msg2" summary="Perform Final Calculation for the Next Four SM3 Message Words"/>
+  <Instruction name="vsm3rnds2" summary="Perform Two Rounds of SM3 Operation"/>
+  <Instruction name="vsm4key4" summary="Perform Four Rounds of SM4 Key Expansion"/>
+  <Instruction name="vsm4rnds4" summary="Performs Four Rounds of SM4 Encryption"/>
+  <Instruction name="vsqrtpd" summary="Compute Square Roots of Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vsqrtph" summary="Compute Square Roots of Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vsqrtps" summary="Compute Square Roots of Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vsqrtsd" summary="Compute Square Root of Scalar Double-Precision Floating-Point Value"/>
+  <Instruction name="vsqrtsh" summary="Compute Square Root of Scalar Half-Precision Floating-Point Value"/>
+  <Instruction name="vsqrtss" summary="Compute Square Root of Scalar Single-Precision Floating-Point Value"/>
+  <Instruction name="vstmxcsr" summary="Store MXCSR Register State"/>
+  <Instruction name="vsubpd" summary="Subtract Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vsubph" summary="Subtract Packed Half-Precision Floating-Point Values"/>
+  <Instruction name="vsubps" summary="Subtract Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vsubsd" summary="Subtract Scalar Double-Precision Floating-Point Values"/>
+  <Instruction name="vsubsh" summary="Subtract Scalar Half-Precision Floating-Point Values"/>
+  <Instruction name="vsubss" summary="Subtract Scalar Single-Precision Floating-Point Values"/>
+  <Instruction name="vtestpd" summary="Packed Double-Precision Floating-Point Bit Test"/>
+  <Instruction name="vtestps" summary="Packed Single-Precision Floating-Point Bit Test"/>
+  <Instruction name="vucomisd" summary="Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="vucomish" summary="Unordered Compare Scalar Half-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="vucomiss" summary="Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS"/>
+  <Instruction name="vunpckhpd" summary="Unpack and Interleave High Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vunpckhps" summary="Unpack and Interleave High Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vunpcklpd" summary="Unpack and Interleave Low Packed Double-Precision Floating-Point Values"/>
+  <Instruction name="vunpcklps" summary="Unpack and Interleave Low Packed Single-Precision Floating-Point Values"/>
+  <Instruction name="vxorpd" summary="Bitwise Logical XOR for Double-Precision Floating-Point Values"/>
+  <Instruction name="vxorps" summary="Bitwise Logical XOR for Single-Precision Floating-Point Values"/>
+  <Instruction name="vzeroall" summary="Zero XMM, YMM, and ZMM Registers"/>
+  <Instruction name="vzeroupper" summary="Zero Upper Bits of YMM and ZMM Registers"/>
+  <Instruction name="wait" summary="Wait"/>
+  <Instruction name="wbinvd" summary="Write Back and Invalidate Cache"/>
+  <Instruction name="wbnoinvd" summary="Write Back and Do Not Invalidate Cache"/>
+  <Instruction name="wrfsbase" summary="Write FS/GS Segment Base"/>
+  <Instruction name="wrgsbase" summary="Write FS/GS Segment Base"/>
+  <Instruction name="wrmsr" summary="Write to Model Specific Register"/>
+  <Instruction name="wrpkru" summary="Write Data to User Page Key Register"/>
+  <Instruction name="wrssd" summary="Write to Shadow Stack"/>
+  <Instruction name="wrssq" summary="Write to Shadow Stack"/>
+  <Instruction name="wrussd" summary="Write to User Shadow Stack"/>
+  <Instruction name="wrussq" summary="Write to User Shadow Stack"/>
+  <Instruction name="xabort" summary="Transactional Abort"/>
+  <Instruction name="xacquire" summary="Hardware Lock Elision Prefix Hints"/>
+  <Instruction name="xadd" summary="Exchange and Add"/>
+  <Instruction name="xbegin" summary="Transactional Begin"/>
+  <Instruction name="xchg" summary="Exchange Register/Memory with Register"/>
+  <Instruction name="xend" summary="Transactional End"/>
+  <Instruction name="xgetbv" summary="Get Value of Extended Control Register"/>
+  <Instruction name="xlat" summary="Table Look-up Translation"/>
+  <Instruction name="xlatb" summary="Table Look-up Translation"/>
+  <Instruction name="xor" summary="Logical Exclusive OR"/>
+  <Instruction name="xorpd" summary="Bitwise Logical XOR of Packed Double Precision Floating-Point Values"/>
+  <Instruction name="xorps" summary="Bitwise Logical XOR of Packed Single Precision Floating-Point Values"/>
+  <Instruction name="xrelease" summary="Hardware Lock Elision Prefix Hints"/>
+  <Instruction name="xresldtrk" summary="Resume Tracking Load Addresses"/>
+  <Instruction name="xrstor" summary="Restore Processor Extended States"/>
+  <Instruction name="xrstors" summary="Restore Processor Extended States Supervisor"/>
+  <Instruction name="xsave" summary="Save Processor Extended States"/>
+  <Instruction name="xsavec" summary="Save Processor Extended States With Compaction"/>
+  <Instruction name="xsaveopt" summary="Save Processor Extended States Optimized"/>
+  <Instruction name="xsaves" summary="Save Processor Extended States Supervisor"/>
+  <Instruction name="xsetbv" summary="Set Extended Control Register"/>
+  <Instruction name="xsusldtrk" summary="Suspend Tracking Load Addresses"/>
+  <Instruction name="xtest" summary="Test if in Transactional Execution"/>
+</InstructionSet>

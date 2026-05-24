@@ -1,9 +1,19 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import { XMLParser } from 'fast-xml-parser';
 
 interface KnowledgeBase {
     [key: string]: string;
+}
+
+interface InstructionInfo {
+    name: string;
+    summary: string;
+}
+
+interface InstructionSet {
+    [name: string]: InstructionInfo;
 }
 
 interface SymbolInfo {
@@ -114,6 +124,34 @@ for (let i = 0; i < 32; i++) {
     registers.add(`zmm${i}`);
 }
 
+function parseInstructionSet(xmlPath: string): InstructionSet {
+    const instructions: InstructionSet = {};
+    if (!fs.existsSync(xmlPath)) return instructions;
+
+    try {
+        const xmlContent = fs.readFileSync(xmlPath, 'utf8');
+        const parser = new XMLParser({
+            ignoreAttributes: false,
+            attributeNamePrefix: '@_'
+        });
+        const parsed = parser.parse(xmlContent);
+        const instrList = parsed?.InstructionSet?.Instruction;
+        if (!instrList) return instructions;
+
+        const instrArray = Array.isArray(instrList) ? instrList : [instrList];
+        for (const instr of instrArray) {
+            const name = instr['@_name'];
+            const summary = instr['@_summary'] || '';
+            if (!name) continue;
+            instructions[name.toLowerCase()] = { name, summary };
+        }
+    } catch (e) {
+        console.error('Failed to parse instruction set XML:', e);
+    }
+
+    return instructions;
+}
+
 export function activate(context: vscode.ExtensionContext) {
     let kb: KnowledgeBase = {};
     const kbPath = path.join(context.extensionPath, 'kb.json');
@@ -124,6 +162,8 @@ export function activate(context: vscode.ExtensionContext) {
             console.error('Failed to load KB:', e);
         }
     }
+
+    const instructionSet = parseInstructionSet(path.join(context.extensionPath, 'x86_64_instructions.xml'));
 
     const symbolManager = new SymbolManager();
     vscode.workspace.textDocuments.forEach(doc => symbolManager.updateCache(doc));
@@ -140,12 +180,21 @@ export function activate(context: vscode.ExtensionContext) {
             const wordRange = document.getWordRangeAtPosition(position, /[%a-zA-Z0-9_$#@~.?]+/);
             const word = wordRange ? document.getText(wordRange) : '';
 
+            for (const key in instructionSet) {
+                const instr = instructionSet[key];
+                const item = new vscode.CompletionItem(key, vscode.CompletionItemKind.Function);
+                item.detail = instr.summary;
+                if (wordRange) item.range = wordRange;
+                itemsMap.set(key.toLowerCase(), item);
+            }
+
             for (const key in kb) {
                 if (key.startsWith('%') && !word.startsWith('%')) continue;
-                
-                const item = new vscode.CompletionItem(key, 
-                    key.startsWith('%') ? vscode.CompletionItemKind.Keyword : 
-                    registers.has(key.toLowerCase()) ? vscode.CompletionItemKind.Variable : 
+                if (itemsMap.has(key.toLowerCase())) continue;
+
+                const item = new vscode.CompletionItem(key,
+                    key.startsWith('%') ? vscode.CompletionItemKind.Keyword :
+                    registers.has(key.toLowerCase()) ? vscode.CompletionItemKind.Variable :
                     vscode.CompletionItemKind.Function);
                 item.documentation = new vscode.MarkdownString(kb[key]);
                 if (wordRange) item.range = wordRange;
@@ -175,25 +224,60 @@ export function activate(context: vscode.ExtensionContext) {
 
     const hoverProvider = vscode.languages.registerHoverProvider('nasm', {
         provideHover(document: vscode.TextDocument, position: vscode.Position) {
-            const range = document.getWordRangeAtPosition(position, /(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h|0b[01]+|[01]+[by]|\d+\.\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?|\d+[dt]?|(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*)/i);
+            let range = document.getWordRangeAtPosition(position, /(?:[+-]?0x[0-9a-fA-F]+|[+-]?\$[0-9a-fA-F]+|[+-]?[0-9][0-9a-fA-F]*h|[+-]?0b[01]+|[+-]?[01]+[by]|[+-]?\d+\.\d*(?:[eE][+-]?\d+)?|[+-]?\.\d+(?:[eE][+-]?\d+)?|[+-]?\d+[dt]?|(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*)/i);
             if (!range) return;
+
+            // Extend range leftward to capture prefix characters (-, %, %%) that getWordRangeAtPosition may miss
+            if (range.start.character > 0) {
+                const lineText = document.lineAt(range.start.line).text;
+                const startChar = range.start.character;
+                let extendBy = 0;
+
+                // Check for %% prefix (must check before single %)
+                if (startChar >= 2 && lineText.substring(startChar - 2, startChar) === '%%') {
+                    extendBy = 2;
+                }
+                // Check for single % prefix
+                else if (lineText[startChar - 1] === '%') {
+                    extendBy = 1;
+                }
+                // Check for - or + prefix on numbers
+                else if ((lineText[startChar - 1] === '-' || lineText[startChar - 1] === '+')) {
+                    const wordText = document.getText(range);
+                    if (/^(?:0x[0-9a-fA-F]|0b[01]|\$[0-9a-fA-F]|[0-9])/.test(wordText)) {
+                        extendBy = 1;
+                    }
+                }
+
+                if (extendBy > 0) {
+                    range = new vscode.Range(
+                        new vscode.Position(range.start.line, startChar - extendBy),
+                        range.end
+                    );
+                }
+            }
 
             const word = document.getText(range);
             const wordLower = word.toLowerCase();
             
             const allSymbols = symbolManager.getSymbols();
             const dynamicSym = allSymbols.find(s => s.name.toLowerCase() === wordLower);
-            if (dynamicSym && dynamicSym.description) return new vscode.Hover(new vscode.MarkdownString(dynamicSym.description));
+            if (dynamicSym && dynamicSym.description) return new vscode.Hover(new vscode.MarkdownString(dynamicSym.description), range);
 
-            const hexRegex = /^(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)$/i;
-            const binRegex = /^(?:0b[01]+|[01]+[by])$/i;
-            const decRegex = /^\d+[dt]?$/i;
-            const floatRegex = /^(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?$/i;
+            const hexRegex = /^[+-]?(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)$/i;
+            const binRegex = /^[+-]?(?:0b[01]+|[01]+[by])$/i;
+            const decRegex = /^[+-]?\d+[dt]?$/i;
+            const floatRegex = /^[+-]?(?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?$/i;
 
             const isNumeric = hexRegex.test(word) || binRegex.test(word) || decRegex.test(word) || floatRegex.test(word);
 
+            const instrInfo = instructionSet[wordLower];
+            if (instrInfo && !isNumeric) {
+                return new vscode.Hover(new vscode.MarkdownString(`**${wordLower}** — ${instrInfo.summary}`), range);
+            }
+
             if (kb[wordLower] && !isNumeric) {
-                return new vscode.Hover(new vscode.MarkdownString(kb[wordLower]));
+                return new vscode.Hover(new vscode.MarkdownString(kb[wordLower]), range);
             }
 
             let val: bigint | null = null;
@@ -202,16 +286,30 @@ export function activate(context: vscode.ExtensionContext) {
             if (hexRegex.test(word)) {
                 type = 'hex';
                 let s = wordLower;
+                let sign = '';
+                if (s.startsWith('-')) { sign = '-'; s = s.substring(1); }
+                else if (s.startsWith('+')) { s = s.substring(1); }
+
                 if (s.startsWith('0x')) s = s.substring(2);
                 else if (s.startsWith('$')) s = s.substring(1);
                 else if (s.endsWith('h')) s = s.substring(0, s.length - 1);
-                try { val = BigInt('0x' + s); } catch (e) { return; }
+                try { 
+                    val = BigInt('0x' + s); 
+                    if (sign === '-') val = -val;
+                } catch (e) { return; }
             } else if (binRegex.test(word)) {
                 type = 'bin';
                 let s = wordLower;
+                let sign = '';
+                if (s.startsWith('-')) { sign = '-'; s = s.substring(1); }
+                else if (s.startsWith('+')) { s = s.substring(1); }
+
                 if (s.startsWith('0b')) s = s.substring(2);
                 else s = s.substring(0, s.length - 1);
-                try { val = BigInt('0b' + s); } catch (e) { return; }
+                try { 
+                    val = BigInt('0b' + s); 
+                    if (sign === '-') val = -val;
+                } catch (e) { return; }
             } else if (decRegex.test(word)) {
                 type = 'dec';
                 let s = wordLower;
@@ -229,21 +327,37 @@ export function activate(context: vscode.ExtensionContext) {
                 const b = bits.toString(2).padStart(64, '0');
                 const formattedBin = b.match(/.{1,8}/g)?.join(' ') || b;
                 hoverText.appendMarkdown(`Bin: \`${formattedBin}\``);
-                return new vscode.Hover(hoverText);
+                return new vscode.Hover(hoverText, range);
             }
 
             if (val !== null && type !== null) {
                 const hoverText = new vscode.MarkdownString();
                 if (type !== 'dec') hoverText.appendMarkdown(`Dec: \`${val.toString(10)}\`  \n`);
-                if (type !== 'hex') hoverText.appendMarkdown(`Hex: \`0x${val.toString(16).toUpperCase()}\`  \n`);
+                
+                const isNeg = val < BigInt(0);
+                const absVal = isNeg ? -val : val;
+
+                if (type !== 'hex') {
+                    if (isNeg) {
+                        const hex = BigInt.asUintN(64, val).toString(16).toUpperCase().padStart(16, '0');
+                        hoverText.appendMarkdown(`Hex: \`0x${hex}\`  \n`);
+                    } else {
+                        hoverText.appendMarkdown(`Hex: \`0x${val.toString(16).toUpperCase()}\`  \n`);
+                    }
+                }
                 if (type !== 'bin') {
-                    let b = val.toString(2);
-                    const paddedLen = Math.max(8, Math.ceil(b.length / 8) * 8);
-                    b = b.padStart(paddedLen, '0');
+                    let b = '';
+                    if (isNeg) {
+                        b = BigInt.asUintN(64, val).toString(2).padStart(64, '0');
+                    } else {
+                        b = val.toString(2);
+                        const paddedLen = Math.max(8, Math.ceil(b.length / 8) * 8);
+                        b = b.padStart(paddedLen, '0');
+                    }
                     const formattedBin = b.match(/.{1,8}/g)?.join(' ') || b;
                     hoverText.appendMarkdown(`Bin: \`${formattedBin}\``);
                 }
-                return new vscode.Hover(hoverText);
+                return new vscode.Hover(hoverText, range);
             }
 
             return;
