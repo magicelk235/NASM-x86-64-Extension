@@ -125,10 +125,31 @@ function makeCompletionProvider(ctx: ProviderContext): vscode.Disposable {
                 itemsMap.set(sym.name.toLowerCase(), item);
             });
 
+            // Paired-block snippets (%if/%endif, %macro/%endmacro, ...). Attach to
+            // an existing KB item when present so its documentation is preserved.
+            for (const [label, body] of BLOCK_SNIPPETS) {
+                const item = itemsMap.get(label.toLowerCase())
+                    ?? new vscode.CompletionItem(label, vscode.CompletionItemKind.Snippet);
+                item.insertText = new vscode.SnippetString(body);
+                item.detail = item.detail || 'NASM block';
+                if (wordRange) item.range = wordRange;
+                itemsMap.set(label.toLowerCase(), item);
+            }
+
             return Array.from(itemsMap.values());
         },
     }, '%', '.');
 }
+
+// Snippet bodies for paired preprocessor/struct blocks, keyed by trigger label.
+const BLOCK_SNIPPETS: ReadonlyArray<readonly [string, string]> = [
+    ['%if',    '%if ${1:cond}\n\t$0\n%endif'],
+    ['%ifdef', '%ifdef ${1:MACRO}\n\t$0\n%endif'],
+    ['%macro', '%macro ${1:name} ${2:0}\n\t$0\n%endmacro'],
+    ['%rep',   '%rep ${1:count}\n\t$0\n%endrep'],
+    ['%while', '%while ${1:cond}\n\t$0\n%endwhile'],
+    ['struc',  'struc ${1:name}\n\t$0\nendstruc'],
+];
 
 // Build a tab-stop snippet for a macro invocation from its param spec.
 // "2" -> `name ${1:%1}, ${2:%2}`; "1-3" uses the minimum (1) placeholder count.
