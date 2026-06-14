@@ -28,6 +28,17 @@ export interface Arm64Bundle {
     summaries: { [mnemonic: string]: string };
 }
 
+// Defer the 2.6 MB JSON parse until arm64 data is first accessed — most users
+// target x86-64, so this keeps activation fast without async plumbing.
+export function lazyArm64Bundle(jsonPath: string): Arm64Bundle {
+    let parsed: Arm64Bundle | undefined;
+    const get = () => (parsed ??= parseArm64Instructions(jsonPath));
+    return {
+        get db() { return get().db; },
+        get summaries() { return get().summaries; },
+    };
+}
+
 export function parseArm64Instructions(jsonPath: string): Arm64Bundle {
     const db: Arm64Database = {};
     const summaries: { [m: string]: string } = {};

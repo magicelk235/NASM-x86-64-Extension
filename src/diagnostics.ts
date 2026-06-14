@@ -7,7 +7,7 @@ import {
     readSettings, severityFor,
 } from './config';
 import { InstructionDatabase, matchOperandPattern } from './x86';
-import { Arm64Database, ARM64_REGISTERS, matchArm64Form } from './arm64';
+import { Arm64Bundle, Arm64Database, ARM64_REGISTERS, matchArm64Form } from './arm64';
 import { SymbolManager } from './symbols';
 
 export function parseOperands(operandStr: string): string[] {
@@ -58,13 +58,13 @@ function isInstructionToken(
 
 export interface DiagnosticsContext {
     instructionDb: InstructionDatabase;
-    arm64Db: Arm64Database;
+    arm64: Arm64Bundle;
     symbolManager: SymbolManager;
     diagnosticCollection: vscode.DiagnosticCollection;
 }
 
 export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
-    const { instructionDb, arm64Db, symbolManager, diagnosticCollection } = ctx;
+    const { instructionDb, arm64, symbolManager, diagnosticCollection } = ctx;
 
     return function updateDiagnostics(document: vscode.TextDocument): void {
         if (document.languageId !== 'nasm') return;
@@ -96,6 +96,8 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
         const lines = document.getText().split(/\r?\n/);
         const symbolNames = new Set(symbolManager.getSymbols().map(s => s.name.toLowerCase()));
         const arch = settings.arch;
+        // Only touch the (lazily-parsed) arm64 database in arm64 mode.
+        const arm64Db: Arm64Database = arch === 'arm64' ? arm64.db : {};
         const lineRange = (i: number, start: number, end: number) =>
             new vscode.Range(i, start, i, end);
 

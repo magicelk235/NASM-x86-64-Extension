@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import { parseInsnsDat, parseInstructionSet } from './x86';
-import { parseArm64Instructions } from './arm64';
+import { lazyArm64Bundle } from './arm64';
 import { KnowledgeBase, SymbolManager } from './symbols';
 import { createUpdateDiagnostics } from './diagnostics';
 import { registerAllProviders } from './providers';
@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext): void {
     const kb = loadKnowledgeBase(context.extensionPath);
     const instructionSet = parseInstructionSet(path.join(context.extensionPath, 'x86_64_instructions.xml'));
     const instructionDb  = parseInsnsDat(path.join(context.extensionPath, 'insns.dat'));
-    const arm64          = parseArm64Instructions(path.join(context.extensionPath, 'aarch64_instructions.json'));
+    const arm64          = lazyArm64Bundle(path.join(context.extensionPath, 'aarch64_instructions.json'));
 
     const diagnosticCollection = vscode.languages.createDiagnosticCollection('nasm');
     context.subscriptions.push(diagnosticCollection);
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
     const updateDiagnostics = createUpdateDiagnostics({
         instructionDb,
-        arm64Db: arm64.db,
+        arm64,
         symbolManager,
         diagnosticCollection,
     });
