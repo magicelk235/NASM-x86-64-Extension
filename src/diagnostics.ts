@@ -44,6 +44,18 @@ export function hasUnterminatedString(s: string): boolean {
     return /(?<!\\)["'`]/.test(stripped);
 }
 
+// Recognize a token that can stand in the instruction slot after `times EXPR`.
+function isInstructionToken(
+    token: string,
+    instructionDb: InstructionDatabase,
+    arm64Db: Arm64Database,
+    arch: string,
+): boolean {
+    const t = token.toLowerCase();
+    return DATA_DECL.has(t)
+        || (arch === 'x86-64' ? instructionDb[t] !== undefined : arm64Db[t] !== undefined);
+}
+
 export interface DiagnosticsContext {
     instructionDb: InstructionDatabase;
     arm64Db: Arm64Database;
@@ -195,6 +207,14 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
             let instrIdx = 0;
             if (arch === 'x86-64') {
                 while (instrIdx < tokens.length && PREFIXES.has(tokens[instrIdx].toLowerCase())) instrIdx++;
+            }
+            // `times EXPR INSTRUCTION` — skip the directive and its count expression
+            // so the repeated instruction itself is validated.
+            if (tokens[instrIdx]?.toLowerCase() === 'times') {
+                instrIdx++;
+                while (instrIdx < tokens.length && !isInstructionToken(tokens[instrIdx], instructionDb, arm64Db, arch)) {
+                    instrIdx++;
+                }
             }
             if (instrIdx >= tokens.length) continue;
 
