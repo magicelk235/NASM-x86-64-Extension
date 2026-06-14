@@ -195,7 +195,46 @@ const DATA_SIZES: Record<string, { bytes: number; name: string }> = {
     dz: { bytes: 64, name: 'zword (512-bit)' }, resz: { bytes: 64, name: 'zword (512-bit)' },
 };
 
-const HOVER_WORD_RE = /(?:[+-]?0x[0-9a-fA-F]+|[+-]?\$[0-9a-fA-F]+|[+-]?[0-9][0-9a-fA-F]*h|[+-]?0b[01]+|[+-]?[01]+[by]|[+-]?\d+\.\d*(?:[eE][+-]?\d+)?|[+-]?\.\d+(?:[eE][+-]?\d+)?|[+-]?\d+[dt]?|(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*)/i;
+// AArch64 condition codes (suffixes on B.cond, CSEL, etc.).
+const ARM64_CONDITIONS: Record<string, string> = {
+    eq: 'equal (Z == 1)',
+    ne: 'not equal (Z == 0)',
+    cs: 'carry set / unsigned higher or same (C == 1)',
+    hs: 'unsigned higher or same (C == 1)',
+    cc: 'carry clear / unsigned lower (C == 0)',
+    lo: 'unsigned lower (C == 0)',
+    mi: 'negative (N == 1)',
+    pl: 'positive or zero (N == 0)',
+    vs: 'signed overflow (V == 1)',
+    vc: 'no signed overflow (V == 0)',
+    hi: 'unsigned higher (C == 1 and Z == 0)',
+    ls: 'unsigned lower or same (C == 0 or Z == 1)',
+    ge: 'signed greater than or equal (N == V)',
+    lt: 'signed less than (N != V)',
+    gt: 'signed greater than (Z == 0 and N == V)',
+    le: 'signed less than or equal (Z == 1 or N != V)',
+    al: 'always',
+    nv: 'always (reserved encoding)',
+};
+
+// AArch64 shift and extend operators used in operand modifiers.
+const ARM64_MODIFIERS: Record<string, string> = {
+    lsl: 'logical shift left',
+    lsr: 'logical shift right',
+    asr: 'arithmetic shift right',
+    ror: 'rotate right',
+    uxtb: 'zero-extend byte',
+    uxth: 'zero-extend halfword',
+    uxtw: 'zero-extend word',
+    uxtx: 'zero-extend doubleword (no-op)',
+    sxtb: 'sign-extend byte',
+    sxth: 'sign-extend halfword',
+    sxtw: 'sign-extend word',
+    sxtx: 'sign-extend doubleword (no-op)',
+    msl: 'masking shift left (fills with ones)',
+};
+
+const HOVER_WORD_RE =/(?:[+-]?0x[0-9a-fA-F]+|[+-]?\$[0-9a-fA-F]+|[+-]?[0-9][0-9a-fA-F]*h|[+-]?0b[01]+|[+-]?[01]+[by]|[+-]?\d+\.\d*(?:[eE][+-]?\d+)?|[+-]?\.\d+(?:[eE][+-]?\d+)?|[+-]?\d+[dt]?|(?:%%|%\?|%\*|%\$|%#|\.[a-zA-Z_?]|[a-zA-Z_?%])[a-zA-Z0-9_$#@~.?]*)/i;
 
 const HEX_RE   = /^[+-]?(?:0x[0-9a-fA-F]+|\$[0-9a-fA-F]+|[0-9][0-9a-fA-F]*h)$/i;
 const BIN_RE   = /^[+-]?(?:0b[01]+|[01]+[by])$/i;
@@ -365,6 +404,14 @@ function makeHoverProvider(ctx: ProviderContext): vscode.Disposable {
             }
 
             if (!isNumeric && arch === 'arm64') {
+                if (ARM64_CONDITIONS[wordLower]) {
+                    return new vscode.Hover(
+                        new vscode.MarkdownString(`**${wordLower}** — condition: ${ARM64_CONDITIONS[wordLower]}`), range);
+                }
+                if (ARM64_MODIFIERS[wordLower]) {
+                    return new vscode.Hover(
+                        new vscode.MarkdownString(`**${wordLower}** — ${ARM64_MODIFIERS[wordLower]}`), range);
+                }
                 const armSummary = ctx.arm64.summaries[wordLower];
                 if (armSummary) {
                     const md = new vscode.MarkdownString(`**${wordLower}** — ${armSummary}`);
