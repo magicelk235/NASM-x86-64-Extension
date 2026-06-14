@@ -50,7 +50,143 @@
         "scopeName": "source.asm.nasm",
         "path": "./syntaxes/nasm.tmLanguage.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "NASM Assembly Support",
+      "properties": {
+        "nasm.arch": {
+          "type": "string",
+          "enum": ["x86-64", "arm64"],
+          "default": "x86-64",
+          "description": "Target architecture used for diagnostics and completion. 'x86-64' uses NASM's insns.dat, 'arm64' uses the bundled AArch64 instruction set."
+        },
+        "nasm.diagnostics.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Master toggle. Turn off to disable ALL diagnostics regardless of arch."
+        },
+        "nasm.x86_64.diagnostics.memoryToMemory": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "[x86-64] Memory-to-memory operations (forbidden in x86)."
+        },
+        "nasm.x86_64.diagnostics.operandCount": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "[x86-64] Wrong number of operands."
+        },
+        "nasm.x86_64.diagnostics.operandType": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "[x86-64] Operand type mismatch (e.g. GPR where SIMD register expected)."
+        },
+        "nasm.x86_64.diagnostics.obsolete": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "[x86-64] Obsolete instructions."
+        },
+        "nasm.x86_64.diagnostics.undocumented": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "info",
+          "description": "[x86-64] Undocumented instructions."
+        },
+        "nasm.x86_64.diagnostics.notInLongMode": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "[x86-64] Instructions unavailable in 64-bit (long) mode."
+        },
+        "nasm.x86_64.warnings.prefixLockXchg": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "[x86-64] NASM 'prefix-lock-xchg': superfluous LOCK prefix on XCHG (XCHG is always locking)."
+        },
+        "nasm.x86_64.warnings.prefixLockError": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "[x86-64] NASM 'prefix-lock-error': LOCK prefix on an unlockable instruction."
+        },
+        "nasm.warnings.dbEmpty": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "NASM 'db-empty': D<x>/RES<x> declaration with no operands."
+        },
+        "nasm.warnings.labelOrphan": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "NASM 'label-orphan': label alone on a line without a trailing ':'."
+        },
+        "nasm.warnings.deprecatedHexPrefix": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "NASM 'number-deprecated-hex': '$' prefix for hex constants is deprecated; use 0x."
+        },
+        "nasm.warnings.unterminatedString": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "NASM 'pp-open-string': unterminated string literal on a line."
+        },
+        "nasm.warnings.repNegative": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "warning",
+          "description": "NASM 'pp-rep-negative': '%rep' with a negative count."
+        },
+        "nasm.warnings.userDirective": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "info",
+          "description": "NASM 'user': surfaces '%warning' source directives as diagnostics."
+        },
+        "nasm.warnings.duplicateLabel": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "A label, macro, or constant defined more than once in the same file."
+        },
+        "nasm.warnings.undefinedSymbol": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "off",
+          "description": "A symbol referenced but never defined, declared 'extern', or known. Off by default (false positives with %include/macros)."
+        },
+        "nasm.arm64.diagnostics.unknownInstruction": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "off",
+          "description": "[arm64] Unknown mnemonic (off by default to avoid noise from macros/aliases)."
+        },
+        "nasm.arm64.diagnostics.operandCount": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "[arm64] Wrong number of operands."
+        },
+        "nasm.arm64.diagnostics.operandType": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "error",
+          "description": "[arm64] Operand type mismatch (e.g. SIMD register where GPR expected)."
+        },
+        "nasm.arm64.diagnostics.alias": {
+          "type": "string",
+          "enum": ["error", "warning", "info", "off"],
+          "default": "off",
+          "description": "[arm64] Mnemonic is an alias of another instruction."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

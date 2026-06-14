@@ -20,6 +20,4 @@ prompt.md
 nasmdoc.txt
 *.html
 x86_64_instructions.json
-aarch64_instructions.json
 test.asm
-.claude/**
