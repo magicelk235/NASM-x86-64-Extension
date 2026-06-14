@@ -41,6 +41,15 @@ export function activate(context: vscode.ExtensionContext): void {
     vscode.workspace.textDocuments.forEach(updateDiagnostics);
 
     context.subscriptions.push(
+        vscode.commands.registerCommand('nasm.toggleArchitecture', async () => {
+            const config = vscode.workspace.getConfiguration('nasm');
+            const next = config.get<string>('arch', 'x86-64') === 'arm64' ? 'x86-64' : 'arm64';
+            const target = vscode.workspace.workspaceFolders
+                ? vscode.ConfigurationTarget.Workspace
+                : vscode.ConfigurationTarget.Global;
+            await config.update('arch', next, target);
+            vscode.window.setStatusBarMessage(`NASM architecture: ${next}`, 3000);
+        }),
         vscode.workspace.onDidOpenTextDocument(doc => {
             symbolManager.updateCache(doc);
             updateDiagnostics(doc);

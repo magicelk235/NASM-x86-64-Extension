@@ -186,7 +186,13 @@
           "description": "[arm64] Mnemonic is an alias of another instruction."
         }
       }
-    }
+    },
+    "commands": [
+      {
+        "command": "nasm.toggleArchitecture",
+        "title": "NASM: Toggle Architecture (x86-64 / arm64)"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
