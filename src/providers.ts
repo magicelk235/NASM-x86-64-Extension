@@ -195,6 +195,12 @@ const DATA_SIZES: Record<string, { bytes: number; name: string }> = {
     dz: { bytes: 64, name: 'zword (512-bit)' }, resz: { bytes: 64, name: 'zword (512-bit)' },
 };
 
+// Operand-size specifiers used in memory operands (`mov dword [x], 1`).
+const SIZE_SPECIFIERS: Record<string, number> = {
+    byte: 1, word: 2, dword: 4, qword: 8,
+    tword: 10, oword: 16, yword: 32, zword: 64,
+};
+
 // AArch64 condition codes (suffixes on B.cond, CSEL, etc.).
 const ARM64_CONDITIONS: Record<string, string> = {
     eq: 'equal (Z == 1)',
@@ -393,6 +399,13 @@ function makeHoverProvider(ctx: ProviderContext): vscode.Disposable {
                 const verb = wordLower.startsWith('res') ? 'reserves' : 'declares';
                 return new vscode.Hover(
                     new vscode.MarkdownString(`**${wordLower}** — ${verb} ${d.name} (${d.bytes} byte${d.bytes === 1 ? '' : 's'})`),
+                    range);
+            }
+
+            if (!isNumeric && SIZE_SPECIFIERS[wordLower] !== undefined) {
+                const bytes = SIZE_SPECIFIERS[wordLower];
+                return new vscode.Hover(
+                    new vscode.MarkdownString(`**${wordLower}** — operand size specifier (${bytes} byte${bytes === 1 ? '' : 's'}, ${bytes * 8}-bit)`),
                     range);
             }
 
