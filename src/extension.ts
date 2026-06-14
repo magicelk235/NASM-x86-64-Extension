@@ -28,6 +28,22 @@ export function activate(context: vscode.ExtensionContext): void {
     const diagnosticCollection = vscode.languages.createDiagnosticCollection('nasm');
     context.subscriptions.push(diagnosticCollection);
 
+    // Status bar: shows the target arch for NASM files; click to toggle.
+    const archStatus = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+    archStatus.command = 'nasm.toggleArchitecture';
+    context.subscriptions.push(archStatus);
+    const updateArchStatus = () => {
+        if (vscode.window.activeTextEditor?.document.languageId === 'nasm') {
+            const arch = vscode.workspace.getConfiguration('nasm').get<string>('arch', 'x86-64');
+            archStatus.text = `$(chip) ${arch}`;
+            archStatus.tooltip = 'NASM target architecture — click to toggle';
+            archStatus.show();
+        } else {
+            archStatus.hide();
+        }
+    };
+    updateArchStatus();
+
     const symbolManager = new SymbolManager();
     vscode.workspace.textDocuments.forEach(doc => symbolManager.updateCache(doc));
 
@@ -65,8 +81,10 @@ export function activate(context: vscode.ExtensionContext): void {
         vscode.workspace.onDidChangeConfiguration(e => {
             if (e.affectsConfiguration('nasm')) {
                 vscode.workspace.textDocuments.forEach(updateDiagnostics);
+                updateArchStatus();
             }
         }),
+        vscode.window.onDidChangeActiveTextEditor(updateArchStatus),
         ...registerAllProviders({ instructionSet, arm64, kb, symbolManager }),
     );
 }
