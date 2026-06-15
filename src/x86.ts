@@ -18,7 +18,7 @@ export function parseInsnsDat(datPath: string): InstructionDatabase {
 
     const content = fs.readFileSync(datPath, 'utf8');
     const lines = content.split(/\r?\n/);
-    const sizeMap: Record<string, string> = { b: 'B', w: 'W', d: 'D', q: 'Q' };
+    const sizeMap: Record<string, string> = { z: '', b: 'B', w: 'W', d: 'D', q: 'Q' };
 
     for (const line of lines) {
         if (line.startsWith(';') || !line.trim()) continue;
@@ -26,28 +26,46 @@ export function parseInsnsDat(datPath: string): InstructionDatabase {
         const parts = line.split(/\t+/).filter(p => p.trim());
         if (parts.length < 4) continue;
 
-        const nameField    = parts[0].trim();
-        const operandField = parts[1].trim();
+        // `$br` is a branch-relaxation flag macro carrying no size semantics;
+        // strip it so the following size prefix / name can be parsed normally.
+        const nameField    = parts[0].trim().replace(/^\$br\s+/, '');
+        let operandField   = parts[1].trim();
         const flagsField   = parts[parts.length - 1].trim();
 
         if (nameField === 'ignore' || operandField === 'ignore') continue;
 
-        const sizePrefix = nameField.match(/^\$([bwdq]+)\s+/);
+        const sizePrefix = nameField.match(/^\$([zbwdq]+)\s+/);
         let names: string[] = [];
 
+        // Strip an optional size prefix ($bwdq etc.), then separate the
+        // instruction name from any operands glued on with spaces instead of
+        // tabs (e.g. "$dq BLSI      reg#,rm#"). In that case the real operand
+        // text lives in the name field and parts[1] is actually the code field.
+        const afterPrefix = sizePrefix
+            ? nameField.substring(sizePrefix[0].length).trim()
+            : nameField;
+        const inlineMatch = afterPrefix.match(/^(\S+)\s+(\S.*)$/);
+        const baseName = inlineMatch ? inlineMatch[1] : afterPrefix;
+        if (inlineMatch) {
+            operandField = inlineMatch[2].trim();
+        }
+
         if (sizePrefix) {
-            const sizes    = sizePrefix[1];
-            const baseName = nameField.substring(sizePrefix[0].length).trim();
+            const sizes = sizePrefix[1];
             if (baseName.includes('%')) {
                 for (const s of sizes) names.push(baseName.replace('%', sizeMap[s]).toLowerCase());
             } else {
                 names = [baseName.toLowerCase()];
             }
         } else {
-            const match = nameField.match(/^([A-Za-z0-9_]+)/);
+            const match = baseName.match(/^([A-Za-z0-9_]+)/);
             if (match) names = [match[1].toLowerCase()];
         }
 
+        // Drop any name still carrying an unresolved substitution placeholder
+        // (e.g. `jcx#z` from `JCX#Z`), which the NASM preprocessor expands by a
+        // mechanism we don't replicate; emitting it would corrupt the key set.
+        names = names.filter(n => !/[#%]/.test(n));
         if (names.length === 0) continue;
 
         const operands = operandField === 'void'
