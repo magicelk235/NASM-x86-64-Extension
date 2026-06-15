@@ -94,7 +94,9 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
             emit(severityFor(settings.warnings[key]), key, range, message);
 
         const lines = document.getText().split(/\r?\n/);
-        const symbolNames = new Set(symbolManager.getSymbols().map(s => s.name.toLowerCase()));
+        // NASM labels/symbols are case-sensitive — match them by exact case
+        // (providers.ts resolves rename/definition the same way).
+        const symbolNames = new Set(symbolManager.getSymbols().map(s => s.name));
         const arch = settings.arch;
         // Only touch the (lazily-parsed) arm64 database in arm64 mode.
         const arm64Db: Arm64Database = arch === 'arm64' ? arm64.db : {};
@@ -111,7 +113,7 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
             if (!m) continue;
             for (const part of m[1].split(',')) {
                 const id = part.trim().split(/[\s:]/)[0];   // common may have `name size`
-                if (id) externNames.add(id.toLowerCase());
+                if (id) externNames.add(id);
             }
         }
 
@@ -126,7 +128,7 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
                              || sym.kind === vscode.CompletionItemKind.Variable;
                 if (!dupable) continue;
                 if (sym.name.startsWith('.')) continue;
-                const key = sym.name.toLowerCase();
+                const key = sym.name;
                 if (seenDef.has(key)) {
                     const diag = new vscode.Diagnostic(sym.range,
                         `'${sym.name}' is defined more than once`, dupSev);
@@ -220,7 +222,8 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
             }
             if (instrIdx >= tokens.length) continue;
 
-            const instr = tokens[instrIdx].toLowerCase();
+            const instrRaw = tokens[instrIdx];
+            const instr = instrRaw.toLowerCase();
             const instrStart = codeAfterLabel.toLowerCase().indexOf(instr);
             const lineOffset = codePart.length - codeAfterLabel.length;
             const range = new vscode.Range(i, lineOffset + instrStart, i, lineOffset + instrStart + instr.length);
@@ -231,7 +234,7 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
                 if (!after) pushWarn('dbEmpty', range, `${instr}: no operand`);
             }
 
-            if (instr.startsWith('%') || DIRECTIVES.has(instr) || symbolNames.has(instr)) continue;
+            if (instr.startsWith('%') || DIRECTIVES.has(instr) || symbolNames.has(instrRaw)) continue;
 
             // x86-only: LOCK prefix checks
             if (arch === 'x86-64' && instrIdx > 0) {
@@ -262,7 +265,7 @@ export function createUpdateDiagnostics(ctx: DiagnosticsContext) {
                     const ref = rm[0];
                     const refLower = ref.toLowerCase();
                     if (ref.startsWith('%') || ref.startsWith('$')) continue;
-                    if (regs.has(refLower) || symbolNames.has(refLower) || externNames.has(refLower)) continue;
+                    if (regs.has(refLower) || symbolNames.has(ref) || externNames.has(ref)) continue;
                     if (DIRECTIVES.has(refLower) || PREFIXES.has(refLower)) continue;
                     if (OPERAND_KEYWORDS.has(refLower)) continue;
                     if (instructionDb[refLower] || arm64Db[refLower]) continue;

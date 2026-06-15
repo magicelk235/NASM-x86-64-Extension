@@ -568,7 +568,10 @@ function makeDocumentHighlightProvider(): vscode.Disposable {
             const range = document.getWordRangeAtPosition(position, SYMBOL_WORD_RE);
             if (!range) return;
             const word = document.getText(range);
-            return findOccurrences(document, word)
+            // Local '.labels' are scoped to their parent label; restrict highlights
+            // to the cursor's scope so distinct same-named locals aren't conflated.
+            const scope = parentLabelAt(document, position.line);
+            return findOccurrences(document, word, scope)
                 .map(r => new vscode.DocumentHighlight(r, vscode.DocumentHighlightKind.Text));
         },
     });
@@ -692,7 +695,8 @@ function makeSignatureHelpProvider(ctx: ProviderContext): vscode.Disposable {
 function countTopLevelCommas(s: string): number {
     let depth = 0;
     let commas = 0;
-    for (const ch of s) {
+    // Blank out string literals so commas inside them aren't counted as separators.
+    for (const ch of maskStrings(s)) {
         if (ch === '[' || ch === '{' || ch === '(') depth++;
         else if (ch === ']' || ch === '}' || ch === ')') depth--;
         else if (ch === ',' && depth === 0) commas++;

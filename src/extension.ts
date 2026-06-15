@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { parseInsnsDat, parseInstructionSet } from './x86';
+import { parseInsnsDat, parseInstructionSet, InstructionDatabase } from './x86';
 import { lazyArm64Bundle } from './arm64';
 import { KnowledgeBase, SymbolManager } from './symbols';
 import { createUpdateDiagnostics } from './diagnostics';
@@ -22,7 +22,16 @@ function loadKnowledgeBase(extensionPath: string): KnowledgeBase {
 export function activate(context: vscode.ExtensionContext): void {
     const kb = loadKnowledgeBase(context.extensionPath);
     const instructionSet = parseInstructionSet(path.join(context.extensionPath, 'x86_64_instructions.xml'));
-    const instructionDb  = parseInsnsDat(path.join(context.extensionPath, 'insns.dat'));
+    // parseInsnsDat (unlike the XML/arm64 parsers) is not internally guarded, so a
+    // missing/unreadable insns.dat would throw and abort activation entirely. Degrade
+    // gracefully to an empty database instead of breaking the whole extension.
+    let instructionDb: InstructionDatabase;
+    try {
+        instructionDb = parseInsnsDat(path.join(context.extensionPath, 'insns.dat'));
+    } catch (e) {
+        console.error('Failed to parse insns.dat:', e);
+        instructionDb = {};
+    }
     const arm64          = lazyArm64Bundle(path.join(context.extensionPath, 'aarch64_instructions.json'));
 
     const diagnosticCollection = vscode.languages.createDiagnosticCollection('nasm');
